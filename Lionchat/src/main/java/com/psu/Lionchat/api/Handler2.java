@@ -5,22 +5,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RequestMapping("/forwardedhandler2")
 @RestController
 public class Handler2 {
     @GetMapping
-    public String getFromHandler2(HttpSession session)
+    public String getFromHandler2(HttpSession session, HttpServletRequest request)
     {
         System.out.println("Session ID: " + session.getId());
+        System.out.println("Session IP: " + request.getRemoteAddr());
         return "This is handler 2's GET request!";
     }
 
     @PostMapping
-    public String postFromHandler2(HttpSession session)
+    public String postFromHandler2(HttpSession session, HttpServletRequest request)
     {
         System.out.println("Session ID: " + session.getId());
+        System.out.println("Session IP: " + request.getRemoteAddr());
         return "This is handler 2's POST request!";
     }
 }
