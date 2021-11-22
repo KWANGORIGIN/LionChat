@@ -18,8 +18,9 @@ public class Handler2 {
     }
 
     @PostMapping
-    public String postFromHandler2()
+    public String postFromHandler2(HttpSession session)
     {
+        System.out.println("Session ID: " + session.getId());
         return "This is handler 2's POST request!";
     }
 }
