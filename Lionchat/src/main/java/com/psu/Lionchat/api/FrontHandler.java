@@ -14,6 +14,4 @@ public class FrontHandler {
 
         return String.format("forward:/forwarded%s", endpoint);
     }
-
-
 }
