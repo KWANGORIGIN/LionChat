@@ -18,6 +18,8 @@ public class Question {
 	
 	private String inputString;
 	
+	private boolean answered;
+	
 	@SuppressWarnings("unused")
 	private Question() {
 		
