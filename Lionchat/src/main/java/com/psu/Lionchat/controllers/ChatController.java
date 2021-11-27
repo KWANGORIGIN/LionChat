@@ -53,7 +53,6 @@ public class ChatController {
 		// then if answer yes move on to potential review state
 		// if no, then provide helpful tips
 		
-//		Thread.activeCount() is related to the number of users.
 		throw new UnsupportedOperationException();
 	}
 
