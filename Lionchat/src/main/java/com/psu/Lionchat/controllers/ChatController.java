@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chat")
 // TODO: HATEOAS
+/**
+ * A controller for the chatbot side of the application. The endpoints a chat
+ * user are here such as asking questions and rating the quality of the chatbots
+ * responses.
+ * @author jacobkarabin
+ */
 public class ChatController {
 
 	// TODO: This should be in a service
