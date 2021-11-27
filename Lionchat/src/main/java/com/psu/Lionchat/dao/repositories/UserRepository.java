@@ -8,7 +8,7 @@ import com.psu.Lionchat.dao.entities.User;
  * An ORM mapping of the Users table and operations to run on it.
  * 
  * @author jacobkarabin
- * */
-public interface UserRepository extends JpaRepository<User, Long>{
+ */
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }
