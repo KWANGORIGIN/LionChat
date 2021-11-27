@@ -3,6 +3,8 @@ package com.psu.Lionchat.dao.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Review {
@@ -10,10 +12,10 @@ public class Review {
 	@GeneratedValue
 	private Long id;
 
-//	@ManyToOne
-//	@JoinColumn(name = "")
-//	private Session session;
-
+	@ManyToOne
+	@JoinColumn
+	private User user;
+	
 	private int score;
 
 	@SuppressWarnings("unused")
@@ -21,8 +23,9 @@ public class Review {
 		
 	}
 	
-	public Review(int score) {
+	public Review(User user, int score) {
 		super();
+		this.user = user;
 		this.score = score;
 	}
 

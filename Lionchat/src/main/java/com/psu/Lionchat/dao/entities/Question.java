@@ -3,6 +3,8 @@ package com.psu.Lionchat.dao.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Question {
@@ -10,8 +12,9 @@ public class Question {
 	@GeneratedValue
 	private Long id;
 	
-//	@Column(name = "session")
-//	private  Session session;
+	@ManyToOne
+	@JoinColumn
+	private User user;
 	
 	private String inputString;
 	
