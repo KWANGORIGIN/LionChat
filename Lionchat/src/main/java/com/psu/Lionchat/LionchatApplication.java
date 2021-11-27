@@ -9,5 +9,4 @@ public class LionchatApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LionchatApplication.class, args);
 	}
-
 }

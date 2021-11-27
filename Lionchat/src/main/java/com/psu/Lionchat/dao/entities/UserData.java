@@ -1,23 +1,16 @@
 package com.psu.Lionchat.dao.entities;
 
+import java.net.InetAddress;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Question {
+public class UserData {
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-//	@Column(name = "session")
-//	private  Session session;
-	
-	private String inputString;
-	
-	@SuppressWarnings("unused")
-	private Question() {
-		
-	}
-	
+	private InetAddress ip;
 }

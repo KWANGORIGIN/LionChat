@@ -1,6 +1,5 @@
 package com.psu.Lionchat.dao.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,10 +10,14 @@ import javax.persistence.OneToOne;
 public class InappropriateQuestion {
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
 	private Long id;
 	
 	@OneToOne(optional = false)
 	@JoinColumn
 	private Question question;
+	
+	@SuppressWarnings("unused")
+	private InappropriateQuestion() {
+		
+	}
 }

@@ -14,17 +14,17 @@ import com.psu.Lionchat.dao.repositories.ReviewRepository;
 @Configuration
 public class LoadDatabase {
 	private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
-
+	
 	@Bean
-	public CommandLineRunner demo(ReviewRepository repository) {
+	public CommandLineRunner saveReviews(ReviewRepository repository) {
 		return (args) -> {
 			// save a few reviews
-			repository.save(new Review(1));
-			repository.save(new Review(2));
-			repository.save(new Review(3));
-			repository.save(new Review(5));
-			repository.save(new Review(5));
-			repository.save(new Review(5));
+//			repository.save(new Review(1));
+//			repository.save(new Review(2));
+//			repository.save(new Review(3));
+//			repository.save(new Review(5));
+//			repository.save(new Review(5));
+//			repository.save(new Review(5));
 
 			// fetch all customers
 			log.info("Reviews found with findAll():");
