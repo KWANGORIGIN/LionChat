@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jacobkarabin
  */
 public class ChatController {
-
 	// TODO: This should be in a service
 	@Autowired
 	SessionRepository<? extends Session> repository;
@@ -53,6 +52,8 @@ public class ChatController {
 		// first make sure correct state
 		// then if answer yes move on to potential review state
 		// if no, then provide helpful tips
+		
+//		Thread.activeCount() is related to the number of users.
 		throw new UnsupportedOperationException();
 	}
 
