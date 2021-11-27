@@ -1,4 +1,4 @@
-package com.psu.Lionchat.database.entities;
+package com.psu.Lionchat.dao.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,28 +6,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Review {
+public class Question {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private Long id;
-
-//	@ManyToOne
-//	@JoinColumn(name = "")
+	
 //	@Column(name = "session")
-//	private Session session;
-
-	@Column(name = "score")
-	private int score;
-
+//	private  Session session;
+	
+	@Column(name = "input_string")
+	private String inputString;
+	
 	@SuppressWarnings("unused")
-	private Review() {
+	private Question() {
 		
 	}
 	
-	public Review(int score) {
-		super();
-		this.score = score;
-	}
-
 }

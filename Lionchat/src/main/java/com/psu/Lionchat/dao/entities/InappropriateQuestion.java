@@ -1,4 +1,4 @@
-package com.psu.Lionchat.database.entities;
+package com.psu.Lionchat.dao.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

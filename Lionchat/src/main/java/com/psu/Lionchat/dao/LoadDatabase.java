@@ -1,4 +1,4 @@
-package com.psu.Lionchat.database;
+package com.psu.Lionchat.dao;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.psu.Lionchat.database.entities.Review;
-import com.psu.Lionchat.database.repositories.ReviewRepository;
+import com.psu.Lionchat.dao.entities.Review;
+import com.psu.Lionchat.dao.repositories.ReviewRepository;
 
 @Configuration
 public class LoadDatabase {
