@@ -28,9 +28,8 @@ public class InappropriateQuestion {
 
 	}
 
-	public InappropriateQuestion(Long id, Question question) {
+	public InappropriateQuestion(Question question) {
 		super();
-		this.id = id;
 		this.question = question;
 	}
 

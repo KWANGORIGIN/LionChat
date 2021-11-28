@@ -4,12 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.session.Session;
-import org.springframework.session.SessionRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.psu.Lionchat.services.chat.ChatService;
+import com.psu.Lionchat.services.chat.ChatServiceImpl;
 
 @RestController
 @RequestMapping("/chat")
@@ -22,8 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 public class ChatController {
 	// TODO: This should be in a service
+	private ChatService chatService;
+	
 	@Autowired
-	SessionRepository<? extends Session> repository;
+	public ChatController(ChatServiceImpl chatService) {
+		super();
+		this.chatService = chatService;
+	}
 
 	/**
 	 * Ask the system a question and receive an answer. The system will log the
@@ -32,11 +38,13 @@ public class ChatController {
 	 */
 	@GetMapping("/askquestion")
 	// TODO: Proper return type.
-	String askQuestion(HttpSession session, HttpServletRequest request) {
+	String askQuestion(HttpServletRequest request) {
 		// make sure alphanumeric!
 
 		// first get answer to question from python server
 		// then update the state.
+		this.chatService.getAnswer(request, null);
+		
 		throw new UnsupportedOperationException();
 	}
 
@@ -48,10 +56,12 @@ public class ChatController {
 	 */
 	@PostMapping("/feedback")
 	// TODO: Proper return type.
-	void feedback(HttpSession session, HttpServletRequest request) {
+	void feedback(HttpServletRequest request) {
 		// first make sure correct state
 		// then if answer yes move on to potential review state
 		// if no, then provide helpful tips
+		
+		this.chatService.submitFeedback(request, false);
 		
 		throw new UnsupportedOperationException();
 	}
@@ -64,10 +74,13 @@ public class ChatController {
 	 */
 	@PostMapping("/review")
 	// TODO: Proper return type.
-	void review(HttpSession session, HttpServletRequest request) {
+	void review(HttpServletRequest request) {
 		// first make sure correct state
 		// then submit review
 		// revert back to default state
+		
+		this.chatService.submitReview(request, 0);
+		
 		throw new UnsupportedOperationException();
 	}
 

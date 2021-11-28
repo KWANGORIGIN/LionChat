@@ -22,16 +22,15 @@ public class User {
 	// and join on it unfortunately this seems impossible?
 	private String sessionId;
 
-	private InetAddress ip;
+	private String ip;
 
 	@SuppressWarnings("unused")
 	private User() {
 
 	}
 
-	public User(Long id, String sessionId, InetAddress ip) {
+	public User(String sessionId, String ip) {
 		super();
-		this.id = id;
 		this.sessionId = sessionId;
 		this.ip = ip;
 	}
@@ -52,11 +51,11 @@ public class User {
 		this.sessionId = sessionId;
 	}
 
-	public InetAddress getIp() {
+	public String getIp() {
 		return ip;
 	}
 
-	public void setIp(InetAddress ip) {
+	public void setIp(String ip) {
 		this.ip = ip;
 	}
 

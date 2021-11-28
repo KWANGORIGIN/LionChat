@@ -21,7 +21,7 @@ public class Review {
 
 	@ManyToOne
 	@JoinColumn
-	private User user;
+	private Question question;
 
 	private int score;
 
@@ -30,9 +30,9 @@ public class Review {
 
 	}
 
-	public Review(User user, int score) {
+	public Review(Question question, int score) {
 		super();
-		this.user = user;
+		this.question = question;
 		this.score = score;
 	}
 
@@ -44,12 +44,12 @@ public class Review {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Question getQuestion() {
+		return question;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 
 	public int getScore() {
@@ -62,7 +62,7 @@ public class Review {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, score, user);
+		return Objects.hash(id, score, question);
 	}
 
 	@Override
@@ -74,12 +74,12 @@ public class Review {
 		if (getClass() != obj.getClass())
 			return false;
 		Review other = (Review) obj;
-		return Objects.equals(id, other.id) && score == other.score && Objects.equals(user, other.user);
+		return Objects.equals(id, other.id) && score == other.score && Objects.equals(question, other.question);
 	}
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", user=" + user + ", score=" + score + "]";
+		return "Review [id=" + id + ", question=" + question + ", score=" + score + "]";
 	}
 
 }

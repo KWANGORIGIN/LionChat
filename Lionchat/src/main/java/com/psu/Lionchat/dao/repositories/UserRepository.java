@@ -1,5 +1,7 @@
 package com.psu.Lionchat.dao.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.psu.Lionchat.dao.entities.User;
@@ -10,5 +12,5 @@ import com.psu.Lionchat.dao.entities.User;
  * @author jacobkarabin
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-
+	Optional<User> findBySessionId(String sessionId);
 }

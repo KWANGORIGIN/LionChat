@@ -32,9 +32,8 @@ public class Question {
 
 	}
 
-	public Question(Long id, User user, String inputString, boolean answered) {
+	public Question(User user, String inputString, boolean answered) {
 		super();
-		this.id = id;
 		this.user = user;
 		this.inputString = inputString;
 		this.answered = answered;
