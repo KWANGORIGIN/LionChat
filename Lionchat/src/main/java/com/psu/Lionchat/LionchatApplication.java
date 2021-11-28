@@ -17,5 +17,4 @@ public class LionchatApplication {
 
 		SpringApplication.run(LionchatApplication.class, args);
 	}
-
 }
