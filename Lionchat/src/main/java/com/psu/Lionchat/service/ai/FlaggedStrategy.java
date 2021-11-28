@@ -1,4 +1,4 @@
-package com.psu.Lionchat.service.ai;
+package com.psu.Lionchat.ai;
 
 // for naughty behavior
 public class FlaggedStrategy extends IntentStrategyAbs{

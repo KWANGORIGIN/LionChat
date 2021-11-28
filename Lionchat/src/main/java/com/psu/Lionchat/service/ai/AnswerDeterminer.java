@@ -1,8 +1,8 @@
-package com.psu.Lionchat.service.ai;
+package com.psu.Lionchat.ai;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class AnswerDeterminer implements AnswerDeterminerIF{
     private IntentStrategyIF intentStrategy;
 
