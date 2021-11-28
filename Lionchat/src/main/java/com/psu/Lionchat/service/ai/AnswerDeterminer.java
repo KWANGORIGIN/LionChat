@@ -1,5 +1,6 @@
-package com.psu.Lionchat.ai;
+package com.psu.Lionchat.service.ai;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

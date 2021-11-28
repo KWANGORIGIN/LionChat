@@ -1,4 +1,4 @@
-package com.psu.Lionchat.ai;
+package com.psu.Lionchat.service.ai;
 
 public interface AnswerDeterminerIF {
 }

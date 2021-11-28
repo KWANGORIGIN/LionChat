@@ -1,7 +1,4 @@
-package com.psu.Lionchat.ai;
+package com.psu.Lionchat.service.ai;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public abstract class IntentStrategyAbs implements IntentStrategyIF{
 }
