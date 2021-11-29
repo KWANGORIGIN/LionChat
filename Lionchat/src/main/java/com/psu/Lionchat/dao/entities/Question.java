@@ -1,5 +1,6 @@
 package com.psu.Lionchat.dao.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
  * @author jacobkarabin
  */
 @Entity
-public class Question {
+public class Question implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -32,9 +33,8 @@ public class Question {
 
 	}
 
-	public Question(Long id, User user, String inputString, boolean answered) {
+	public Question(User user, String inputString, boolean answered) {
 		super();
-		this.id = id;
 		this.user = user;
 		this.inputString = inputString;
 		this.answered = answered;

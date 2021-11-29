@@ -24,9 +24,8 @@ public class CrashReport {
 
 	}
 
-	public CrashReport(Long id, String stackTrace) {
+	public CrashReport(String stackTrace) {
 		super();
-		this.id = id;
 		this.stackTrace = stackTrace;
 	}
 

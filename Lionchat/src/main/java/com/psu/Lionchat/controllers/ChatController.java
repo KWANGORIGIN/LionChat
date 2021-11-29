@@ -1,15 +1,15 @@
 package com.psu.Lionchat.controllers;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.session.Session;
-import org.springframework.session.SessionRepository;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.psu.Lionchat.services.chat.ChatService;
+import com.psu.Lionchat.services.chat.ChatServiceImpl;
 
 @RestController
 @RequestMapping("/chat")
@@ -18,26 +18,31 @@ import org.springframework.web.bind.annotation.RestController;
  * A controller for the chatbot side of the application. The endpoints a chat
  * user are here such as asking questions and rating the quality of the chatbots
  * responses.
+ * 
  * @author jacobkarabin
  */
 public class ChatController {
 	// TODO: This should be in a service
+	private ChatService chatService;
+
 	@Autowired
-	SessionRepository<? extends Session> repository;
+	public ChatController(ChatServiceImpl chatService) {
+		super();
+		this.chatService = chatService;
+	}
 
 	/**
 	 * Ask the system a question and receive an answer. The system will log the
 	 * question as well as information about the user who asked the question. Move
 	 * the user into the feedback state.
 	 */
-	@GetMapping("/askquestion")
+	@PostMapping("/askquestion")
 	// TODO: Proper return type.
-	String askQuestion(HttpSession session, HttpServletRequest request) {
+	String askQuestion(@RequestBody String question, HttpServletRequest request) {
 		// make sure alphanumeric!
-
 		// first get answer to question from python server
 		// then update the state.
-		throw new UnsupportedOperationException();
+		return this.chatService.getAnswer(request, question);
 	}
 
 	/**
@@ -48,12 +53,17 @@ public class ChatController {
 	 */
 	@PostMapping("/feedback")
 	// TODO: Proper return type.
-	void feedback(HttpSession session, HttpServletRequest request) {
+	String feedback(@RequestBody boolean helpful, HttpServletRequest request) {
 		// first make sure correct state
 		// then if answer yes move on to potential review state
 		// if no, then provide helpful tips
+		try {
+			this.chatService.submitFeedback(request, helpful);
+		}catch(Exception e) {
+			return "Failed to submit feedback, illegal state.";
+		}
 		
-		throw new UnsupportedOperationException();
+		return "Added feedback";
 	}
 
 	/**
@@ -64,11 +74,16 @@ public class ChatController {
 	 */
 	@PostMapping("/review")
 	// TODO: Proper return type.
-	void review(HttpSession session, HttpServletRequest request) {
+	String review(@RequestBody int score, HttpServletRequest request) {
 		// first make sure correct state
 		// then submit review
 		// revert back to default state
-		throw new UnsupportedOperationException();
+		try {
+			this.chatService.submitReview(request, score);
+		}catch(Exception e) {
+			return "Failed to submit review, illegal state.";
+		}
+		return "Reviewed question";
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.psu.Lionchat.dao.entities;
 
-import java.net.InetAddress;
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * @author jacobkarabin
  */
 @Entity
-public class User {
+public class User implements Serializable{
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -22,16 +22,15 @@ public class User {
 	// and join on it unfortunately this seems impossible?
 	private String sessionId;
 
-	private InetAddress ip;
+	private String ip;
 
 	@SuppressWarnings("unused")
 	private User() {
 
 	}
 
-	public User(Long id, String sessionId, InetAddress ip) {
+	public User(String sessionId, String ip) {
 		super();
-		this.id = id;
 		this.sessionId = sessionId;
 		this.ip = ip;
 	}
@@ -52,11 +51,11 @@ public class User {
 		this.sessionId = sessionId;
 	}
 
-	public InetAddress getIp() {
+	public String getIp() {
 		return ip;
 	}
 
-	public void setIp(InetAddress ip) {
+	public void setIp(String ip) {
 		this.ip = ip;
 	}
 
