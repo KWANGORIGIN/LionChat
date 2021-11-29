@@ -42,7 +42,8 @@ public class ChatController {
 		// make sure alphanumeric!
 		// first get answer to question from python server
 		// then update the state.
-		return this.chatService.getAnswer(request, question);
+//		return this.chatService.getAnswer(request, question);
+		return request.getRemoteAddr() + ":" + request.getRemotePort();
 	}
 
 	/**
