@@ -1,5 +1,6 @@
 package com.psu.Lionchat.dao.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.OneToOne;
  * @author jacobkarabin
  */
 @Entity
-public class InappropriateQuestion {
+public class InappropriateQuestion implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;

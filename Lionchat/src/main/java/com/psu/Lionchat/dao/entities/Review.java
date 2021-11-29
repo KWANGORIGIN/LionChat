@@ -1,5 +1,6 @@
 package com.psu.Lionchat.dao.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
  * @author jacobkarabin
  */
 @Entity
-public class Review {
+public class Review implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;

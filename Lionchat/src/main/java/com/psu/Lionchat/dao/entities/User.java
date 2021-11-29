@@ -1,6 +1,6 @@
 package com.psu.Lionchat.dao.entities;
 
-import java.net.InetAddress;
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * @author jacobkarabin
  */
 @Entity
-public class User {
+public class User implements Serializable{
 	@Id
 	@GeneratedValue
 	private Long id;
