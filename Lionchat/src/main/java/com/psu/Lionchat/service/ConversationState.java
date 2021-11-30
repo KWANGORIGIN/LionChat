@@ -1,4 +1,4 @@
-package com.psu.Lionchat.services.chat;
+package com.psu.Lionchat.service;
 
 public enum ConversationState {
 	IDLE, FEEDBACK, RATING;
