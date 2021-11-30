@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, request
+from flask import Flask, send_from_directory, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -28,7 +28,7 @@ def getIntent():
     userInput = []
     userInput.append(receivedDict["utterance"])
     
-    return ""
+    return jsonify(intent="")
     
 if __name__ == "__main__":
     #Run server
