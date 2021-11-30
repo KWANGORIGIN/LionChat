@@ -1,7 +1,5 @@
 package com.psu.Lionchat;
 
-import org.assertj.core.internal.bytebuddy.implementation.bind.annotation.Argument;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,15 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.util.SocketUtils;
 
-import java.util.ArrayList;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @Execution(ExecutionMode.CONCURRENT)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HundredUserTest {
+public class ThousandUserTest {
 
     @LocalServerPort
     private int port;
@@ -29,11 +27,13 @@ public class HundredUserTest {
 
     @ParameterizedTest
     @MethodSource("userValueGenerator")
-    public void hundredUserRequest(){
-        System.out.println(restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "yeet", String.class));
+    public void thousandUserRequest(){
+        String result = restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "Asking a question?", String.class);
+        System.out.println(result + " " + Thread.currentThread().getName());
+        assertNotNull(result);
     }
 
     private static Stream<Arguments> userValueGenerator(){
-        return IntStream.range(0,100).mapToObj(Arguments::of);
+        return IntStream.range(0,1000).mapToObj(Arguments::of);
     }
 }
