@@ -25,7 +25,7 @@ public class User implements Serializable{
 	private String ip;
 
 	@SuppressWarnings("unused")
-	private User() {
+	public User() {
 
 	}
 

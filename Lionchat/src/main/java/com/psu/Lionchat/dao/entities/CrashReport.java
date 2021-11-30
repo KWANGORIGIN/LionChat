@@ -20,7 +20,7 @@ public class CrashReport {
 	private String stackTrace;
 
 	@SuppressWarnings("unused")
-	private CrashReport() {
+	public CrashReport() {
 
 	}
 

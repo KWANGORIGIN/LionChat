@@ -25,7 +25,7 @@ public class InappropriateQuestion implements Serializable {
 	private Question question;
 
 	@SuppressWarnings("unused")
-	private InappropriateQuestion() {
+	public InappropriateQuestion() {
 
 	}
 

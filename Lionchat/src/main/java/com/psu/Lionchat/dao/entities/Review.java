@@ -27,7 +27,7 @@ public class Review implements Serializable {
 	private int score;
 
 	@SuppressWarnings("unused")
-	private Review() {
+	public Review() {
 
 	}
 

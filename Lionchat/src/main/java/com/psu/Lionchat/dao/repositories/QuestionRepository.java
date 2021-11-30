@@ -10,5 +10,5 @@ import com.psu.Lionchat.dao.entities.Question;
  * @author jacobkarabin
  */
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-
+	Question getById(Long id);
 }

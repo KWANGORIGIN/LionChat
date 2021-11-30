@@ -29,7 +29,7 @@ public class Question implements Serializable {
 	private boolean answered;
 
 	@SuppressWarnings("unused")
-	private Question() {
+	public Question() {
 
 	}
 
