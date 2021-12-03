@@ -3,6 +3,7 @@ package com.psu.Lionchat.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class ChatController {
 	@RequestMapping("/")
 	public ModelAndView index () {
 	    ModelAndView modelAndView = new ModelAndView();
-	    modelAndView.setViewName("chatpage");
+	    modelAndView.setViewName("index");
 	    return modelAndView;
 	}
 	/**
@@ -43,6 +44,7 @@ public class ChatController {
 	 * question as well as information about the user who asked the question. Move
 	 * the user into the feedback state.
 	 */
+	@CrossOrigin(origins = "http://localhost:8082")
 	@PostMapping("/askquestion")
 	// TODO: Proper return type.
 	String askQuestion(@RequestBody String question, HttpServletRequest request) {

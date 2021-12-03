@@ -1,13 +1,20 @@
 package com.psu.Lionchat.services.chat;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.google.gson.Gson;
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
 import com.psu.Lionchat.dao.entities.User;
@@ -22,7 +29,7 @@ public class ChatServiceImpl implements ChatService {
 	private ReviewRepository reviews;
 	private QuestionRepository questions;
 	private InappropriateQuestionRepository inappropriateQuestions;
-
+	
 	@Autowired
 	public ChatServiceImpl(UserRepository users, ReviewRepository reviews, QuestionRepository questions,
 			InappropriateQuestionRepository inappropriateQuestions) {
@@ -34,6 +41,22 @@ public class ChatServiceImpl implements ChatService {
 		this.inappropriateQuestions = inappropriateQuestions;
 	}
 
+	private String classify(String question) {
+		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		Gson gson = new Gson();
+		Map<String, String> map = new HashMap<>();
+
+		map.put("utterance", question);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(map), headers);
+
+		//TODO: make this into a bean.xml / web.xml data source if thats a thing.
+		String response = restTemplate.postForObject("http://localhost:8000/intent", entity, String.class);
+		Map<String, String> responseMap = gson.fromJson(response, Map.class);
+		return responseMap.get("intent");
+	}
+	
 	private User getUser(HttpServletRequest request) {
 		String sessionId = request.getSession().getId();
 		Optional<User> userOptional = users.findBySessionId(sessionId);
@@ -63,7 +86,8 @@ public class ChatServiceImpl implements ChatService {
 		questions.save(q);
 		
 
-		return "I have discovered a truly remarkable answer of this question which this margin is too small to contain";
+		return this.classify(question);
+				//"Sorry, I do not understand. Please try to rephrase the question.";//"I have discovered a truly remarkable answer of this question which this margin is too small to contain";
 	}
 
 	@Override
