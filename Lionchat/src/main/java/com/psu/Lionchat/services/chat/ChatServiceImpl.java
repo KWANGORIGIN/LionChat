@@ -22,6 +22,8 @@ import com.psu.Lionchat.dao.repositories.InappropriateQuestionRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
+import com.psu.Lionchat.service.ChatService;
+import com.psu.Lionchat.service.ConversationState;
 
 @Service
 public class ChatServiceImpl implements ChatService {
