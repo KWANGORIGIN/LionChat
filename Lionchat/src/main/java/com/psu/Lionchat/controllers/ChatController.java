@@ -3,10 +3,12 @@ package com.psu.Lionchat.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.psu.Lionchat.service.ChatService;
 import com.psu.Lionchat.service.ChatServiceImpl;
@@ -32,11 +34,18 @@ public class ChatController {
 		this.chatService = chatService;
 	}
 
+	@RequestMapping("/")
+	public ModelAndView index () {
+	    ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.setViewName("index");
+	    return modelAndView;
+	}
 	/**
 	 * Ask the system a question and receive an answer. The system will log the
 	 * question as well as information about the user who asked the question. Move
 	 * the user into the feedback state.
 	 */
+	@CrossOrigin(origins = "http://localhost:8082")
 	@PostMapping("/askquestion")
 	// TODO: Proper return type.
 	String askQuestion(@RequestBody String question, HttpServletRequest request) {
