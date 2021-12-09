@@ -1,9 +1,10 @@
 package com.psu.Lionchat.service;
 
-import com.psu.Lionchat.dao.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractService implements ChatServiceIF{
+import com.psu.Lionchat.dao.DAO;
+
+public abstract class AbstractService{
     protected final DAO dao;
 
     public AbstractService(){

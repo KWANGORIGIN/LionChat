@@ -1,4 +1,4 @@
-package com.psu.Lionchat.service;
+package com.psu.Lionchat.service.chat;
 
 import javax.servlet.http.HttpServletRequest;
 

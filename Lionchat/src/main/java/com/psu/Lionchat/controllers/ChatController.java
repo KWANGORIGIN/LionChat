@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.psu.Lionchat.service.ChatService;
-import com.psu.Lionchat.service.ChatServiceImpl;
+import com.psu.Lionchat.service.chat.ChatService;
+import com.psu.Lionchat.service.chat.ChatServiceImpl;
 
 
 @RestController

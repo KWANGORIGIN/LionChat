@@ -1,4 +1,4 @@
-package com.psu.Lionchat.services.chat;
+package com.psu.Lionchat.service.chat;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,6 @@ import com.psu.Lionchat.dao.repositories.InappropriateQuestionRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
-import com.psu.Lionchat.service.ChatService;
 import com.psu.Lionchat.service.ConversationState;
 
 @Service
