@@ -12,9 +12,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
 import com.psu.Lionchat.dao.entities.User;
@@ -42,20 +44,18 @@ public class ChatServiceImpl implements ChatService {
 		this.inappropriateQuestions = inappropriateQuestions;
 	}
 
-	private String classify(String question) {
+	private String classify(String question) throws RestClientException, JsonSyntaxException{
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		Gson gson = new Gson();
-		Map<String, String> map = new HashMap<>();
-
-		map.put("utterance", question);
+		ClassifierRequest utterance = new ClassifierRequest(question);
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(map), headers);
+		HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
 
 		//TODO: make this into a bean.xml / web.xml data source if thats a thing.
 		String response = restTemplate.postForObject("http://localhost:8000/intent", entity, String.class);
-		Map<String, String> responseMap = gson.fromJson(response, Map.class);
-		return responseMap.get("intent");
+		ClassifierResponse intent = gson.fromJson(response, ClassifierResponse.class);
+		return intent.getIntent();
 	}
 	
 	private User getUser(HttpServletRequest request) {
@@ -86,8 +86,16 @@ public class ChatServiceImpl implements ChatService {
 		
 		questions.save(q);
 		
-
-		return this.classify(question);
+		try {
+			return this.classify(question);
+		}catch(RestClientException e) {
+			System.out.println("Failed to connect to python server.");
+			return "We cannot answer your question because our classification service is offline. We apologize for the inconvenience.";
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "failed";
 				//"Sorry, I do not understand. Please try to rephrase the question.";//"I have discovered a truly remarkable answer of this question which this margin is too small to contain";
 	}
 
