@@ -1,0 +1,9 @@
+Implementation TODO:
+
+- Update the database to use intent based model (question should have an intent attribute for sorting by intent/topic)
+- Add the administrative web page.
+- Bert question answering for IT related issues.
+- Add the strategies for each intent
+- Possibly remove the conversation state in favor of submitting feedback/reviews for a specific question and rejecting it if a review already exists.
+
+Low Priority: Fix concurrency issues
