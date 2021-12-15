@@ -45,7 +45,6 @@ public class ChatController {
 	 * question as well as information about the user who asked the question. Move
 	 * the user into the feedback state.
 	 */
-	@CrossOrigin(origins = "http://localhost:8082")
 	@PostMapping("/askquestion")
 	// TODO: Proper return type.
 	String askQuestion(@RequestBody String question, HttpServletRequest request) {

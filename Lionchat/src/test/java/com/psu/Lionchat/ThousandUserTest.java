@@ -29,7 +29,7 @@ public class ThousandUserTest {
     @MethodSource("userValueGenerator")
     public void thousandUserRequest(){
         String result = restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "Asking a question?", String.class);
-        System.out.println(result + " " + Thread.currentThread().getName());
+//        System.out.println(result + " " + Thread.currentThread().getName());
         assertNotNull(result);
     }
 
