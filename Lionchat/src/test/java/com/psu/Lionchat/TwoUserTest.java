@@ -22,7 +22,7 @@ public class TwoUserTest {
     @Test
     public void firstUserRequest(){
 //        System.out.println("FirstUserRequest => " + Thread.currentThread().getName());
-        System.out.println(restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "yeet", String.class));
+        restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "yeet", String.class);
 //        for(int count = 0; count < 1000; count++){
 //            System.out.println("First test");
 //        }
@@ -31,8 +31,7 @@ public class TwoUserTest {
     @Test
     public void secondUserRequest(){
 //        System.out.println("SecondUserRequest => " + Thread.currentThread().getName());
-        System.out.println(restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "yeet", String.class));
-        System.out.println(restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "yeet", String.class));
+        restTemplate.postForObject("http://localhost:" + port + "/chat/askquestion", "yeet", String.class);
 //        for(int count = 0; count < 1000; count++){
 //            System.out.println("Second test");
 //        }
