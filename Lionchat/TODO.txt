@@ -1,9 +1,51 @@
 Implementation TODO:
 
-- Update the database to use intent based model (question should have an intent attribute for sorting by intent/topic)
+✓ - Update the database to use intent based model (question should have an intent attribute for sorting by intent/topic)
 - Add the administrative web page.
 - Bert question answering for IT related issues.
 - Add the strategies for each intent
 - Possibly remove the conversation state in favor of submitting feedback/reviews for a specific question and rejecting it if a review already exists.
+- Remove Botonic as a dependency
 
 Low Priority: Fix concurrency issues
+
+
+Comments/Concerns/Quesitions:
+	Maybe have ChatServiceImpl use the RatingService/FeedbackService/ChatService classes?
+	
+	The endpoints in general:
+		What should their return types be changed to?
+			/ask-question makes sense to return the database question so its questionid is known when
+			the user reviews it. This prevents session cookies from being used which make sense since
+			the system should forget about previous questions when it moves onto the next session. (IMO).
+	
+	Cookies: What should be saved across system usage? Should the system remember the previous questions asked?
+		Personally, I think it may annoy the user if they see their previous questions. For example, what if
+		they ask an inappropriate question as a joke and then have to see it every time they visit the webpage.
+		
+	The administrative webpage:
+	/average-ratings and similar endpoints: the model should have all questions/reviews/intents so 
+		the chart of topic vs average ratings can be displayed. The calculation can be done client side
+		to save time. Also, we can potentially cache computation results in the database if needed (so the
+		entire list of questions does not need to be returned every time an endpoint is called). If caching is
+		used, we need to be careful of concurrency issues, such as storing 150 stars for the 50 wifi reviews 
+		(3 star average) but having two servers update this average at the same time.
+		
+		Ex. Server 1 and 2 receive a new question with wifi intent at time t=0
+			Server 1 and 2 get the databases value for the wifi reviews 150 total stars
+			Server 1 and 2 add the new review's stars to the 150 total stars to get 155 and 153 respectively.
+			Server 1 updates the database's value to 155 but then Server 2 updates the value to 153. 
+			
+			The 5 star review was deleted. Maybe this can be fixed by executing everything in a single query?
+			Ex. UPDATE topic.reviews, topic.stars to topic.reviews+1, topic.stars+5
+			It needs to be atomic and consistent?
+		
+		
+		We need a way of mapping repository entities, such as Question, Review, and Intent to a javascript object
+		containing only the required information.
+	
+	Live updates: How do we do this? When a new question is added to the database the administrative users
+		listening to the webpage need to be sent the new question's review and topic. The review of a existing
+		question could also be updated and this result needs to change.
+	
+	
