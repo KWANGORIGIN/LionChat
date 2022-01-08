@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * An ORM mapping of the database's Question table.
@@ -24,6 +25,10 @@ public class Question implements Serializable {
 	@JoinColumn
 	private User user;
 
+	@OneToOne
+	@JoinColumn(nullable = true)
+	private Intent intent;
+
 	private String inputString;
 
 	private boolean answered;
@@ -33,9 +38,10 @@ public class Question implements Serializable {
 
 	}
 
-	public Question(User user, String inputString, boolean answered) {
+	public Question(User user, Intent intent, String inputString, boolean answered) {
 		super();
 		this.user = user;
+		this.intent = intent;
 		this.inputString = inputString;
 		this.answered = answered;
 	}
@@ -56,6 +62,14 @@ public class Question implements Serializable {
 		this.user = user;
 	}
 
+	public Intent getIntent() {
+		return intent;
+	}
+
+	public void setIntent(Intent intent) {
+		this.intent = intent;
+	}
+
 	public String getInputString() {
 		return inputString;
 	}
@@ -74,7 +88,7 @@ public class Question implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(answered, id, inputString, user);
+		return Objects.hash(answered, id, inputString, intent, user);
 	}
 
 	@Override
@@ -87,13 +101,14 @@ public class Question implements Serializable {
 			return false;
 		Question other = (Question) obj;
 		return answered == other.answered && Objects.equals(id, other.id)
-				&& Objects.equals(inputString, other.inputString) && Objects.equals(user, other.user);
+				&& Objects.equals(inputString, other.inputString) && Objects.equals(intent, other.intent)
+				&& Objects.equals(user, other.user);
 	}
 
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", user=" + user + ", inputString=" + inputString + ", answered=" + answered
-				+ "]";
+		return "Question [id=" + id + ", user=" + user + ", intent=" + intent + ", inputString=" + inputString
+				+ ", answered=" + answered + "]";
 	}
 
 }

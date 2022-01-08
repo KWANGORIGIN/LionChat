@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### ECLIPSE ###
+/bin
+/.mvn
+/target
+.classpath
+.project
+mvnw

@@ -15,10 +15,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.psu.Lionchat.dao.entities.Intent;
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
 import com.psu.Lionchat.dao.entities.User;
 import com.psu.Lionchat.dao.repositories.InappropriateQuestionRepository;
+import com.psu.Lionchat.dao.repositories.IntentRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
@@ -29,16 +31,18 @@ public class ChatServiceImpl implements ChatService {
 	private UserRepository users;
 	private ReviewRepository reviews;
 	private QuestionRepository questions;
+	private IntentRepository intents;
 	private InappropriateQuestionRepository inappropriateQuestions;
 
 	@Autowired
 	public ChatServiceImpl(UserRepository users, ReviewRepository reviews, QuestionRepository questions,
-			InappropriateQuestionRepository inappropriateQuestions) {
+			IntentRepository intents, InappropriateQuestionRepository inappropriateQuestions) {
 		super();
 
 		this.users = users;
 		this.reviews = reviews;
 		this.questions = questions;
+		this.intents = intents;
 		this.inappropriateQuestions = inappropriateQuestions;
 	}
 
@@ -73,7 +77,7 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public String getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
-		Question q = new Question(user, question, false);
+		Question q = new Question(user, null, question, false);
 		HttpSession session = request.getSession();
 
 		questions.save(q);
@@ -84,7 +88,13 @@ public class ChatServiceImpl implements ChatService {
 			session.setAttribute(ConversationState.class.getName(), ConversationState.FEEDBACK);
 			session.setAttribute(Question.class.getName(), q);
 
-			return this.classify(question);
+			String intentString = this.classify(question);
+			Intent intent = new Intent(intentString);
+			intents.save(intent);
+
+			q.setIntent(intent);
+
+			return intentString;
 		} catch (RestClientException e) {
 			System.out.println("Failed to connect to python server.");
 			return "We cannot answer your question because our classification service is offline. We apologize for the inconvenience.";
@@ -104,6 +114,8 @@ public class ChatServiceImpl implements ChatService {
 		this.getUser(request);
 		HttpSession session = request.getSession();
 
+		// TODO: If questions contains this question, update the value to yes/no
+		// regardless of its previous value.
 		// TODO: Custom exception and concurrency issue
 		if (session.getAttribute(ConversationState.class.getName()) != ConversationState.FEEDBACK) {
 			throw new IllegalStateException();
@@ -123,6 +135,8 @@ public class ChatServiceImpl implements ChatService {
 		this.getUser(request);
 		HttpSession session = request.getSession();
 
+		// TODO: If questions contains this question, update the value to the new rating
+		// regardless of its previous value or current state.
 		// TODO: Custom exception and concurrency issue
 		if (session.getAttribute(ConversationState.class.getName()) != ConversationState.RATING) {
 			throw new IllegalStateException();
