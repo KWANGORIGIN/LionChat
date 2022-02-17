@@ -10,6 +10,7 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
+import ner
 
 app = Flask(__name__)
 CORS(app)
@@ -64,9 +65,23 @@ def getSemanticSearchResults():
 def getIntent():
     print("What intent?")
     
+    
+@app.route('/entities', methods=["POST"])
+def getEntities():
+    text = request.json["text"]
+    entities = []
+    
+    for ent in ner.getEnts(text):
+        entities.append((ent.text, ent.label_))
+        
+    return jsonify(entities = entities)
+    
 if __name__ == "__main__":
     #Initialize similarity searcher
     fit_corpus_for_similarity_search()
+    
+    #load ner model
+    ner.init()
     
     #Run server
     app.run(port = 8000)
