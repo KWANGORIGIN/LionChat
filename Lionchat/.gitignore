@@ -69,3 +69,5 @@ yarn-error.log*
 /react-frontend/node_modules
 /react-frontend/package-lock.json
 /react-frontend/yarn.lock
+
+/pythonserver/LionchatVenv/
