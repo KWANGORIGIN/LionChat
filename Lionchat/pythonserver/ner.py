@@ -4,7 +4,7 @@ Created on Wed Feb 16 17:56:06 2022
 
 @author: willh
 """
-
+from timeit import default_timer as timer
 import spacy
 
 nlp = None
@@ -26,7 +26,11 @@ def init():
     
 def getEnts(text):
     global nlp
-    text = str.lower(text)
-    doc = nlp(text)
-    return doc.ents
+    
+    if nlp is not None:
+        text = str.lower(text) 
+        doc = nlp(text)
+        return doc.ents
+    else:
+        return []
     
