@@ -4,6 +4,7 @@ Created on Wed Feb 16 19:32:14 2022
 
 @author: Kevin Wang
 """
+import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sentence_transformers import SentenceTransformer
@@ -66,9 +67,14 @@ def getIntent():
     print("What intent?")
     
     
-@app.route('/entities', methods=["POST"])
-def getEntities():
-    text = request.json["text"]
+@app.route('/campus_events_entities', methods=["POST"])
+def result():
+    
+    if isinstance(request.json, str):
+        text = json.loads(request.json)["text"]
+    else:
+        text = request.json["text"]
+    
     entities = []
     
     for ent in ner.getEnts(text):
