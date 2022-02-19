@@ -68,22 +68,27 @@ def getIntent():
     print("What intent?")
     
     
-#@app.route('/entities', methods=["POST"])
-#def getEntities():
-#    text = request.json["text"]
-#    entities = []
-#    
-#    for ent in ner.getEnts(text):
-#        entities.append((ent.text, ent.label_))
-#        
-#    return jsonify(entities = entities)
+@app.route('/campus_events_entities', methods=["POST"])
+def get_entities():
+    
+    if isinstance(request.json, str):
+        text = jsonify(request.json)["text"]
+    else:
+        text = request.json["text"]
+    
+    entities = []
+    
+    for ent in ner.getEnts(text):
+        entities.append((ent.text, ent.label_))
+        
+    return jsonify(entities = entities)
     
 if __name__ == "__main__":
     #Initialize similarity searcher
     fit_corpus_for_similarity_search()
     
     #load ner model
-    #ner.init()
+    ner.init()
     
     #Run server
     app.run(port = 8000)
