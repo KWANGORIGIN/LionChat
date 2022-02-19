@@ -4,7 +4,6 @@ Created on Wed Feb 16 19:32:14 2022
 
 @author: Kevin Wang
 """
-import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sentence_transformers import SentenceTransformer
