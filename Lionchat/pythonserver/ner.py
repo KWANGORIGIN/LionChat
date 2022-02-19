@@ -18,7 +18,6 @@ def init():
         print("Not using GPU")
         
     try:
-        
         nlp = spacy.load("./output/modified-modl")
         print('Model loaded.')
     except:
