@@ -71,3 +71,4 @@ yarn-error.log*
 /react-frontend/yarn.lock
 
 /pythonserver/LionchatVenv/
+/pythonserver/__pycache__/

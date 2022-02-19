@@ -23,6 +23,7 @@ def generate_corpus_embeddings():
     df = pd.read_csv('IT_Knowledge_Articles.csv')
     
     #Get article titles from column
+    global articleTitles
     articleTitles = df.ArticleName.values
     
     return embedder.encode(articleTitles, convert_to_numpy=True)
@@ -40,6 +41,7 @@ def fit_corpus_for_similarity_search():
 def getSemanticSearchResults():
     #Get POST request from client
     receivedDict = request.get_json()
+    print(receivedDict)
     
     #Get query from received dict
     query = receivedDict['query']
@@ -52,9 +54,9 @@ def getSemanticSearchResults():
     
     #KNN semantic search
     resultPositions = similarity_searcher.kneighbors(query_embedding, return_distance=False)[0]
-    
     #Get results
     results = []
+    
     for position in resultPositions:
         results.append(articleTitles[position])
     
@@ -66,22 +68,22 @@ def getIntent():
     print("What intent?")
     
     
-@app.route('/entities', methods=["POST"])
-def getEntities():
-    text = request.json["text"]
-    entities = []
-    
-    for ent in ner.getEnts(text):
-        entities.append((ent.text, ent.label_))
-        
-    return jsonify(entities = entities)
+#@app.route('/entities', methods=["POST"])
+#def getEntities():
+#    text = request.json["text"]
+#    entities = []
+#    
+#    for ent in ner.getEnts(text):
+#        entities.append((ent.text, ent.label_))
+#        
+#    return jsonify(entities = entities)
     
 if __name__ == "__main__":
     #Initialize similarity searcher
     fit_corpus_for_similarity_search()
     
     #load ner model
-    ner.init()
+    #ner.init()
     
     #Run server
     app.run(port = 8000)
