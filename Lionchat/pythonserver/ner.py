@@ -17,8 +17,12 @@ def init():
     else:
         print("Not using GPU")
         
-    nlp = spacy.load("./nerModel/modified-model")
-    print('Model loaded.')
+    try:
+        
+        nlp = spacy.load("./output/modified-modl")
+        print('Model loaded.')
+    except:
+        print('Model not found.')
     
     
 def getEnts(text):
