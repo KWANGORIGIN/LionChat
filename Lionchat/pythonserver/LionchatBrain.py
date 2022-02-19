@@ -70,7 +70,7 @@ def getIntent():
 def result():
     
     if isinstance(request.json, str):
-        text = json.loads(request.json)["text"]
+        text = jsonify(request.json)["text"]
     else:
         text = request.json["text"]
     
