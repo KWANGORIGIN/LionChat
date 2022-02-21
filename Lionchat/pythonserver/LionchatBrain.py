@@ -64,6 +64,7 @@ def getSemanticSearchResults():
     for position in resultPositions:
         results.append(articleTitles[position])
     
+    print("Outgoing results: ", results)
     #Return json list of search results
     return jsonify(searchresults = results)
 

@@ -40,9 +40,6 @@ const ChatBox = () => {
 			return [...previousMessages, { id: uuidv4(), text: message, userSent: true }]
 		})
 
-
-		const data = { question: message }
-
 		const response = await fetch(`/chat/askquestion`,
 			// TODO: Create an object for this...
 			{
@@ -54,7 +51,7 @@ const ChatBox = () => {
 					'Content-Type': 'application/json',
 				},
 				// redirect: 'follow',
-				body: JSON.stringify(data),
+				body: message,
 			})
 
 		const chatResponse = await response.text()
