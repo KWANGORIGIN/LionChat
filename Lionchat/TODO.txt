@@ -18,6 +18,10 @@ Comments/Concerns/Quesitions:
 			/ask-question makes sense to return the database question so its questionid is known when
 			the user reviews it. This prevents session cookies from being used which make sense since
 			the system should forget about previous questions when it moves onto the next session. (IMO).
+			
+			/feedback should accept a question ID and then the backend compares the session ids.
+			
+			/review should accept a question ID and then backend compares the session ids. If we keep this.
 	
 	Cookies: What should be saved across system usage? Should the system remember the previous questions asked?
 		Personally, I think it may annoy the user if they see their previous questions. For example, what if
