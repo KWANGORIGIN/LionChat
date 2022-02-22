@@ -29,7 +29,7 @@ const ChatMessages = ({ messages }) => {
   return (
     <div style={containerStyle}>
       {messages.map((m) => {
-        return <ChatMessage key={m.id} text={m.text} userSent={m.userSent} />;
+        return <ChatMessage key={m.key} text={m.text} userSent={m.userSent} id={m.id} />;
       })}
       <div ref={bottom}></div>
     </div>

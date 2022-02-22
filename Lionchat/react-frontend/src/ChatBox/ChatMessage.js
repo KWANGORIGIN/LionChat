@@ -1,46 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Logo from "./LionChat_Logo.svg";
 import parse from 'html-react-parser'
+import styles from './ChatMessage.module.css'
+import ChatMessageFooter from "./ChatMessageFooter";
 
-const ChatMessage = ({ text, userSent }) => {
-  const containerStyle = {
-    display: "flex",
-    margin: 5,
-  };
+const ChatMessage = ({ text, userSent, id }) => {
+  const [setId] = useState()
 
-  const messageStyle = {
-    backgroundColor: userSent ? "#66aaff" : "#eeeeee",
-    color: userSent ? "white" : "black",
-    borderRadius: "6px 6px 6px 6px",
-    height: "fit-content",
-    width: "fit-content",
-    padding: 5,
-    // fontFamily: "Comic Sans MS",
-    maxWidth: "55%",
-    userSelect: "text",
-    marginLeft: userSent ? "auto" : 5,
-    marginRight: userSent ? 5 : "auto",
-    wordWrap: 'break-word',
-  };
+  const sendFeedback = async (helpful) => {
+    console.log(`is helpful: ${helpful} id: ${id}`)
 
-  const logoStyle = {
-    height: 40,
-    marginLeft: 5,
-  };
+    const feedbackRequest = { "questionId": id, "helpful": helpful }
+
+    const response = await fetch(`/chat/feedback`,
+      // TODO: Create an object for this...
+      {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // redirect: 'follow',
+        body: JSON.stringify(feedbackRequest),
+      })
+
+    console.log(response)
+  }
 
   return (
-    <div style={containerStyle}>
+    <div className={styles.container}>
       {!userSent && (
         <img
           src={Logo}
-          style={logoStyle}
+          className={styles.logo}
           draggable="false"
           alt="LionChat Logo"
         />
       )}
-      <div style={messageStyle}>{parse(text)}</div>
-    </div>
+      <div className={styles.messageBubble}>
+        <div className={userSent ? styles.userMessage : styles.lionchatMessage}>
+          <label>{parse(text)}</label>
+        </div>
+        {!userSent && <ChatMessageFooter sendFeedback={sendFeedback} />}
+      </div>
+    </div >
   );
 };
 

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.psu.Lionchat.service.chat.ChatAnswer;
 import com.psu.Lionchat.service.chat.ChatService;
 import com.psu.Lionchat.service.chat.ChatServiceImpl;
+import com.psu.Lionchat.service.chat.FeedbackRequest;
 
 
 @RestController
@@ -46,7 +48,7 @@ public class ChatController {
 	 */
 	@PostMapping("/askquestion")
 	// TODO: Proper return type.
-	String askQuestion(@RequestBody String question, HttpServletRequest request) {
+	ChatAnswer askQuestion(@RequestBody String question, HttpServletRequest request) {
 		// make sure alphanumeric!
 		// first get answer to question from python server
 		// then update the state.
@@ -63,12 +65,12 @@ public class ChatController {
 	 */
 	@PostMapping("/feedback")
 	// TODO: Proper return type.
-	String feedback(@RequestBody boolean helpful, HttpServletRequest request) {
+	String feedback(@RequestBody FeedbackRequest feedbackRequest, HttpServletRequest request) {
 		// first make sure correct state
 		// then if answer yes move on to potential review state
 		// if no, then provide helpful tips
 		try {
-			this.chatService.submitFeedback(request, helpful);
+			this.chatService.submitFeedback(request, feedbackRequest);
 		}catch(Exception e) {
 			return "Failed to submit feedback, illegal state.";
 		}

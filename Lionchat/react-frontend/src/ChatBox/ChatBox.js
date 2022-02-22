@@ -37,7 +37,7 @@ const ChatBox = () => {
 
 		chatInput.current.value = null
 		setMessages(previousMessages => {
-			return [...previousMessages, { id: uuidv4(), text: message, userSent: true }]
+			return [...previousMessages, { key: uuidv4(), text: message, userSent: true }]
 		})
 
 
@@ -57,9 +57,10 @@ const ChatBox = () => {
 				body: question,
 			})
 
-		const chatResponse = await response.text()
+		const chatResponse = await response.json();
+
 		setMessages(previousMessages => {
-			return [...previousMessages, { id: uuidv4(), text: chatResponse, userSent: false }]
+			return [...previousMessages, { key: uuidv4(), text: chatResponse.answer, userSent: false, id: chatResponse.questionId }]
 		})
 	}
 

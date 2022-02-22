@@ -53,11 +53,12 @@ public class ChatServiceImpl implements ChatService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
 		// TODO: make this into a bean.xml / web.xml data source if thats a thing.
-		String response = restTemplate.postForObject("http://localhost:8000/semantic-search-results", entity, String.class);
+		String response = restTemplate.postForObject("http://localhost:8000/semantic-search-results", entity,
+				String.class);
 		SimilarityResponse articles = gson.fromJson(response, SimilarityResponse.class);
 		// ClassifierResponse intent = gson.fromJson(response,
 		// ClassifierResponse.class);
-		if(articles.getTitles().size() == 0) {
+		if (articles.getTitles().size() == 0) {
 			return "ERROR";
 		}
 		String title = articles.getTitles().get(0);
@@ -94,13 +95,13 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public String getAnswer(HttpServletRequest request, String question) {
+	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
 		Question q = new Question(user, null, question, false);
 		HttpSession session = request.getSession();
 
 		questions.save(q);
-
+		System.out.println(q.getId());
 		try {
 			// TODO: Concurrency Issue
 			// TODO: Do we need to save this user's current question ID?
@@ -114,39 +115,46 @@ public class ChatServiceImpl implements ChatService {
 //			q.setIntent(intent);
 
 //			return intentString;
-			return "I found this article that may help: " + this.itSimilarity(question);
+			return new ChatAnswer(q.getId(), "I found this article that may help: " + this.itSimilarity(question));
 		} catch (RestClientException e) {
 			System.out.println("Failed to connect to python server.");
-			return "We cannot answer your question because our classification service is offline. We apologize for the inconvenience.";
+			return new ChatAnswer(q.getId(),
+					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "failed";
+		return new ChatAnswer(q.getId(), "failed");
 		// "Sorry, I do not understand. Please try to rephrase the question.";//"I have
 		// discovered a truly remarkable answer of this question which this margin is
 		// too small to contain";
 	}
 
 	@Override
-	public void submitFeedback(HttpServletRequest request, boolean helpful) {
+	public void submitFeedback(HttpServletRequest request, FeedbackRequest feedbackRequest) {
+		boolean helpful = feedbackRequest.isHelpful();
 		// save user if doesn't exist?
-		this.getUser(request);
-		HttpSession session = request.getSession();
+		User user = this.getUser(request);
+//		HttpSession session = request.getSession();
+		Question question = questions.getById(feedbackRequest.getQuestionId());
+
+		if (!question.getUser().equals(user)) {
+			throw new IllegalStateException();
+		}
 
 		// TODO: If questions contains this question, update the value to yes/no
 		// regardless of its previous value.
 		// TODO: Custom exception and concurrency issue
-		if (session.getAttribute(ConversationState.class.getName()) != ConversationState.FEEDBACK) {
-			throw new IllegalStateException();
-		}
+//		if (session.getAttribute(ConversationState.class.getName()) != ConversationState.FEEDBACK) {
+//			throw new IllegalStateException();
+//		}
 
-		Question question = (Question) session.getAttribute(Question.class.getName());
+//		Question question = (Question) session.getAttribute(Question.class.getName());
 		question.setAnswered(helpful);
 		questions.save(question);
 
 		// TODO: Concurrency issue
-		session.setAttribute(ConversationState.class.getName(), ConversationState.RATING);
+		//session.setAttribute(ConversationState.class.getName(), ConversationState.RATING);
 	}
 
 	@Override
