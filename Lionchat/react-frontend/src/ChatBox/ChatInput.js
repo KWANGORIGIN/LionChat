@@ -17,7 +17,7 @@ const ChatInput = ({ chatInput, handleSendMessage }) => {
 
     const inputStyle = {
         fontSize: 16,
-        fontFamily: 'Comic Sans MS',
+        // fontFamily: 'Comic Sans MS',
         flexGrow: 1
     }
 

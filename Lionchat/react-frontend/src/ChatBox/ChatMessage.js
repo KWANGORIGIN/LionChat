@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Logo from "./LionChat_Logo.svg";
+import parse from 'html-react-parser'
 
 const ChatMessage = ({ text, userSent }) => {
   const containerStyle = {
@@ -9,17 +10,18 @@ const ChatMessage = ({ text, userSent }) => {
   };
 
   const messageStyle = {
-    backgroundColor: userSent ? "#66aaff" : "#66aaff",
-    color: "white",
+    backgroundColor: userSent ? "#66aaff" : "#eeeeee",
+    color: userSent ? "white" : "black",
     borderRadius: "6px 6px 6px 6px",
     height: "fit-content",
     width: "fit-content",
     padding: 5,
-    fontFamily: "Comic Sans MS",
+    // fontFamily: "Comic Sans MS",
     maxWidth: "55%",
     userSelect: "text",
     marginLeft: userSent ? "auto" : 5,
     marginRight: userSent ? 5 : "auto",
+    wordWrap: 'break-word',
   };
 
   const logoStyle = {
@@ -37,7 +39,7 @@ const ChatMessage = ({ text, userSent }) => {
           alt="LionChat Logo"
         />
       )}
-      <div style={messageStyle}>{text}</div>
+      <div style={messageStyle}>{parse(text)}</div>
     </div>
   );
 };

@@ -57,7 +57,12 @@ public class ChatServiceImpl implements ChatService {
 		SimilarityResponse articles = gson.fromJson(response, SimilarityResponse.class);
 		// ClassifierResponse intent = gson.fromJson(response,
 		// ClassifierResponse.class);
-		return articles.getResponses().get(0);
+		if(articles.getTitles().size() == 0) {
+			return "ERROR";
+		}
+		String title = articles.getTitles().get(0);
+		String url = articles.getUrls().get(0);
+		return String.format("<a href=%s target=\"_blank\">%s</a>", url, title);
 	}
 
 	private String classify(String question) throws RestClientException, JsonSyntaxException {

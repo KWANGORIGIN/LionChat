@@ -10,7 +10,7 @@ export default function ChatHeader({ minimize }) {
         alignItems: 'center',
         color: 'white',
         fontSize: 25,
-        fontFamily: 'Comic Sans MS'
+        //fontFamily: 'Comic Sans MS'
     }
 
     const logoStyle = {

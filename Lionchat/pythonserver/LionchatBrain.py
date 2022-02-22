@@ -20,14 +20,16 @@ CORS(app)
 
 #Sentence Transformer embedder
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
+articleUrls = []
 articleTitles = []
 def generate_corpus_embeddings():
     #Read values from csv
     df = pd.read_csv('IT_Knowledge_Articles.csv')
     
     #Get article titles from column
-    global articleTitles
+    global articleTitles, articleUrls
     articleTitles = df.ArticleName.values
+    articleUrls = df.ArticleLink.values
     
     return embedder.encode(articleTitles, convert_to_numpy=True)
 
@@ -57,16 +59,23 @@ def getSemanticSearchResults():
     query_embedding = np.reshape(query_embedding, (1, 384))
     
     #KNN semantic search
-    resultPositions = similarity_searcher.kneighbors(query_embedding, return_distance=False)[0]
+    similarities, positions = similarity_searcher.kneighbors(query_embedding, return_distance=True)
+    similarities = similarities[0]
+    positions = positions[0]
     #Get results
-    results = []
+    results = {'titles':[], 'urls': []}
     
-    for position in resultPositions:
-        results.append(articleTitles[position])
+    for position in positions:
+        results['titles'].append(articleTitles[position])
+        results['urls'].append(articleUrls[position])
+
+    print(results)
+    print(jsonify(results))
+    # print(similarities)
     
     print("Outgoing results: ", results)
     #Return json list of search results
-    return jsonify(searchresults = results)
+    return jsonify(results)
 
 classifier = ComplementNB()
 inputVector = TfidfVectorizer()
