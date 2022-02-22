@@ -49,3 +49,11 @@ label.feedbackEmoji:hover {
   opacity: 100%;
   cursor: pointer;
 }
+
+label.feedbackEmojiSelected {
+  opacity: 100%;
+}
+
+label.feedbackEmojiSelected:hover {
+  cursor: pointer;
+}
