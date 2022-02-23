@@ -16,8 +16,8 @@ const ChatMessageFooter = ({ sendFeedback }) => {
     return (
         <div className={styles.footerBubbleContainer}>
             <div className={styles.feedbackBubble}>
-                <label className={helpfulSelected ? styles.feedbackEmojiSelected : styles.feedbackEmoji} onClick={() => setHelpful(true)}>🤠</label>
-                <label className={unhelpfulSelected ? styles.feedbackEmojiSelected : styles.feedbackEmoji} onClick={() => setHelpful(false)}>🤮</label>
+                <label className={helpfulSelected ? styles.feedbackEmojiSelected : styles.feedbackEmoji} onClick={() => setHelpful(true)}>😀</label>
+                <label className={unhelpfulSelected ? styles.feedbackEmojiSelected : styles.feedbackEmoji} onClick={() => setHelpful(false)}>🙁</label>
             </div>
             <div className={styles.bubbleWhiteBackground}>
                 <div className={styles.footerBubbleRounded} />
