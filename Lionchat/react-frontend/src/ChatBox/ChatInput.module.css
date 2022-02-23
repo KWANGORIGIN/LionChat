@@ -4,7 +4,7 @@ div.container {
 }
 
 input.messageBox {
-  font-size: 16pt;
+  font-size: 16px;
   flex-grow: 1;
 }
 

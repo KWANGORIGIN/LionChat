@@ -81,7 +81,7 @@ const ChatBox = () => {
 		display: 'flex',
 		flexDirection: 'column',
 		userSelect: 'none',
-		zIndex: 100000
+		zIndex: 100000,
 	}
 
 	return (
