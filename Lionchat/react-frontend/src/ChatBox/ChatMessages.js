@@ -23,7 +23,9 @@ const ChatMessages = ({ messages }) => {
 
   const containerStyle = {
     overflowY: "scroll",
-    height: "100%"
+    height: "100%",
+    display: 'flex',
+    flexDirection: 'column',
   };
 
   return (
