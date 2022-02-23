@@ -14,7 +14,6 @@ const ChatMessage = ({ text, userSent, id }) => {
     const feedbackRequest = { "questionId": id, "helpful": helpful }
 
     const response = await fetch(`/chat/feedback`,
-      // TODO: Create an object for this...
       {
         method: 'POST',
         mode: 'cors',
@@ -23,7 +22,6 @@ const ChatMessage = ({ text, userSent, id }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        // redirect: 'follow',
         body: JSON.stringify(feedbackRequest),
       })
 
