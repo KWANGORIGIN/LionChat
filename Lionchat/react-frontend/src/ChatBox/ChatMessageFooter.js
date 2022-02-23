@@ -7,10 +7,10 @@ const ChatMessageFooter = ({ sendFeedback }) => {
     const [unhelpfulSelected, setUnhelpfulSelected] = useState(false);
 
     const setHelpful = (helpful) => {
-        // sendFeedback(helpful)
-
         setHelpfulSelected(helpful)
         setUnhelpfulSelected(!helpful)
+
+        sendFeedback(helpful)
     }
 
     return (
