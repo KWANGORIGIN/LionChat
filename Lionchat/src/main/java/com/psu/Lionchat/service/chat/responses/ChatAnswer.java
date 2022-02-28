@@ -1,4 +1,4 @@
-package com.psu.Lionchat.service.chat;
+package com.psu.Lionchat.service.chat.responses;
 
 public class ChatAnswer {
 	private long questionId;

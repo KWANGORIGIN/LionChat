@@ -1,4 +1,4 @@
-package com.psu.Lionchat.service.chat;
+package com.psu.Lionchat.service.chat.requests;
 
 public class FeedbackRequest {
 	private long questionId;

@@ -22,6 +22,13 @@ import com.psu.Lionchat.dao.repositories.IntentRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
+import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
+import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
+import com.psu.Lionchat.service.chat.requests.ReviewRequest;
+import com.psu.Lionchat.service.chat.requests.SimilarityRequest;
+import com.psu.Lionchat.service.chat.responses.ChatAnswer;
+import com.psu.Lionchat.service.chat.responses.ClassifierResponse;
+import com.psu.Lionchat.service.chat.responses.SimilarityResponse;
 
 @Service
 public class ChatServiceImpl implements ChatService {

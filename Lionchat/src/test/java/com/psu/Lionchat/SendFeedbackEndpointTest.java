@@ -16,8 +16,8 @@ import org.springframework.http.MediaType;
 
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
-import com.psu.Lionchat.service.chat.ChatAnswer;
-import com.psu.Lionchat.service.chat.FeedbackRequest;
+import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
+import com.psu.Lionchat.service.chat.responses.ChatAnswer;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SendFeedbackEndpointTest {
