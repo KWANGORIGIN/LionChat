@@ -7,5 +7,5 @@ public interface ChatService {
 	
 	public void submitFeedback(HttpServletRequest request, FeedbackRequest feedbackRequest);
 	
-	public void submitReview(HttpServletRequest request, int rating);
+	public void submitReview(HttpServletRequest request, ReviewRequest reviewRequest);
 }

@@ -27,6 +27,10 @@ public class Question implements Serializable {
 
 	@OneToOne
 	@JoinColumn(nullable = true)
+	private Review review;
+
+	@OneToOne
+	@JoinColumn(nullable = true)
 	private Intent intent;
 
 	private String inputString;
@@ -38,12 +42,13 @@ public class Question implements Serializable {
 
 	}
 
-	public Question(User user, Intent intent, String inputString, boolean answered) {
+	public Question(User user, Intent intent, String inputString, boolean answered, Review review) {
 		super();
 		this.user = user;
 		this.intent = intent;
 		this.inputString = inputString;
 		this.answered = answered;
+		this.review = review;
 	}
 
 	public Long getId() {
@@ -60,6 +65,14 @@ public class Question implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
 	}
 
 	public Intent getIntent() {
@@ -88,7 +101,7 @@ public class Question implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(answered, id, inputString, intent, user);
+		return Objects.hash(answered, id, inputString, intent, review, user);
 	}
 
 	@Override
@@ -102,13 +115,12 @@ public class Question implements Serializable {
 		Question other = (Question) obj;
 		return answered == other.answered && Objects.equals(id, other.id)
 				&& Objects.equals(inputString, other.inputString) && Objects.equals(intent, other.intent)
-				&& Objects.equals(user, other.user);
+				&& Objects.equals(review, other.review) && Objects.equals(user, other.user);
 	}
 
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", user=" + user + ", intent=" + intent + ", inputString=" + inputString
-				+ ", answered=" + answered + "]";
+		return "Question [id=" + id + ", user=" + user + ", review=" + review + ", intent=" + intent + ", inputString="
+				+ inputString + ", answered=" + answered + "]";
 	}
-
 }

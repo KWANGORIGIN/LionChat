@@ -13,6 +13,7 @@ import com.psu.Lionchat.service.chat.ChatAnswer;
 import com.psu.Lionchat.service.chat.ChatService;
 import com.psu.Lionchat.service.chat.ChatServiceImpl;
 import com.psu.Lionchat.service.chat.FeedbackRequest;
+import com.psu.Lionchat.service.chat.ReviewRequest;
 
 
 @RestController
@@ -86,13 +87,14 @@ public class ChatController {
 	 */
 	@PostMapping("/review")
 	// TODO: Proper return type.
-	String review(@RequestBody int score, HttpServletRequest request) {
+	String review(@RequestBody ReviewRequest reviewRequest, HttpServletRequest request) {
 		// first make sure correct state
 		// then submit review
 		// revert back to default state
 		try {
-			this.chatService.submitReview(request, score);
+			this.chatService.submitReview(request, reviewRequest);
 		}catch(Exception e) {
+			e.printStackTrace();
 			return "Failed to submit review, illegal state.";
 		}
 		return "Reviewed question";

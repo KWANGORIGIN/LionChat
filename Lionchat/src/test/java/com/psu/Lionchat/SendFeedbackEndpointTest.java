@@ -13,10 +13,11 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
+import com.psu.Lionchat.service.chat.ChatAnswer;
+import com.psu.Lionchat.service.chat.FeedbackRequest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SendFeedbackEndpointTest {
@@ -26,35 +27,36 @@ class SendFeedbackEndpointTest {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
-	
+
 	@Autowired
 	private QuestionRepository questions;
 
 	@Test
 	public void testSendFeedbackDatabase() {
-		var entity = restTemplate.postForEntity(
-				"http://localhost:" + port + "/chat/askquestion",
-				"Asking a question?", String.class);
+		var entity = restTemplate.postForEntity("http://localhost:" + port + "/chat/askquestion", "Asking a question?",
+				ChatAnswer.class);
 		String cookie = entity.getHeaders().get("Set-Cookie").get(0);
-		cookie = cookie.substring(cookie.indexOf('=')+1, cookie.indexOf(';'));
+		cookie = cookie.substring(cookie.indexOf('=') + 1, cookie.indexOf(';'));
 		String session = new String(Base64.getDecoder().decode(cookie));
-		Optional<Question> question = questions.findAll().stream().filter(q->q.getUser().getSessionId().equals(session)).findAny();
+
+		ChatAnswer answer = entity.getBody();
+		Optional<Question> question = questions.findById(answer.getQuestionId());
 		assertEquals(true, question.isPresent());
-		
-//		System.out.println(entity.getBody());
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Cookie", entity.getHeaders().get("Set-Cookie").get(0));
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		
-		HttpEntity<Boolean> feedbackRequest = new HttpEntity<Boolean>(true, headers);
-		String response = restTemplate.postForObject(
-				"http://localhost:" + port + "/chat/feedback", feedbackRequest,
+
+		FeedbackRequest request = new FeedbackRequest(answer.getQuestionId(), true);
+		HttpEntity<FeedbackRequest> feedbackRequest = new HttpEntity<FeedbackRequest>(request, headers);
+		String response = restTemplate.postForObject("http://localhost:" + port + "/chat/feedback", feedbackRequest,
 				String.class);
 //		System.out.println(response);
-		question = questions.findAll().stream().filter(q->q.getUser().getSessionId().equals(session)).findAny();
+		question = questions.findAll().stream().filter(q -> q.getUser().getSessionId().equals(session)).findAny();
+//		System.out.println(question);
 		assertEquals(true, question.isPresent());
 		assertEquals(true, question.get().isAnswered());
+		assertEquals(true, response != null);
 	}
 
 }

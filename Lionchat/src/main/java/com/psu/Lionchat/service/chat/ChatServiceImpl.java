@@ -3,7 +3,6 @@ package com.psu.Lionchat.service.chat;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -23,7 +22,6 @@ import com.psu.Lionchat.dao.repositories.IntentRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
-import com.psu.Lionchat.service.ConversationState;
 
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -97,17 +95,10 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
-		Question q = new Question(user, null, question, false);
-		HttpSession session = request.getSession();
+		Question q = new Question(user, null, question, false, null);
 
 		questions.save(q);
-		System.out.println(q.getId());
 		try {
-			// TODO: Concurrency Issue
-			// TODO: Do we need to save this user's current question ID?
-			session.setAttribute(ConversationState.class.getName(), ConversationState.FEEDBACK);
-			session.setAttribute(Question.class.getName(), q);
-
 //			String intentString = this.classify(question);
 //			Intent intent = new Intent(intentString);
 //			intents.save(intent);
@@ -118,6 +109,7 @@ public class ChatServiceImpl implements ChatService {
 			return new ChatAnswer(q.getId(), "I found this article that may help: " + this.itSimilarity(question));
 		} catch (RestClientException e) {
 			System.out.println("Failed to connect to python server.");
+			e.printStackTrace();
 			return new ChatAnswer(q.getId(),
 					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
 		} catch (Exception e) {
@@ -133,49 +125,40 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public void submitFeedback(HttpServletRequest request, FeedbackRequest feedbackRequest) {
 		boolean helpful = feedbackRequest.isHelpful();
-		// save user if doesn't exist?
 		User user = this.getUser(request);
-//		HttpSession session = request.getSession();
 		Question question = questions.getById(feedbackRequest.getQuestionId());
 
 		if (!question.getUser().equals(user)) {
 			throw new IllegalStateException();
 		}
 
-		// TODO: If questions contains this question, update the value to yes/no
-		// regardless of its previous value.
-		// TODO: Custom exception and concurrency issue
-//		if (session.getAttribute(ConversationState.class.getName()) != ConversationState.FEEDBACK) {
-//			throw new IllegalStateException();
-//		}
-
-//		Question question = (Question) session.getAttribute(Question.class.getName());
 		question.setAnswered(helpful);
 		questions.save(question);
-
-		// TODO: Concurrency issue
-		//session.setAttribute(ConversationState.class.getName(), ConversationState.RATING);
 	}
 
 	@Override
-	public void submitReview(HttpServletRequest request, int rating) {
+	public void submitReview(HttpServletRequest request, ReviewRequest reviewRequest) {
 		// save user if doesn't exist?
-		this.getUser(request);
-		HttpSession session = request.getSession();
+		User user = this.getUser(request);
+		Question question = questions.getById(reviewRequest.getQuestionId());
 
-		// TODO: If questions contains this question, update the value to the new rating
-		// regardless of its previous value or current state.
-		// TODO: Custom exception and concurrency issue
-		if (session.getAttribute(ConversationState.class.getName()) != ConversationState.RATING) {
+		// Make sure the user asked this question.
+		if (!question.getUser().equals(user)) {
 			throw new IllegalStateException();
 		}
 
-		Question question = (Question) session.getAttribute(Question.class.getName());
-		Review review = new Review(question, rating);
-		reviews.save(review);
+		// Update the question review if it exists.
+		if (question.getReview() == null) {
+			Review review = new Review(question, reviewRequest.getReview());
+			question.setReview(review);
+			reviews.save(review);
+			questions.save(question);
+		} else {
+			Review review = question.getReview();
+			review.setScore(reviewRequest.getReview());
+			reviews.save(review);
+		}
 
-		// TODO: Concurrency issue
-		session.setAttribute(ConversationState.class.getName(), ConversationState.IDLE);
 	}
 
 }
