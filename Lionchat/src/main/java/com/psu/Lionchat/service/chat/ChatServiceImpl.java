@@ -124,22 +124,19 @@ public class ChatServiceImpl implements ChatService {
 		}
 
 		return new ChatAnswer(q.getId(), "failed");
-		// "Sorry, I do not understand. Please try to rephrase the question.";//"I have
-		// discovered a truly remarkable answer of this question which this margin is
-		// too small to contain";
 	}
 
 	@Override
 	public void submitFeedback(HttpServletRequest request, FeedbackRequest feedbackRequest) {
-		boolean helpful = feedbackRequest.isHelpful();
 		User user = this.getUser(request);
 		Question question = questions.getById(feedbackRequest.getQuestionId());
 
+		// Make sure the user asked this question.
 		if (!question.getUser().equals(user)) {
 			throw new IllegalStateException();
 		}
 
-		question.setAnswered(helpful);
+		question.setAnswered(feedbackRequest.isHelpful());
 		questions.save(question);
 	}
 
