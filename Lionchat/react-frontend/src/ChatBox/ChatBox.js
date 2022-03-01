@@ -60,7 +60,13 @@ const ChatBox = () => {
 		const chatResponse = await response.json();
 
 		setMessages(previousMessages => {
-			return [...previousMessages, { key: uuidv4(), text: chatResponse.answer, userSent: false, id: chatResponse.questionId }]
+			return [...previousMessages, { key: uuidv4(), text: chatResponse.answer, userSent: false, id: chatResponse.questionId, helpful: null }]
+		})
+	}
+
+	function handleSendFeedback(message) {
+		setMessages(previousMessages => {
+			return previousMessages.map(m => m.key === message.key ? {...m, ...message} : m)
 		})
 	}
 
@@ -87,7 +93,7 @@ const ChatBox = () => {
 	return (
 		<div style={chatBoxStyle}>
 			<ChatHeader minimize={() => setMinimized(true)} />
-			<ChatMessages messages={messages} />
+			<ChatMessages messages={messages} handleSendFeedback={handleSendFeedback} />
 			<ChatInput chatInput={chatInput} handleSendMessage={handleSendMessage} />
 		</div>
 	)

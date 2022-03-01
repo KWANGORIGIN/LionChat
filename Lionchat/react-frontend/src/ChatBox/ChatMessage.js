@@ -5,13 +5,9 @@ import parse from 'html-react-parser'
 import styles from './ChatMessage.module.css'
 import ChatMessageFooter from "./ChatMessageFooter";
 
-const ChatMessage = ({ text, userSent, id }) => {
-  const [setId] = useState()
-
+const ChatMessage = ({ id, text, userSent, questionId, helpful, handleSendFeedback }) => {
   const sendFeedback = async (helpful) => {
-    console.log(`is helpful: ${helpful} id: ${id}`)
-
-    const feedbackRequest = { "questionId": id, "helpful": helpful }
+    const feedbackRequest = { "questionId": questionId, "helpful": helpful }
 
     const response = await fetch(`/chat/feedback`,
       {
@@ -25,7 +21,10 @@ const ChatMessage = ({ text, userSent, id }) => {
         body: JSON.stringify(feedbackRequest),
       })
 
-    console.log(response)
+    if (response !== undefined) {
+      const message = { "key": id, "helpful": helpful }
+      handleSendFeedback(message)
+    }
   }
 
   return (
@@ -42,7 +41,7 @@ const ChatMessage = ({ text, userSent, id }) => {
         <div className={userSent ? styles.userMessage : styles.lionchatMessage}>
           <label>{parse(text)}</label>
         </div>
-        {!userSent && <ChatMessageFooter sendFeedback={sendFeedback} />}
+        {!userSent && <ChatMessageFooter helpful={helpful} sendFeedback={sendFeedback} />}
       </div>
     </div >
   );

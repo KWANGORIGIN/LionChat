@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import ChatMessage from "./ChatMessage";
 
-const ChatMessages = ({ messages }) => {
+const ChatMessages = ({ messages, handleSendFeedback }) => {
   const bottom = useRef();
   const [count, setCount] = useState(0);
 
@@ -31,7 +31,7 @@ const ChatMessages = ({ messages }) => {
   return (
     <div style={containerStyle}>
       {messages.map((m) => {
-        return <ChatMessage key={m.key} text={m.text} userSent={m.userSent} id={m.id} />;
+        return <ChatMessage key={m.key} id={m.key} text={m.text} userSent={m.userSent} questionId={m.id} helpful={m.helpful} handleSendFeedback={handleSendFeedback} />;
       })}
       <div ref={bottom}></div>
     </div>

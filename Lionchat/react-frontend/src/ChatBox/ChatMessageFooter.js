@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styles from "./ChatMessageFooter.module.css"
 
 //😁🙂😃😢😟😥😖👍👎
-const ChatMessageFooter = ({ sendFeedback }) => {
-    const [helpfulSelected, setHelpfulSelected] = useState(false);
-    const [unhelpfulSelected, setUnhelpfulSelected] = useState(false);
+const ChatMessageFooter = ({ helpful, sendFeedback }) => {
+    const [helpfulSelected, setHelpfulSelected] = useState(helpful === true);
+    const [unhelpfulSelected, setUnhelpfulSelected] = useState(helpful === false);
 
     const setHelpful = (helpful) => {
         setHelpfulSelected(helpful)
