@@ -7,4 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 // for unrecognized queries
 public class InvalidStrategy extends IntentStrategyAbs{
+    @Override
+    public String doStrategy(String question) {
+        return null;
+    }
 }
