@@ -206,8 +206,10 @@ class intent_classifier_dataset_generator:
         nlp = spacy.load("./output_updated/model-best")
         inputVal = input("Enter text: ")
         while inputVal != 'exit':
-            output = nlp(inputVal)
-            print(output.cats)
+            doc = nlp(inputVal)
+            classifiedIntent = max(doc.cats, key = doc.cats.get)
+            print(doc.cats)
+            print("Classified Intent: ", classifiedIntent)
             inputVal = input("Enter text: ")
         
         # demo = nlp("where does behrend cheerleading meet")

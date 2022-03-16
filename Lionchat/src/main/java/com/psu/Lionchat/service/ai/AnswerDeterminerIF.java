@@ -1,5 +1,8 @@
 package com.psu.Lionchat.service.ai;
 
+import com.psu.Lionchat.dao.entities.Question;
+import com.psu.Lionchat.service.chat.responses.ChatAnswer;
+
 public interface AnswerDeterminerIF {
-    String getAnswer(String question);
+    ChatAnswer getAnswer(Question questionObj);
 }

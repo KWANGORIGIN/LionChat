@@ -4,8 +4,6 @@ Created on Wed Feb 16 19:32:14 2022
 
 @author: Kevin Wang
 """
-from sklearn.naive_bayes import ComplementNB
-from sklearn.feature_extraction.text import TfidfVectorizer
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sentence_transformers import SentenceTransformer
@@ -14,6 +12,7 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 import ner
 import csv
+import spacy
 
 app = Flask(__name__)
 CORS(app)
@@ -69,33 +68,33 @@ def getSemanticSearchResults():
         results['titles'].append(articleTitles[position])
         results['urls'].append(articleUrls[position])
 
-    print(results)
-    print(jsonify(results))
+    # print(results)
+    # print(jsonify(results))
     # print(similarities)
     
-    print("Outgoing results: ", results)
+    # print("Outgoing results: ", results)
     #Return json list of search results
     return jsonify(results)
 
-classifier = ComplementNB()
-inputVector = TfidfVectorizer()
+nlp = spacy.load("./output_updated/model-best")
 @app.before_first_request
 def trainIntentClassifier():
+    nlp = spacy.load("./output_updated/model-best")
     
-    #Open questions.csv to train classifier from
-    questions = []
-    labels = []
-    with open("questions.csv", newline='', encoding='utf-8-sig') as csvfile:
-        csvReader = csv.DictReader(csvfile, delimiter=',')
-        for row in csvReader:
-            questions.append(row['Question'].strip())
-            labels.append(row['Intent'].strip())
+    # #Open questions.csv to train classifier from
+    # questions = []
+    # labels = []
+    # with open("questions.csv", newline='', encoding='utf-8-sig') as csvfile:
+    #     csvReader = csv.DictReader(csvfile, delimiter=',')
+    #     for row in csvReader:
+    #         questions.append(row['Question'].strip())
+    #         labels.append(row['Intent'].strip())
         
-    #Transforming questions list into questions tfIDF vectors
-    questions_vec = inputVector.fit_transform(questions)
+    # #Transforming questions list into questions tfIDF vectors
+    # questions_vec = inputVector.fit_transform(questions)
     
-    #Training the classifier
-    classifier.fit(questions_vec, labels)
+    # #Training the classifier
+    # classifier.fit(questions_vec, labels)
 
 @app.route('/intent', methods=['POST'])
 def classifyIntent():
@@ -105,29 +104,33 @@ def classifyIntent():
     print(receivedDict)
     
     #Get user utterance
-    userInput = []
-    userInput.append(receivedDict["utterance"])
+    userInput = receivedDict["utterance"]
     
-    #Transform user utterance to tfIDF vector
-    new_question = inputVector.transform(userInput)
+    doc = nlp(userInput)
     
-    #Classify intent
-    intent = classifier.predict(new_question)
-    # print(intent)
+    classifiedIntent = max(doc.cats, key = doc.cats.get)
+    print("Classified Intent: ", classifiedIntent)
     
-    prob = classifier.predict_proba(new_question)
-    # print(prob)
-    prob = prob.item(0) #Gets first probability in list
+    # #Transform user utterance to tfIDF vector
+    # new_question = inputVector.transform(userInput)
     
-    #If probability is the same across each class, then intent is unknown
-    '''
-    May be wrong. Might need to update for multilabel classification
-    '''
-    if(prob == (1 / len(classifier.classes_))):
-        intent = ["unknownIntent"]
+    # #Classify intent
+    # intent = classifier.predict(new_question)
+    # # print(intent)
+    
+    # prob = classifier.predict_proba(new_question)
+    # # print(prob)
+    # prob = prob.item(0) #Gets first probability in list
+    
+    # #If probability is the same across each class, then intent is unknown
+    # '''
+    # May be wrong. Might need to update for multilabel classification
+    # '''
+    # if(prob == (1 / len(classifier.classes_))):
+    #     intent = ["unknownIntent"]
     
     #Return intent as JSON
-    return jsonify(intent=intent[0])
+    return jsonify(intent=classifiedIntent)
     
 @app.route('/campus_events_entities', methods=["POST"])
 def get_entities():

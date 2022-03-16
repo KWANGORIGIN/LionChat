@@ -1,8 +1,10 @@
 package com.psu.Lionchat.service.ai;
 
 import com.google.gson.Gson;
+import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
 import com.psu.Lionchat.service.chat.requests.SimilarityRequest;
+import com.psu.Lionchat.service.chat.responses.ChatAnswer;
 import com.psu.Lionchat.service.chat.responses.ClassifierResponse;
 import com.psu.Lionchat.service.chat.responses.SimilarityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +33,22 @@ public class AnswerDeterminer implements AnswerDeterminerIF{
     }
 
     @Override
-    public String getAnswer(String question){
+    public ChatAnswer getAnswer(Question questionObj){
         //First check if there is a toxic problem with user's input
+        String question = questionObj.getInputString();
+        Long questionId = questionObj.getId();
         String issueResponse = issueClassifier.doStrategy(question);
+        //Temporary
+        issueResponse = "Valid";
         if(Objects.equals(issueResponse, "Valid")){
             String intentType = classifyIntent(question);
             IntentStrategyIF strategy = strategyFactory.getStrategy(intentType);
-            return strategy.doStrategy(question);//Returns answer as determined by classifier
+            return new ChatAnswer(questionId, strategy.doStrategy(question));//Returns answer as determined by classifier
         }
-        return issueResponse;//Returns error message from issueClassifier
+        return new ChatAnswer(questionId, issueResponse);//Returns error message from issueClassifier
     }
 
-    //Todo: finish implementing this
+    //Todo: Considering loading in Python server ip from config file
     private String classifyIntent(String question){
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
