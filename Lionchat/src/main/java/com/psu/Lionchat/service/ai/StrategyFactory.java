@@ -13,6 +13,9 @@ public class StrategyFactory {
         else if(Objects.equals(strategyType, "Event_Intent")){
             return new EventStrategy();
         }
+        else if (Objects.equals(strategyType, "Search_Intent")){
+            return new SearchStrategy();
+        }
         else{
             return new InvalidStrategy();
         }
