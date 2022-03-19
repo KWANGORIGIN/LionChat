@@ -26,7 +26,7 @@ public class ITStrategy extends IntentStrategyAbs{
         // ClassifierResponse intent = gson.fromJson(response,
         // ClassifierResponse.class);
         if (articles.getTitles().size() == 0) {
-            return "ERROR";
+            return "Sorry we were unable to find any related articles to your query.";
         }
         String title = articles.getTitles().get(0);
         String url = articles.getUrls().get(0);

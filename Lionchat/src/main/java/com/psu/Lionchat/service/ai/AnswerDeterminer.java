@@ -39,7 +39,7 @@ public class AnswerDeterminer implements AnswerDeterminerIF{
         Long questionId = questionObj.getId();
         String issueResponse = issueClassifier.doStrategy(question);
         //Temporary
-        issueResponse = "Valid";
+        issueResponse = "Valid";//ToDo: Implement toxic classifier and get rid of this
         if(Objects.equals(issueResponse, "Valid")){
             String intentType = classifyIntent(question);
             IntentStrategyIF strategy = strategyFactory.getStrategy(intentType);

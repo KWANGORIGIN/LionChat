@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class InvalidStrategy extends IntentStrategyAbs{
     @Override
     public String doStrategy(String question) {
-        return null;
+        return "I'm sorry can you please rephrase the question? We want to make sure we can provide you with the right answer.";
     }
 }

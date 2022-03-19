@@ -7,6 +7,14 @@ import org.springframework.stereotype.Component;
 public class FlaggedStrategy extends IntentStrategyAbs{
     @Override
     public String doStrategy(String question) {
-        return null;
+        //Preprocessing for keywords
+        boolean flagQuestion = false;
+
+        //If not found flagged, then run through Python server
+        if(flagQuestion){
+
+        }
+
+        return "Please keep your language clean and appropriate. You may rephrase your query.";
     }
 }
