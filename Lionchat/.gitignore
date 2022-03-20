@@ -72,3 +72,5 @@ yarn-error.log*
 
 /pythonserver/LionchatVenv/
 /pythonserver/__pycache__/
+
+/database
