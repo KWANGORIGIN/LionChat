@@ -1,0 +1,21 @@
+﻿Question,Intent
+what i the wifi password,ITIntent
+how can i access the wifi,ITIntent
+i need help set up wifi on my devic,ITIntent
+how do i setup wifi for an iphon,ITIntent
+can you help me set up the wifi,ITIntent
+what i there to do in eri,ErieInfoIntent
+where can i go get a drink,ErieInfoIntent
+what i presqu isl,ErieInfoIntent
+where can i get chines food,ErieInfoIntent
+where can i get mexican food in eri,ErieInfoIntent
+what i there to do on campu,CampusEventsIntent
+what can i do for fun,CampusEventsIntent
+what event should i attend,CampusEventsIntent
+what activ should student particip in,CampusEventsIntent
+when i there someth fun happen,CampusEventsIntent
+hello,GreetingIntent
+greet,GreetingIntent
+hei,GreetingIntent
+what up,GreetingIntent
+hi there,GreetingIntent

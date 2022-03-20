@@ -1,0 +1,25 @@
+div.container {
+  display: flex;
+  max-height: 3rem;
+  width: 100%;
+}
+
+input.messageBox {
+  font-size: 1.25em;
+  flex-grow: 1;
+}
+
+button.send {
+  border: none;
+  cursor: pointer;
+  background-color: #aaaaff;
+  width: fit-content;
+}
+
+button.send:active {
+  background-color: #4444ff;
+}
+
+button.send:hover {
+  background-color: #8888ff;
+}

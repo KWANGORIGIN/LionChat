@@ -4,6 +4,7 @@ import ChatMessages from './ChatMessages'
 import ChatInput from './ChatInput'
 import ChatBubble from './ChatBubble'
 import { v4 as uuidv4 } from 'uuid'
+import styles from './ChatBox.module.css'
 
 const LOCAL_STORAGE_KEY = 'LionChat.Messages'
 
@@ -37,11 +38,11 @@ const ChatBox = () => {
 
 		chatInput.current.value = null
 		setMessages(previousMessages => {
-			return [...previousMessages, { id: uuidv4(), text: message, userSent: true }]
+			return [...previousMessages, { key: uuidv4(), text: message, userSent: true }]
 		})
 
 
-		const data = { question: message }
+		const question = message
 
 		const response = await fetch(`/chat/askquestion`,
 			// TODO: Create an object for this...
@@ -54,12 +55,19 @@ const ChatBox = () => {
 					'Content-Type': 'application/json',
 				},
 				// redirect: 'follow',
-				body: JSON.stringify(data),
+				body: question,
 			})
 
-		const chatResponse = await response.text()
+		const chatResponse = await response.json();
+
 		setMessages(previousMessages => {
-			return [...previousMessages, { id: uuidv4(), text: chatResponse, userSent: false }]
+			return [...previousMessages, { key: uuidv4(), text: chatResponse.answer, userSent: false, id: chatResponse.questionId, helpful: null }]
+		})
+	}
+
+	function handleSendFeedback(message) {
+		setMessages(previousMessages => {
+			return previousMessages.map(m => m.key === message.key ? { ...m, ...message } : m)
 		})
 	}
 
@@ -69,24 +77,10 @@ const ChatBox = () => {
 		return <ChatBubble maximize={() => setMinimized(false)} />
 	}
 
-	const chatBoxStyle = {
-		width: 300,
-		position: 'fixed',
-		bottom: 10,
-		right: 10,
-		background: '#ffffff',
-		height: 400,
-		boxShadow: 'rgb(0 0 0 / 20%) 0px 0px 12px',
-		display: 'flex',
-		flexDirection: 'column',
-		userSelect: 'none',
-		zIndex: 100000
-	}
-
 	return (
-		<div style={chatBoxStyle}>
+		<div className={styles.chatBox}>
 			<ChatHeader minimize={() => setMinimized(true)} />
-			<ChatMessages messages={messages} />
+			<ChatMessages messages={messages} handleSendFeedback={handleSendFeedback} />
 			<ChatInput chatInput={chatInput} handleSendMessage={handleSendMessage} />
 		</div>
 	)

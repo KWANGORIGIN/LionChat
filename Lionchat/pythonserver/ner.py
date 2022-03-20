@@ -18,7 +18,7 @@ def init():
         print("Not using GPU")
         
     try:
-        nlp = spacy.load("./output/modified-model")
+        nlp = spacy.load("./nerModel/modified-model")
         print('Model loaded.')
     except:
         print('Model not found.')

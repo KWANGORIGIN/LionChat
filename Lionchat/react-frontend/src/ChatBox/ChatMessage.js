@@ -1,44 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Logo from "./LionChat_Logo.svg";
+import parse from 'html-react-parser'
+import styles from './ChatMessage.module.css'
+import ChatMessageFooter from "./ChatMessageFooter";
 
-const ChatMessage = ({ text, userSent }) => {
-  const containerStyle = {
-    display: "flex",
-    margin: 5,
-  };
+const ChatMessage = ({ id, text, userSent, questionId, helpful, handleSendFeedback }) => {
+  const sendFeedback = async (helpful) => {
+    const feedbackRequest = { "questionId": questionId, "helpful": helpful }
 
-  const messageStyle = {
-    backgroundColor: userSent ? "#66aaff" : "#66aaff",
-    color: "white",
-    borderRadius: "6px 6px 6px 6px",
-    height: "fit-content",
-    width: "fit-content",
-    padding: 5,
-    fontFamily: "Comic Sans MS",
-    maxWidth: "55%",
-    userSelect: "text",
-    marginLeft: userSent ? "auto" : 5,
-    marginRight: userSent ? 5 : "auto",
-  };
+    const response = await fetch(`/chat/feedback`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(feedbackRequest),
+      })
 
-  const logoStyle = {
-    height: 40,
-    marginLeft: 5,
-  };
+    if (response !== undefined) {
+      const message = { "key": id, "helpful": helpful }
+      handleSendFeedback(message)
+    }
+  }
 
   return (
-    <div style={containerStyle}>
+    <div className={styles.container}>
       {!userSent && (
         <img
           src={Logo}
-          style={logoStyle}
+          className={styles.logo}
           draggable="false"
           alt="LionChat Logo"
         />
       )}
-      <div style={messageStyle}>{text}</div>
-    </div>
+      <div className={styles.messageBubble}>
+        <div className={userSent ? styles.userMessage : styles.lionchatMessage}>
+          <label>{parse(text)}</label>
+        </div>
+        {!userSent && <ChatMessageFooter helpful={helpful} sendFeedback={sendFeedback} />}
+      </div>
+    </div >
   );
 };
 

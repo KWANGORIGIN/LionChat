@@ -1,0 +1,21 @@
+div.container {
+  background-color: rgb(71, 89, 252);
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 2.125rem;
+}
+
+img.headerLogo {
+  margin: 10px;
+  height: 30px;
+  margin-top: 12px;
+}
+
+img.close {
+  height: 20px;
+  margin-right: 10px;
+  margin-left: auto;
+  cursor: pointer;
+}

@@ -11,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.psu.Lionchat.service.chat.ChatService;
 import com.psu.Lionchat.service.chat.ChatServiceImpl;
+import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
+import com.psu.Lionchat.service.chat.requests.ReviewRequest;
+import com.psu.Lionchat.service.chat.responses.ChatAnswer;
 
 
 @RestController
@@ -46,7 +49,7 @@ public class ChatController {
 	 */
 	@PostMapping("/askquestion")
 	// TODO: Proper return type.
-	String askQuestion(@RequestBody String question, HttpServletRequest request) {
+	ChatAnswer askQuestion(@RequestBody String question, HttpServletRequest request) {
 		// make sure alphanumeric!
 		// first get answer to question from python server
 		// then update the state.
@@ -63,12 +66,12 @@ public class ChatController {
 	 */
 	@PostMapping("/feedback")
 	// TODO: Proper return type.
-	String feedback(@RequestBody boolean helpful, HttpServletRequest request) {
+	String feedback(@RequestBody FeedbackRequest feedbackRequest, HttpServletRequest request) {
 		// first make sure correct state
 		// then if answer yes move on to potential review state
 		// if no, then provide helpful tips
 		try {
-			this.chatService.submitFeedback(request, helpful);
+			this.chatService.submitFeedback(request, feedbackRequest);
 		}catch(Exception e) {
 			return "Failed to submit feedback, illegal state.";
 		}
@@ -84,13 +87,14 @@ public class ChatController {
 	 */
 	@PostMapping("/review")
 	// TODO: Proper return type.
-	String review(@RequestBody int score, HttpServletRequest request) {
+	String review(@RequestBody ReviewRequest reviewRequest, HttpServletRequest request) {
 		// first make sure correct state
 		// then submit review
 		// revert back to default state
 		try {
-			this.chatService.submitReview(request, score);
+			this.chatService.submitReview(request, reviewRequest);
 		}catch(Exception e) {
+			e.printStackTrace();
 			return "Failed to submit review, illegal state.";
 		}
 		return "Reviewed question";

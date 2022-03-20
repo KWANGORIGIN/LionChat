@@ -1,0 +1,59 @@
+:root {
+  --bubble-color: #eeeeee;
+}
+
+div.footerBubbleContainer {
+  max-width: calc(55% + 10px);
+  background-color: white;
+  margin-left: 5px;
+  display: flex;
+}
+
+div.feedbackBubble {
+  background-color: var(--bubble-color);
+  border-radius: 0px 0px 6px 6px;
+  padding-bottom: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+div.bubbleWhiteBackground {
+  background-color: white;
+  flex-grow: 1;
+}
+
+div.footerBubbleRounded {
+  background-color: var(--bubble-color);
+  height: 5px;
+  border-radius: 0px 0px 6px 0px;
+}
+
+div.smallCurve {
+  background-color: var(--bubble-color);
+  height: 15px;
+  width: 15px;
+}
+
+div.smallCurveBackground {
+  background-color: white;
+  height: 15px;
+  width: 15px;
+  border-radius: 5px 0px 0px 0px;
+}
+
+label.feedbackEmoji {
+  opacity: 50%;
+}
+
+label.feedbackEmoji:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+
+label.feedbackEmojiSelected {
+  opacity: 100%;
+}
+
+label.feedbackEmojiSelected:hover {
+  cursor: pointer;
+}

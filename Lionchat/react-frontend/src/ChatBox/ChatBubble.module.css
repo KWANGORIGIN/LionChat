@@ -1,0 +1,20 @@
+div.bubble {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 35%;
+  position: fixed;
+  background: rgb(71, 89, 252);
+  box-shadow: rgb(0 0 0 / 20%) 0px 0px 12px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  z-index: 100000;
+}
+
+img.logo {
+  width: 4rem;
+}
