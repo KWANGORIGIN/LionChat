@@ -104,7 +104,7 @@ public class ChatServiceImpl implements ChatService {
 	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
 		Question q = new Question(user, null, question, false, null);
-		Intent intent = new Intent("information technology");
+		Intent intent = new Intent("InformationTechnology");
 		q.setIntent(intent);
 		intents.save(intent);
 		questions.save(q);
