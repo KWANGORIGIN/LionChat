@@ -15,6 +15,11 @@ public class Intent implements Serializable {
 
 	private String intent;
 
+	@SuppressWarnings("unused")
+	public Intent() {
+
+	}
+
 	public Intent(String intent) {
 		super();
 		this.intent = intent;

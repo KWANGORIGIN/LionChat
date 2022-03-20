@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.psu.Lionchat.dao.entities.Intent;
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
 import com.psu.Lionchat.dao.entities.User;
@@ -103,7 +104,9 @@ public class ChatServiceImpl implements ChatService {
 	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
 		Question q = new Question(user, null, question, false, null);
-
+		Intent intent = new Intent("information technology");
+		q.setIntent(intent);
+		intents.save(intent);
 		questions.save(q);
 		try {
 //			String intentString = this.classify(question);
