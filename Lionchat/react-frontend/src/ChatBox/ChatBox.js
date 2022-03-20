@@ -4,6 +4,7 @@ import ChatMessages from './ChatMessages'
 import ChatInput from './ChatInput'
 import ChatBubble from './ChatBubble'
 import { v4 as uuidv4 } from 'uuid'
+import styles from './ChatBox.module.css'
 
 const LOCAL_STORAGE_KEY = 'LionChat.Messages'
 
@@ -66,7 +67,7 @@ const ChatBox = () => {
 
 	function handleSendFeedback(message) {
 		setMessages(previousMessages => {
-			return previousMessages.map(m => m.key === message.key ? {...m, ...message} : m)
+			return previousMessages.map(m => m.key === message.key ? { ...m, ...message } : m)
 		})
 	}
 
@@ -76,22 +77,8 @@ const ChatBox = () => {
 		return <ChatBubble maximize={() => setMinimized(false)} />
 	}
 
-	const chatBoxStyle = {
-		width: 300,
-		position: 'fixed',
-		bottom: 10,
-		right: 10,
-		background: '#ffffff',
-		height: 400,
-		boxShadow: 'rgb(0 0 0 / 20%) 0px 0px 12px',
-		display: 'flex',
-		flexDirection: 'column',
-		userSelect: 'none',
-		zIndex: 100000,
-	}
-
 	return (
-		<div style={chatBoxStyle}>
+		<div className={styles.chatBox}>
 			<ChatHeader minimize={() => setMinimized(true)} />
 			<ChatMessages messages={messages} handleSendFeedback={handleSendFeedback} />
 			<ChatInput chatInput={chatInput} handleSendMessage={handleSendMessage} />

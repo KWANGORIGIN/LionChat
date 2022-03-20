@@ -1,0 +1,17 @@
+div.header {
+  background-color: hsl(207, 62%, 20%);
+  padding: 0.5em;
+  user-select: none;
+}
+
+a.headerLeft {
+  color: hsl(208, 86%, 80%);
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+a.headerRight {
+  color: hsl(208, 20%, 50%);
+  font-size: 2.5rem;
+  font-weight: 500;
+}
