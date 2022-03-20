@@ -3,9 +3,17 @@ package com.psu.Lionchat.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.psu.Lionchat.dao.repositories.CrashReportRepository;
+import com.psu.Lionchat.dao.repositories.InappropriateQuestionRepository;
+import com.psu.Lionchat.dao.repositories.IntentRepository;
+import com.psu.Lionchat.dao.repositories.QuestionRepository;
+import com.psu.Lionchat.dao.repositories.ReviewRepository;
+import com.psu.Lionchat.dao.repositories.UserRepository;
 
 /**
  * The controller for the administrative webpage. This includes endpoints for
@@ -18,6 +26,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/administrative")
 // TODO: Authentication
 public class AdministrativeController {
+	private UserRepository users;
+	private ReviewRepository reviews;
+	private QuestionRepository questions;
+	private IntentRepository intents;
+	private InappropriateQuestionRepository inappropriateQuestions;
+	private CrashReportRepository crashReports;
+
+	@Autowired
+	public AdministrativeController(UserRepository users, ReviewRepository reviews, QuestionRepository questions,
+			IntentRepository intents, InappropriateQuestionRepository inappropriateQuestions) {
+		super();
+
+		this.users = users;
+		this.reviews = reviews;
+		this.questions = questions;
+		this.intents = intents;
+		this.inappropriateQuestions = inappropriateQuestions;
+	}
 
 	/**
 	 * Return the crash reports and their information.
