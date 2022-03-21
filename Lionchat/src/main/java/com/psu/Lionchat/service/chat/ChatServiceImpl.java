@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.psu.Lionchat.service.ai.AnswerDeterminer;
+import com.psu.Lionchat.service.ai.AnswerDeterminerIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -38,6 +40,7 @@ public class ChatServiceImpl implements ChatService {
 	private QuestionRepository questions;
 	private IntentRepository intents;
 	private InappropriateQuestionRepository inappropriateQuestions;
+	private AnswerDeterminerIF answerDeterminer;
 
 	@Autowired
 	public ChatServiceImpl(UserRepository users, ReviewRepository reviews, QuestionRepository questions,
@@ -49,6 +52,7 @@ public class ChatServiceImpl implements ChatService {
 		this.questions = questions;
 		this.intents = intents;
 		this.inappropriateQuestions = inappropriateQuestions;
+		answerDeterminer = new AnswerDeterminer();
 	}
 
 	private String itSimilarity(String question) {
@@ -108,25 +112,33 @@ public class ChatServiceImpl implements ChatService {
 		q.setIntent(intent);
 		intents.save(intent);
 		questions.save(q);
-		try {
-//			String intentString = this.classify(question);
-//			Intent intent = new Intent(intentString);
-//			intents.save(intent);
+		ChatAnswer answer = answerDeterminer.getAnswer(q);
+		System.out.println("Answer: " + answer.getAnswer());
+		return answer;
+		/*
+		Move below code into AnswerDeterminer class
+		 */
+
+//		try {
+//			return answerDeterminer.getAnswer(q);
+////			String intentString = this.classify(question);
+////			Intent intent = new Intent(intentString);
+////			intents.save(intent);
+////
+////			q.setIntent(intent);
 //
-//			q.setIntent(intent);
-
-//			return intentString;
-			return new ChatAnswer(q.getId(), "I found this article that may help: " + this.itSimilarity(question));
-		} catch (RestClientException e) {
-			System.out.println("Failed to connect to python server.");
-			e.printStackTrace();
-			return new ChatAnswer(q.getId(),
-					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return new ChatAnswer(q.getId(), "failed");
+////			return intentString;
+////			return new ChatAnswer(q.getId(), "I found this article that may help: " + this.itSimilarity(question));
+//		} catch (RestClientException e) {
+//			System.out.println("Failed to connect to python server.");
+//			e.printStackTrace();
+//			return new ChatAnswer(q.getId(),
+//					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return new ChatAnswer(q.getId(), "failed");
 	}
 
 	@Override

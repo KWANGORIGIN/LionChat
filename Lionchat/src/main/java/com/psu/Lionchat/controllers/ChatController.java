@@ -55,6 +55,7 @@ public class ChatController {
 		// then update the state.
 //		this.chatService.getAnswer(request, question);
 //		return request.getRemoteAddr() + ":" + request.getRemotePort();
+		System.out.println("Asking question!");
 		return this.chatService.getAnswer(request, question);
 	}
 

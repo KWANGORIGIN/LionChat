@@ -203,11 +203,13 @@ class intent_classifier_dataset_generator:
         df.to_csv('erieEventsProcessed.csv', encoding='UTF-8')
     
     def test_model(cls):
-        nlp = spacy.load("output_updated/model-best")
+        nlp = spacy.load("./output_updated/model-best")
         inputVal = input("Enter text: ")
         while inputVal != 'exit':
-            output = nlp(inputVal)
-            print(output.cats)
+            doc = nlp(inputVal)
+            classifiedIntent = max(doc.cats, key = doc.cats.get)
+            print(doc.cats)
+            print("Classified Intent: ", classifiedIntent)
             inputVal = input("Enter text: ")
         
         # demo = nlp("where does behrend cheerleading meet")
