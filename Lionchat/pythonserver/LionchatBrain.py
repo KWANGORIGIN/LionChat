@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 import ner
+import tox
 import csv
 import spacy
 
@@ -123,16 +124,18 @@ def classifyIntent():
     # prob = prob.item(0) #Gets first probability in list
     
     # #If probability is the same across each class, then intent is unknown
-    # '''
+    
+
+    
     # May be wrong. Might need to update for multilabel classification
-    # '''
+
     # if(prob == (1 / len(classifier.classes_))):
     #     intent = ["unknownIntent"]
     
     #Return intent as JSON
     return jsonify(intent=classifiedIntent)
     
-@app.route('/campus_events_entities', methods=["POST"])
+@app.route('/events_entities', methods=["POST"])
 def get_entities():
     
     if isinstance(request.json, str):
@@ -146,6 +149,17 @@ def get_entities():
         entities.append((ent.text, ent.label_))
         
     return jsonify(entities = entities)
+
+@app.route('/toxic_classification', methods=["POST"])
+def is_toxic():
+    
+    if isinstance(request.json, str):
+        text = jsonify(request.json)["utterance"]
+    else:
+        text = request.json["utterance"]
+
+    return jsonify(toxicity = tox.is_toxic(text))
+    
     
 if __name__ == "__main__":
     #Initialize similarity searcher
@@ -153,6 +167,7 @@ if __name__ == "__main__":
     
     #load ner model
     ner.init()
+    tox.init()
     
     #Run server
     app.run(port = 8000)
