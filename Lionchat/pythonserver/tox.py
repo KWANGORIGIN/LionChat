@@ -29,7 +29,6 @@ def is_toxic(text):
     if nlp is not None:
         text = str.lower(text) 
         doc = nlp(text)
-        print(doc.cats)
         return max(doc.cats, key= doc.cats.get)
     else:
         return "ERROR"
