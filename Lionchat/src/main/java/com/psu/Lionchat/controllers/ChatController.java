@@ -33,11 +33,13 @@ public class ChatController {
 	// TODO: This should be in a service
 	private ChatService chatService;
 
-	Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+	//Logger for outputs
+	Logger chatControllerLogger;
 
 	@Autowired
 	public ChatController(ChatServiceImpl chatService) {
 		super();
+		chatControllerLogger = LoggerFactory.getLogger(this.getClass().getName());
 		this.chatService = chatService;
 	}
 
@@ -60,14 +62,8 @@ public class ChatController {
 		// then update the state.
 //		this.chatService.getAnswer(request, question);
 //		return request.getRemoteAddr() + ":" + request.getRemotePort();
-		logger.info("Yeet yeet beet");
-		logger.trace("A TRACE Message");
-		logger.debug("A DEBUG Message");
-		logger.info("An INFO Message");
-		logger.warn("A WARN Message");
-		logger.error("An ERROR Message");
-		System.out.println("Asking question!");
-		System.out.println(SpringVersion.getVersion());
+//		System.out.println("Asking question!");
+//		System.out.println(SpringVersion.getVersion());
 		return this.chatService.getAnswer(request, question);
 	}
 
@@ -86,7 +82,8 @@ public class ChatController {
 		try {
 			this.chatService.submitFeedback(request, feedbackRequest);
 		}catch(Exception e) {
-			return "Failed to submit feedback, illegal state.";
+			chatControllerLogger.error("Failed to submit feedback, illegal state");
+//			return "Failed to submit feedback, illegal state.";
 		}
 		
 		return "Added feedback";
@@ -108,7 +105,8 @@ public class ChatController {
 			this.chatService.submitReview(request, reviewRequest);
 		}catch(Exception e) {
 			e.printStackTrace();
-			return "Failed to submit review, illegal state.";
+			chatControllerLogger.error("Failed to submit review, illegal state.");
+//			return "Failed to submit review, illegal state.";
 		}
 		return "Reviewed question";
 	}
