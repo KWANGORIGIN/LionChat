@@ -2,7 +2,10 @@ package com.psu.Lionchat.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.SpringVersion;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,8 @@ public class ChatController {
 	// TODO: This should be in a service
 	private ChatService chatService;
 
+	Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
 	@Autowired
 	public ChatController(ChatServiceImpl chatService) {
 		super();
@@ -55,7 +60,14 @@ public class ChatController {
 		// then update the state.
 //		this.chatService.getAnswer(request, question);
 //		return request.getRemoteAddr() + ":" + request.getRemotePort();
+		logger.info("Yeet yeet beet");
+		logger.trace("A TRACE Message");
+		logger.debug("A DEBUG Message");
+		logger.info("An INFO Message");
+		logger.warn("A WARN Message");
+		logger.error("An ERROR Message");
 		System.out.println("Asking question!");
+		System.out.println(SpringVersion.getVersion());
 		return this.chatService.getAnswer(request, question);
 	}
 
