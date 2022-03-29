@@ -23,12 +23,17 @@ app = Flask(__name__)
 CORS(app)
 
 #configure database info
-db = yaml.safe_load(open('db.yaml'))
-app.config['MYSQL_HOST'] = db['mysql_host']
-app.config['MYSQL_USER'] = db['mysql_user']
-app.config['MYSQL_PASSWORD'] = db['mysql_password']
-app.config['MYSQL_DB'] = db['mysql_db']
-mydb = MySQL(app)
+
+#make sure server doesn't crash if config file missing
+try:
+    db = yaml.safe_load(open('db.yaml'))
+    app.config['MYSQL_HOST'] = db['mysql_host']
+    app.config['MYSQL_USER'] = db['mysql_user']
+    app.config['MYSQL_PASSWORD'] = db['mysql_password']
+    app.config['MYSQL_DB'] = db['mysql_db']
+    mydb = MySQL(app)
+except:
+    print("YAML database config file not found!")
 
 #Sentence Transformer embedder
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
@@ -244,21 +249,28 @@ def get_events():
         print(sql)
         print(date1)
         print(datetime.fromtimestamp(date2.timestamp() - 1))
-        cursor = mydb.connection.cursor()
-        cursor.execute(sql)
         
-        evt_list = list(cursor)
+        #make sure program does not crash if database missing
+        try:
+            cursor = mydb.connection.cursor()
+            cursor.execute(sql)
         
-        for i in range(len(evt_list)):
-            evt_list[i] = list(evt_list[i])
-            evt_list[i][3] = str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S"))
-        
+            evt_list = list(cursor)
+            cursor.close()
+ 
+            for i in range(len(evt_list)):
+                evt_list[i] = list(evt_list[i])
+                evt_list[i][3] = str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S"))
+        except:
+            print("Can't access database")
+            evt_list = ["Database missing."]
+            
         if evt_list: #if events found
             payload = jsonify(message = message, events = evt_list)
         else: #if nothing found
-            payload = jsonify(message = "It looks like I don't have any information on that.", events = [])
+            payload = jsonify(message = "It looks like I don't have any information on that.", events = [evt_list])
         
-        cursor.close()
+        
     else: #if no entities were present
         payload = jsonify(message = 'I am sorry, I need more data.  Can you be more specific?', events = [])
         
