@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class FlaggedStrategy extends IntentStrategyAbs{
     @Override
     public String doStrategy(String question) {
-        //Preprocessing for keywords
+        //TODO Preprocessing for keywords
         boolean flagQuestion = false;
 
         //If not found flagged, then run through Python server
