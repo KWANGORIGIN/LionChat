@@ -160,9 +160,9 @@ def get_events():
     
     #get request from Spring Boot application containing query
     if isinstance(request.json, str):
-        text = jsonify(request.json)["text"]
+        text = jsonify(request.json)["utterance"]
     else:
-        text = request.json["text"]
+        text = request.json["utterance"]
     
     entities = ner.getEnts(text) # get entities from user query
     
