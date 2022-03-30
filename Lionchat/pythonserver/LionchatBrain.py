@@ -260,7 +260,12 @@ def get_events():
  
             for i in range(len(evt_list)):
                 evt_list[i] = list(evt_list[i])
-                evt_list[i][3] = str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S"))
+                del evt_list[i][0]
+                evt_list[i][0] = "Event Name: " + evt_list[i][0]
+                evt_list[i][1] = "Event Organizer: " + evt_list[i][1]
+                evt_list[i][2] = "Event Location: " + evt_list[i][2]
+                evt_list[i][3] = "Event Date: " + str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S"))
+                evt_list[i][4] = "Event Link: " + evt_list[i][4]
         except:
             print("Can't access database")
             evt_list = ["Database missing."]
