@@ -1,3 +1,8 @@
 body {
   background-color: #fff;
+  color: #30558f;
+}
+
+ul.analyticsList {
+  list-style-type: disc;
 }
