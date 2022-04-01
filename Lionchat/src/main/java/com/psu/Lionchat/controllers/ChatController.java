@@ -15,7 +15,6 @@ import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
 import com.psu.Lionchat.service.chat.requests.ReviewRequest;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;
 
-
 @RestController
 @RequestMapping("/chat")
 // TODO: HATEOAS
@@ -42,6 +41,7 @@ public class ChatController {
 	    modelAndView.setViewName("index");
 	    return modelAndView;
 	}
+
 	/**
 	 * Ask the system a question and receive an answer. The system will log the
 	 * question as well as information about the user who asked the question. Move
@@ -73,10 +73,10 @@ public class ChatController {
 		// if no, then provide helpful tips
 		try {
 			this.chatService.submitFeedback(request, feedbackRequest);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return "Failed to submit feedback, illegal state.";
 		}
-		
+
 		return "Added feedback";
 	}
 
@@ -94,7 +94,7 @@ public class ChatController {
 		// revert back to default state
 		try {
 			this.chatService.submitReview(request, reviewRequest);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return "Failed to submit review, illegal state.";
 		}
