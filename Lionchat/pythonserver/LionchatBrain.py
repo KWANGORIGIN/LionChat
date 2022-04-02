@@ -154,6 +154,8 @@ def get_events():
                     date2 = date1 + timedelta(days=1)
 
             else:
+                text = str.replace(text, "\'", "\\'")
+               # print(text)
                 sql = sql +  "LOWER({}) like '%{}%'".format(label, text)
                 more_entities = True
             
