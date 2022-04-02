@@ -21,6 +21,8 @@ import java.util.stream.Stream;
 public class FlaggedStrategy extends IntentStrategyAbs{
     @Override
     public String doStrategy(String question) {
+        strategyLogger.error("Yeet Yeet in the flag shmeat yeet");
+
         //Preprocessing for keywords
         boolean flagQuestion = filterKeywords(question);
 
@@ -62,6 +64,7 @@ public class FlaggedStrategy extends IntentStrategyAbs{
         Set<String> questionSet = new HashSet<>(Arrays.asList(question.split(" ")));
 
         //Find intersection between sets
-        return questionSet.retainAll(badWordsSet);
+        questionSet.retainAll(badWordsSet);
+        return questionSet.size() != 0;
     }
 }
