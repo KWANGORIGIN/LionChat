@@ -3,7 +3,7 @@ package com.psu.Lionchat.service.ai;
 import java.util.Objects;
 
 public class StrategyFactory {
-    public IntentStrategyIF getStrategy(String strategyType){
+    public static IntentStrategyIF getStrategy(String strategyType){
         if(Objects.equals(strategyType, "IT_Intent")){
             return new ITStrategy();
         }

@@ -2,7 +2,10 @@ package com.psu.Lionchat.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.SpringVersion;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +32,13 @@ public class ChatController {
 	// TODO: This should be in a service
 	private ChatService chatService;
 
+	//Logger for outputs
+	Logger chatControllerLogger;
+
 	@Autowired
 	public ChatController(ChatServiceImpl chatService) {
 		super();
+		chatControllerLogger = LoggerFactory.getLogger(this.getClass().getName());
 		this.chatService = chatService;
 	}
 
@@ -55,7 +62,8 @@ public class ChatController {
 		// then update the state.
 //		this.chatService.getAnswer(request, question);
 //		return request.getRemoteAddr() + ":" + request.getRemotePort();
-		System.out.println("Asking question!");
+//		System.out.println("Asking question!");
+//		System.out.println(SpringVersion.getVersion());
 		return this.chatService.getAnswer(request, question);
 	}
 
@@ -73,10 +81,10 @@ public class ChatController {
 		// if no, then provide helpful tips
 		try {
 			this.chatService.submitFeedback(request, feedbackRequest);
-		} catch (Exception e) {
-			return "Failed to submit feedback, illegal state.";
+		}catch(Exception e) {
+			chatControllerLogger.error("Failed to submit feedback, illegal state");
+//			return "Failed to submit feedback, illegal state.";
 		}
-
 		return "Added feedback";
 	}
 
@@ -96,7 +104,8 @@ public class ChatController {
 			this.chatService.submitReview(request, reviewRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "Failed to submit review, illegal state.";
+			chatControllerLogger.error("Failed to submit review, illegal state.");
+//			return "Failed to submit review, illegal state.";
 		}
 		return "Reviewed question";
 	}
