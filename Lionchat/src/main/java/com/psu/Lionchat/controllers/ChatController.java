@@ -1,13 +1,10 @@
 package com.psu.Lionchat.controllers;
 
-import java.util.stream.IntStream;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.SpringVersion;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.psu.Lionchat.service.chat.ChatService;
 import com.psu.Lionchat.service.chat.ChatServiceImpl;
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
-import com.psu.Lionchat.service.chat.requests.ReviewPostRequest;
 import com.psu.Lionchat.service.chat.requests.ReviewPutRequest;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;
-import com.psu.Lionchat.service.chat.responses.ReviewResponse;
 
 @RestController
 @RequestMapping("/chat")
@@ -100,15 +95,16 @@ public class ChatController {
 	 */
 	@PostMapping("/review")
 	// TODO: Proper return type.
-	ReviewResponse review(@RequestBody ReviewPostRequest reviewPostRequest, HttpServletRequest request) {
+	long review(@RequestBody int score, HttpServletRequest request) {
 		// first make sure correct state
 		// then submit review
 		// revert back to default state
 		try {
-			return this.chatService.submitReview(request, reviewPostRequest);
+			return this.chatService.submitReview(request, score);
 		} catch (Exception e) {
-			chatControllerLogger.error(e.toString());
-			return null;
+			e.printStackTrace();
+//			chatControllerLogger.error(e.toString());
+			return -1;
 		}
 	}
 
