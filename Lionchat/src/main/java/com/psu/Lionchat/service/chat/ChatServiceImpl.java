@@ -183,10 +183,9 @@ public class ChatServiceImpl implements ChatService {
 	 * The review must be in the range [1,5].
 	 */
 	@Override
-	public long submitReview(HttpServletRequest request,
-			int score) {
+	public long submitReview(HttpServletRequest request, int score) {
 		User user = this.getUser(request);
-		
+
 		if (score < 1 || score > 5) {
 			// fail since the review is outside of the range.
 			throw new IllegalStateException();
