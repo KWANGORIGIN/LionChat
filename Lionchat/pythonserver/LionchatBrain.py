@@ -12,6 +12,7 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 import ner
 import tox
+import intent_classifier
 import csv
 import spacy
 import yaml
@@ -94,35 +95,6 @@ def getSemanticSearchResults():
     #Return json list of search results
     return jsonify(results)
 
-#this is a dumb fix
-try:
-    nlp = spacy.load("./output_updated/model-best")
-except:
-    print('intent model not loaded')
-    
-@app.before_first_request
-def trainIntentClassifier():
-    
-    try:
-        nlp = spacy.load("./output_updated/model-best")
-    except:
-        print('intent model not loaded')
-    
-    # #Open questions.csv to train classifier from
-    # questions = []
-    # labels = []
-    # with open("questions.csv", newline='', encoding='utf-8-sig') as csvfile:
-    #     csvReader = csv.DictReader(csvfile, delimiter=',')
-    #     for row in csvReader:
-    #         questions.append(row['Question'].strip())
-    #         labels.append(row['Intent'].strip())
-        
-    # #Transforming questions list into questions tfIDF vectors
-    # questions_vec = inputVector.fit_transform(questions)
-    
-    # #Training the classifier
-    # classifier.fit(questions_vec, labels)
-
 @app.route('/intent', methods=['POST'])
 def classifyIntent():
     
@@ -133,30 +105,8 @@ def classifyIntent():
     #Get user utterance
     userInput = receivedDict["utterance"]
     
-    doc = nlp(userInput)
-    
-    classifiedIntent = max(doc.cats, key = doc.cats.get)
+    classifiedIntent = intent_classifier.classifyIntent(userInput)
     print("Classified Intent: ", classifiedIntent)
-    
-    # #Transform user utterance to tfIDF vector
-    # new_question = inputVector.transform(userInput)
-    
-    # #Classify intent
-    # intent = classifier.predict(new_question)
-    # # print(intent)
-    
-    # prob = classifier.predict_proba(new_question)
-    # # print(prob)
-    # prob = prob.item(0) #Gets first probability in list
-    
-    # #If probability is the same across each class, then intent is unknown
-    
-
-    
-    # May be wrong. Might need to update for multilabel classification
-
-    # if(prob == (1 / len(classifier.classes_))):
-    #     intent = ["unknownIntent"]
     
     #Return intent as JSON
     return jsonify(intent=classifiedIntent)
@@ -319,6 +269,7 @@ if __name__ == "__main__":
     #load ner model
     ner.init()
     tox.init()
+    intent_classifier.init()
     
     #Run server
     app.run(port = 8000)
