@@ -21,10 +21,12 @@ import java.util.stream.Stream;
 public class FlaggedStrategy extends IntentStrategyAbs{
     @Override
     public String doStrategy(String question) {
-        strategyLogger.error("Yeet Yeet in the flag shmeat yeet");
+        //TODO Preprocessing for keywords
+  
 
         //Preprocessing for keywords
         boolean flagQuestion = filterKeywords(question);
+
 
         //If not found flagged, then run through Python server
         if(!flagQuestion){
