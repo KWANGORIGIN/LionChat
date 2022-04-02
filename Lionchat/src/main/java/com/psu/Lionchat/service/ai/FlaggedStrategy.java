@@ -21,12 +21,8 @@ import java.util.stream.Stream;
 public class FlaggedStrategy extends IntentStrategyAbs{
     @Override
     public String doStrategy(String question) {
-        //TODO Preprocessing for keywords
-  
-
         //Preprocessing for keywords
         boolean flagQuestion = filterKeywords(question);
-
 
         //If not found flagged, then run through Python server
         if(!flagQuestion){

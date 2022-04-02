@@ -19,7 +19,6 @@ import java.util.Objects;
 @Service
 public class AnswerDeterminer implements AnswerDeterminerIF{
     private IntentStrategyIF intentClassifier;
-    private StrategyFactory strategyFactory;
     private IntentStrategyIF issueClassifier;
 
     @Autowired
@@ -28,8 +27,7 @@ public class AnswerDeterminer implements AnswerDeterminerIF{
      */
     public AnswerDeterminer()
     {
-        strategyFactory = new StrategyFactory();
-        issueClassifier = strategyFactory.getStrategy("Flagged_Intent");
+        issueClassifier = StrategyFactory.getStrategy("Flagged_Intent");
     }
 
     @Override
@@ -42,7 +40,7 @@ public class AnswerDeterminer implements AnswerDeterminerIF{
         //issueResponse = "Valid";//ToDo: Implement toxic classifier and get rid of this
         if(Objects.equals(issueResponse, "Valid")){
             String intentType = classifyIntent(question);
-            IntentStrategyIF strategy = strategyFactory.getStrategy(intentType);
+            IntentStrategyIF strategy = StrategyFactory.getStrategy(intentType);
             return new ChatAnswer(questionId, strategy.doStrategy(question));//Returns answer as determined by classifier
         }
         return new ChatAnswer(questionId, issueResponse);//Returns error message from issueClassifier
