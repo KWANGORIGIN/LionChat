@@ -1,12 +1,9 @@
 package com.psu.Lionchat.controllers;
 
-import java.util.stream.IntStream;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.psu.Lionchat.service.chat.ChatService;
 import com.psu.Lionchat.service.chat.ChatServiceImpl;
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
-import com.psu.Lionchat.service.chat.requests.ReviewPostRequest;
-import com.psu.Lionchat.service.chat.requests.ReviewPutRequest;
+import com.psu.Lionchat.service.chat.requests.ReviewRequest;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;
-import com.psu.Lionchat.service.chat.responses.ReviewResponse;
 
 @RestController
 @RequestMapping("/chat")
@@ -41,10 +36,10 @@ public class ChatController {
 	}
 
 	@RequestMapping("/")
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("index");
-		return modelAndView;
+	public ModelAndView index () {
+	    ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.setViewName("index");
+	    return modelAndView;
 	}
 
 	/**
@@ -70,18 +65,19 @@ public class ChatController {
 	 * the review state. If their question was not answered provide them with
 	 * helpful tips and move them back to the idle state.
 	 */
-	@PutMapping("/update-feedback")
+	@PostMapping("/feedback")
 	// TODO: Proper return type.
-	void feedback(@RequestBody FeedbackRequest feedbackRequest, HttpServletRequest request) {
+	String feedback(@RequestBody FeedbackRequest feedbackRequest, HttpServletRequest request) {
 		// first make sure correct state
 		// then if answer yes move on to potential review state
 		// if no, then provide helpful tips
 		try {
 			this.chatService.submitFeedback(request, feedbackRequest);
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "Failed to submit feedback, illegal state.";
 		}
 
+		return "Added feedback";
 	}
 
 	/**
@@ -92,29 +88,17 @@ public class ChatController {
 	 */
 	@PostMapping("/review")
 	// TODO: Proper return type.
-	ReviewResponse review(@RequestBody ReviewPostRequest reviewPostRequest, HttpServletRequest request) {
-		// first make sure correct state
-		// then submit review
-		// revert back to default state
-		IntStream.range(0, 100).forEach(o->System.out.println("SSS"));
-		try {
-			return this.chatService.submitReview(request, reviewPostRequest);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	@PutMapping("/update-review")
-	void updateReview(@RequestBody ReviewPutRequest reviewPutRequest, HttpServletRequest request) {
+	String review(@RequestBody ReviewRequest reviewRequest, HttpServletRequest request) {
 		// first make sure correct state
 		// then submit review
 		// revert back to default state
 		try {
-			this.chatService.updateReview(request, reviewPutRequest);
+			this.chatService.submitReview(request, reviewRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "Failed to submit review, illegal state.";
 		}
+		return "Reviewed question";
 	}
 
 }

@@ -122,6 +122,36 @@ public class AdministrativeController {
 	}
 
 	/**
+	 * Return the average 5 star rating for each business defined topic.
+	 * 
+	 * @return
+	 */
+	@GetMapping("/average-ratings-per-topic")
+	Map<String, Double> getAverageRatingPerTopic() {
+		Map<String, Integer> counts = new HashMap<>();
+		Map<String, Integer> ratings = new HashMap<>();
+		for (Question q : questions.findAll()) {
+			if (q.getReview() == null) {
+				continue;
+			}
+			if (q.getIntent() == null) {
+				counts.put("UnknownIntent", counts.getOrDefault("UnknownIntent", 0) + 1);
+				ratings.put("UnknownIntent", ratings.getOrDefault("UnknownIntent", 0) + q.getReview().getScore());
+				continue;
+			}
+			counts.put(q.getIntent().getIntent(), counts.getOrDefault(q.getIntent().getIntent(), 0) + 1);
+			ratings.put(q.getIntent().getIntent(),
+					ratings.getOrDefault(q.getIntent().getIntent(), 0) + q.getReview().getScore());
+		}
+		Map<String, Double> averageRatings = new HashMap<>();
+		for (String s : counts.keySet()) {
+			averageRatings.put(s, (double) ratings.get(s) / counts.get(s));
+		}
+		// sorted?
+		return averageRatings;
+	}
+
+	/**
 	 * Return the number of misclassifications for each business defined topic. This
 	 * is how many times the user said that their question was not answered.
 	 * 

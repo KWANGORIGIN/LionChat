@@ -49,13 +49,14 @@ class SendFeedbackEndpointTest {
 
 		FeedbackRequest request = new FeedbackRequest(answer.getQuestionId(), true);
 		HttpEntity<FeedbackRequest> feedbackRequest = new HttpEntity<FeedbackRequest>(request, headers);
-		restTemplate.put("http://localhost:" + port + "/chat/update-feedback", feedbackRequest,
+		String response = restTemplate.postForObject("http://localhost:" + port + "/chat/feedback", feedbackRequest,
 				String.class);
 //		System.out.println(response);
 		question = questions.findAll().stream().filter(q -> q.getUser().getSessionId().equals(session)).findAny();
-		System.out.println(question);
+//		System.out.println(question);
 		assertEquals(true, question.isPresent());
 		assertEquals(true, question.get().isAnswered());
+		assertEquals(true, response != null);
 	}
 
 }

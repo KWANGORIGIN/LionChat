@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import org.springframework.lang.Nullable;
-
 /**
  * An ORM mapping of the database's Question table.
  * 
@@ -29,23 +27,28 @@ public class Question implements Serializable {
 
 	@OneToOne
 	@JoinColumn(nullable = true)
+	private Review review;
+
+	@OneToOne
+	@JoinColumn(nullable = true)
 	private Intent intent;
 
 	private String inputString;
 
-	@Nullable
-	private Boolean answered;
+	private boolean answered;
 
 	@SuppressWarnings("unused")
 	public Question() {
 
 	}
 
-	public Question(User user, Intent intent, String inputString) {
+	public Question(User user, Intent intent, String inputString, boolean answered, Review review) {
 		super();
 		this.user = user;
 		this.intent = intent;
 		this.inputString = inputString;
+		this.answered = answered;
+		this.review = review;
 	}
 
 	public Long getId() {
@@ -64,6 +67,14 @@ public class Question implements Serializable {
 		this.user = user;
 	}
 
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+
 	public Intent getIntent() {
 		return intent;
 	}
@@ -80,7 +91,7 @@ public class Question implements Serializable {
 		this.inputString = inputString;
 	}
 
-	public Boolean isAnswered() {
+	public boolean isAnswered() {
 		return answered;
 	}
 
@@ -90,7 +101,7 @@ public class Question implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(answered, id, inputString, intent, user);
+		return Objects.hash(answered, id, inputString, intent, review, user);
 	}
 
 	@Override
@@ -104,12 +115,12 @@ public class Question implements Serializable {
 		Question other = (Question) obj;
 		return answered == other.answered && Objects.equals(id, other.id)
 				&& Objects.equals(inputString, other.inputString) && Objects.equals(intent, other.intent)
-				&& Objects.equals(user, other.user);
+				&& Objects.equals(review, other.review) && Objects.equals(user, other.user);
 	}
 
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", user=" + user + ", intent=" + intent + ", inputString=" + inputString
-				+ ", answered=" + answered + "]";
+		return "Question [id=" + id + ", user=" + user + ", review=" + review + ", intent=" + intent + ", inputString="
+				+ inputString + ", answered=" + answered + "]";
 	}
 }

@@ -58,7 +58,6 @@ public class Intent implements Serializable {
 		return Objects.equals(id, other.id) && Objects.equals(intent, other.intent);
 	}
 
-	// Never include question in this it will cause stackoverflow.
 	@Override
 	public String toString() {
 		return "Intent [id=" + id + ", intent=" + intent + "]";

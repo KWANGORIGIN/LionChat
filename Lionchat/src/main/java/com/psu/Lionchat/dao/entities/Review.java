@@ -1,7 +1,6 @@
 package com.psu.Lionchat.dao.entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -9,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * An ORM mapping of the database's Review table.
@@ -26,24 +22,18 @@ public class Review implements Serializable {
 
 	@ManyToOne
 	@JoinColumn
-	private User user;
+	private Question question;
 
 	private int score;
-
-	@CreationTimestamp
-	private LocalDateTime creationTime;
-
-	@UpdateTimestamp
-	private LocalDateTime updateTime;
 
 	@SuppressWarnings("unused")
 	public Review() {
 
 	}
 
-	public Review(User user, int score) {
+	public Review(Question question, int score) {
 		super();
-		this.user = user;
+		this.question = question;
 		this.score = score;
 	}
 
@@ -55,12 +45,12 @@ public class Review implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Question getQuestion() {
+		return question;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 
 	public int getScore() {
@@ -71,17 +61,9 @@ public class Review implements Serializable {
 		this.score = score;
 	}
 
-	public LocalDateTime getCreationTime() {
-		return creationTime;
-	}
-
-	public LocalDateTime getUpdateTime() {
-		return updateTime;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, score, user);
+		return Objects.hash(id, score, question);
 	}
 
 	@Override
@@ -93,12 +75,12 @@ public class Review implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Review other = (Review) obj;
-		return Objects.equals(id, other.id) && score == other.score && Objects.equals(user, other.user);
+		return Objects.equals(id, other.id) && score == other.score && Objects.equals(question, other.question);
 	}
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", user=" + user + ", score=" + score + "]";
+		return "Review [id=" + id + ", question=" + question + ", score=" + score + "]";
 	}
 
 }

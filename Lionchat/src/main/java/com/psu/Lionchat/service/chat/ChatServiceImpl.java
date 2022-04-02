@@ -1,10 +1,11 @@
 package com.psu.Lionchat.service.chat;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.psu.Lionchat.service.ai.AnswerDeterminer;
+import com.psu.Lionchat.service.ai.AnswerDeterminerIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,16 +25,12 @@ import com.psu.Lionchat.dao.repositories.IntentRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
-import com.psu.Lionchat.service.ai.AnswerDeterminer;
-import com.psu.Lionchat.service.ai.AnswerDeterminerIF;
 import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
-import com.psu.Lionchat.service.chat.requests.ReviewPostRequest;
-import com.psu.Lionchat.service.chat.requests.ReviewPutRequest;
+import com.psu.Lionchat.service.chat.requests.ReviewRequest;
 import com.psu.Lionchat.service.chat.requests.SimilarityRequest;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;
 import com.psu.Lionchat.service.chat.responses.ClassifierResponse;
-import com.psu.Lionchat.service.chat.responses.ReviewResponse;
 import com.psu.Lionchat.service.chat.responses.SimilarityResponse;
 
 @Service
@@ -110,23 +107,16 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
-		Question q = new Question(user, null, question);
+		Question q = new Question(user, null, question, false, null);
 		Intent intent = new Intent("InformationTechnology");
 		q.setIntent(intent);
 		intents.save(intent);
 		questions.save(q);
-		try {
-			ChatAnswer answer = answerDeterminer.getAnswer(q);
-			System.out.println("Answer: " + answer.getAnswer());
-			return answer;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ChatAnswer(q.getId(),
-					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
-		}
-
+		ChatAnswer answer = answerDeterminer.getAnswer(q);
+		System.out.println("Answer: " + answer.getAnswer());
+		return answer;
 		/*
-		 * Move below code into AnswerDeterminer class
+		Move below code into AnswerDeterminer class
 		 */
 
 //		try {
@@ -165,64 +155,29 @@ public class ChatServiceImpl implements ChatService {
 		questions.save(question);
 	}
 
-	// TODO: Remove IllegalStateExceptions.
-	/**
-	 * Add a review to the database if the oldest review is either undefined or
-	 * greater than 2 weeks old. The user must have asked at least one question. The
-	 * review must be in the range [1,5].
-	 */
 	@Override
-	public ReviewResponse submitReview(HttpServletRequest request, ReviewPostRequest reviewPostRequest) {
+	public void submitReview(HttpServletRequest request, ReviewRequest reviewRequest) {
+		// save user if doesn't exist?
 		User user = this.getUser(request);
+		Question question = questions.getById(reviewRequest.getQuestionId());
 
-		int score = reviewPostRequest.getReview();
-		if (score < 1 || score > 5) {
-			// fail since the review is outside of the range.
+		// Make sure the user asked this question.
+		if (!question.getUser().equals(user)) {
 			throw new IllegalStateException();
 		}
 
-		if (user.getQuestions().size() == 0) {
-			// fail since the user asked no questions.
-			throw new IllegalStateException();
+		// Update the question review if it exists.
+		if (question.getReview() == null) {
+			Review review = new Review(question, reviewRequest.getReview());
+			question.setReview(review);
+			reviews.save(review);
+			questions.save(question);
+		} else {
+			Review review = question.getReview();
+			review.setScore(reviewRequest.getReview());
+			reviews.save(review);
 		}
 
-		Review latest = user.getReviews().get(user.getReviews().size() - 1);
-		if (!latest.getCreationTime().plusWeeks(2).isBefore(LocalDateTime.now())) {
-			// fail since the review is too recent.
-			throw new IllegalStateException();
-		}
-
-		Review review = new Review(user, score);
-		reviews.save(review);
-
-		ReviewResponse response = new ReviewResponse(review.getId());
-		return response;
-	}
-
-	@Override
-	public void updateReview(HttpServletRequest request, ReviewPutRequest reviewPutRequest) {
-		User user = this.getUser(request);
-		Optional<Review> reviewOptional = reviews.findById(reviewPutRequest.getReviewId());
-
-		int score = reviewPutRequest.getReview();
-		if (score < 1 || score > 5) {
-			// fail since the review is outside of the range.
-			throw new IllegalStateException();
-		}
-
-		if (!reviewOptional.isPresent()) {
-			// review was not found in the database and cannot be updated.
-			throw new IllegalStateException();
-		}
-
-		Review review = reviewOptional.get();
-		if (!review.getUser().equals(user)) {
-			// cannot update another user's review
-			throw new IllegalStateException();
-		}
-
-		review.setScore(score);
-		reviews.save(review);
 	}
 
 }

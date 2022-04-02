@@ -1,15 +1,11 @@
 package com.psu.Lionchat.dao.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.MapKey;
-import javax.persistence.OneToMany;
 
 /**
  * An ORM mapping of the database's User table.
@@ -17,7 +13,7 @@ import javax.persistence.OneToMany;
  * @author jacobkarabin
  */
 @Entity
-public class User implements Serializable {
+public class User implements Serializable{
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -28,17 +24,6 @@ public class User implements Serializable {
 
 	private String ip;
 
-	// mappedBy is the name of the field in Review/Question class that represents
-	// this relationship. Forgetting to include this will cause JPA to create a
-	// inefficient JOIN table. JOIN table should only be needed for many to many
-	// relationship. Using mapped by will instead create a foreign key in
-	// Review/Question table.
-	@OneToMany(mappedBy = "user")
-	private List<Review> reviews;
-
-	@OneToMany(mappedBy = "user")
-	private List<Question> questions;
-
 	@SuppressWarnings("unused")
 	public User() {
 
@@ -48,8 +33,6 @@ public class User implements Serializable {
 		super();
 		this.sessionId = sessionId;
 		this.ip = ip;
-		this.reviews = new ArrayList<>();
-		this.questions = new ArrayList<>();
 	}
 
 	public Long getId() {
@@ -76,22 +59,6 @@ public class User implements Serializable {
 		this.ip = ip;
 	}
 
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
-
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, ip, sessionId);
@@ -110,7 +77,6 @@ public class User implements Serializable {
 				&& Objects.equals(sessionId, other.sessionId);
 	}
 
-	// NEVER include Question/Review list in toString it will cause stackoverflow.
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", sessionId=" + sessionId + ", ip=" + ip + "]";
