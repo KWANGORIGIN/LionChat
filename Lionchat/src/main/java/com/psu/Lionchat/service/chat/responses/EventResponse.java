@@ -26,7 +26,7 @@ public class EventResponse {
         String evts = message;
         for(String e : events)
         {
-            evts += "\n" + e;
+            evts += "<br>" + e;
         }
 
         return evts;
