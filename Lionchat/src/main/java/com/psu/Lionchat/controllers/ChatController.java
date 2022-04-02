@@ -104,7 +104,6 @@ public class ChatController {
 		// first make sure correct state
 		// then submit review
 		// revert back to default state
-		IntStream.range(0, 100).forEach(o->System.out.println("SSS"));
 		try {
 			return this.chatService.submitReview(request, reviewPostRequest);
 		} catch (Exception e) {
