@@ -13,6 +13,7 @@ from sklearn.neighbors import NearestNeighbors
 import ner
 import tox
 import intent_classifier
+import semantic_searcher
 import csv
 import spacy
 import yaml
@@ -36,31 +37,6 @@ try:
 except:
     print("YAML database config file not found!")
 
-#Sentence Transformer embedder
-embedder = SentenceTransformer('all-MiniLM-L6-v2')
-articleUrls = []
-articleTitles = []
-def generate_corpus_embeddings():
-    #Read values from csv
-    df = pd.read_csv('IT_Knowledge_Articles.csv')
-    
-    #Get article titles from column
-    global articleTitles, articleUrls
-    articleTitles = df.ArticleName.values
-    articleUrls = df.ArticleLink.values
-    
-    return embedder.encode(articleTitles, convert_to_numpy=True)
-
-#Similarity search object
-similarity_searcher = NearestNeighbors(n_neighbors=5)
-@app.before_first_request
-def fit_corpus_for_similarity_search():
-    #Get corpus embeddings
-    corpus_embeddings = generate_corpus_embeddings()
-    
-    #Fit onto nearest neighbors
-    similarity_searcher.fit(corpus_embeddings)
-
 @app.route('/semantic-search-results', methods=['POST'])
 def getSemanticSearchResults():
     #Get POST request from client
@@ -70,22 +46,7 @@ def getSemanticSearchResults():
     #Get query from received dict
     query = receivedDict['query']
     
-    #Convert query to embedding
-    query_embedding = embedder.encode(query, convert_to_numpy=True)
-    
-    #Reshape corpus embedding for input in KNN
-    query_embedding = np.reshape(query_embedding, (1, 384))
-    
-    #KNN semantic search
-    similarities, positions = similarity_searcher.kneighbors(query_embedding, return_distance=True)
-    similarities = similarities[0]
-    positions = positions[0]
-    #Get results
-    results = {'titles':[], 'urls': []}
-    
-    for position in positions:
-        results['titles'].append(articleTitles[position])
-        results['urls'].append(articleUrls[position])
+    results = semantic_searcher.search(query)
 
     # print(results)
     # print(jsonify(results))
@@ -270,6 +231,7 @@ if __name__ == "__main__":
     ner.init()
     tox.init()
     intent_classifier.init()
+    semantic_searcher.init()
     
     #Run server
     app.run(port = 8000)

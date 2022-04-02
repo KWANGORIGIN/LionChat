@@ -17,6 +17,7 @@ def init():
         print("Unable to load intent classifier model")
 
 def classifyIntent(question):
+    global nlp
     
     if nlp is not None:
         doc = nlp(question)
