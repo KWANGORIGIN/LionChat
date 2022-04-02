@@ -153,7 +153,6 @@ def classifyIntent():
     #Return intent as JSON
     return jsonify(intent=classifiedIntent)
 
-@app.route('/answer_events', methods=["POST"])
 def get_events():
     #default message
     message = "Here's what I found for this week:"
@@ -172,7 +171,7 @@ def get_events():
         more_entities = False
         set_date = False
         set_name = False
-        sql = "SELECT * FROM events WHERE " # begin sql query on events table
+        sql = "SELECT EVTNAME, ORG, LOC, DATE, URL FROM events WHERE " # begin sql query on events table
         
         #find current day for use in query
         current_day = datetime.today().replace(hour = 0, minute = 0, second = 0, microsecond = 0)
@@ -200,7 +199,7 @@ def get_events():
 
                 if text == 'today':
                     date2 = date1 + timedelta(days=1)
-                    message = "Here's what I found for this today:"
+                    message = "Here's what I found for today:"
 
                 elif text == 'tomorrow':
                     date1 = current_day + timedelta(days=1)
@@ -232,9 +231,11 @@ def get_events():
                 sql = sql +  "LOWER({}) like '%{}%'".format(label, text)
                 more_entities = True
             
+        '''
         for ent in entities:
             print(ent.label_, ent.text)
-            
+         '''
+         
         if more_entities:
             sql = sql + " AND " #add more entities to search in the database
             
@@ -246,9 +247,9 @@ def get_events():
             sql += "DATE >= {}".format(int(date1.timestamp()))
         else: #otherwise query between whatever dates were set
             sql += "DATE BETWEEN {} AND {}".format(int(date1.timestamp()), int(date2.timestamp()) - 1)
-        print(sql)
-        print(date1)
-        print(datetime.fromtimestamp(date2.timestamp() - 1))
+        #print(sql)
+        #print(date1)
+        #print(datetime.fromtimestamp(date2.timestamp() - 1))
         
         #make sure program does not crash if database missing
         try:
@@ -260,7 +261,6 @@ def get_events():
  
             for i in range(len(evt_list)):
                 evt_list[i] = list(evt_list[i])
-                del evt_list[i][0]
                 evt_list[i][0] = "Event Name: " + evt_list[i][0]
                 evt_list[i][1] = "Event Organizer: " + evt_list[i][1]
                 evt_list[i][2] = "Event Location: " + evt_list[i][2]
@@ -268,7 +268,7 @@ def get_events():
                 evt_list[i][4] = "Event Link: " + evt_list[i][4]
         except:
             print("Can't access database")
-            evt_list = ["Database missing."]
+            evt_list = ["Database error."]
             
         if evt_list: #if events found
             payload = jsonify(message = message, events = evt_list)
@@ -279,13 +279,11 @@ def get_events():
     else: #if no entities were present
         payload = jsonify(message = 'I am sorry, I need more data.  Can you be more specific?', events = [])
         
-    
-     
-    #EVTNAME
-    #LOC
-    #DATE
-    #ORG
-    
+     #EVTNAME
+     #LOC
+     #DATE
+     #ORG
+
     return payload
 
 @app.route('/toxic_classification', methods=["POST"])
