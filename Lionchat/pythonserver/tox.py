@@ -19,9 +19,9 @@ def init():
         
     try:
         nlp = spacy.load("./output/model-best-toxic")
-        print('Model loaded.')
+        print('Toxic model loaded.')
     except:
-        print('Model not found.')
+        print('Toxic model not found.')
     
     
 def is_toxic(text):

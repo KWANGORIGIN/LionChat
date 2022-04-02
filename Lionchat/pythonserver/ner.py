@@ -19,9 +19,9 @@ def init():
         
     try:
         nlp = spacy.load("./output/model-best-ner")
-        print('Model loaded.')
+        print('NER model loaded.')
     except:
-        print('Model not found.')
+        print('NER model not found.')
     
     
 def getEnts(text):
