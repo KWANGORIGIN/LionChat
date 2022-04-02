@@ -94,11 +94,19 @@ def getSemanticSearchResults():
     #Return json list of search results
     return jsonify(results)
 
-
-nlp = spacy.load("./output_updated/model-best")
+#this is a dumb fix
+try:
+    nlp = spacy.load("./output_updated/model-best")
+except:
+    print('intent model not loaded')
+    
 @app.before_first_request
 def trainIntentClassifier():
-    nlp = spacy.load("./output_updated/model-best")
+    
+    try:
+        nlp = spacy.load("./output_updated/model-best")
+    except:
+        print('intent model not loaded')
     
     # #Open questions.csv to train classifier from
     # questions = []
@@ -153,6 +161,7 @@ def classifyIntent():
     #Return intent as JSON
     return jsonify(intent=classifiedIntent)
 
+@app.route('/answer_events', methods=["POST"])
 def get_events():
     #default message
     message = "Here's what I found for this week:"
@@ -162,8 +171,14 @@ def get_events():
         text = jsonify(request.json)["utterance"]
     else:
         text = request.json["utterance"]
+        
+    entities = []
     
-    entities = ner.getEnts(text) # get entities from user query
+    try:
+        entities = ner.getEnts(text) # get entities from user query
+    except:
+        print("NER model not found")
+        
     
     #if entities are present
     if entities:
