@@ -82,6 +82,7 @@ def get_events():
         text = jsonify(request.json)["utterance"]
     else:
         text = request.json["utterance"]
+        text = str.replace(text, "\'", "\\'")
         
     entities = []
     
@@ -154,15 +155,15 @@ def get_events():
                     date2 = date1 + timedelta(days=1)
 
             else:
-                text = str.replace(text, "\'", "\\'")
-               # print(text)
+                
+                print(text)
                 sql = sql +  "LOWER({}) like '%{}%'".format(label, text)
                 more_entities = True
             
-        '''
+        
         for ent in entities:
             print(ent.label_, ent.text)
-         '''
+         
          
         if more_entities:
             sql = sql + " AND " #add more entities to search in the database
