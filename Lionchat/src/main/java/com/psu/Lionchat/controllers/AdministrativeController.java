@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
@@ -51,6 +52,13 @@ public class AdministrativeController {
 		this.inappropriateQuestions = inappropriateQuestions;
 	}
 
+	@GetMapping("/")
+	public ModelAndView index () {
+	    ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.setViewName("index");
+	    return modelAndView;
+	}
+	
 	/**
 	 * Return the crash reports and their information.
 	 */
@@ -65,6 +73,52 @@ public class AdministrativeController {
 	@GetMapping("/total-questions-asked")
 	long getTotalQuestionsAsked() {
 		return questions.count();
+	}
+
+	/**
+	 * Return all questions asked to the system and information about the users who
+	 * asked them.
+	 */
+	@GetMapping("/questions-asked")
+	void getQuestionsAsked() {
+		List<Question> q = questions.findAll();
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * Return the number of questions asked about each business defined topic.
+	 * 
+	 * @return
+	 */
+	@GetMapping("/number-questions-per-topic")
+	Map<String, Integer> getNumberQuestionsPerTopic() {
+		Map<String, Integer> map = new HashMap<>();
+		for (Question q : questions.findAll()) {
+			if (q.getIntent() == null) {
+				map.put("UnknownIntent", map.getOrDefault("UnknownIntent", 0) + 1);
+				continue;
+			}
+			map.put(q.getIntent().getIntent(), map.getOrDefault(q.getIntent().getIntent(), 0) + 1);
+		}
+		return map;
+	}
+
+	/**
+	 * Return the average overall 5 star rating of the system.
+	 */
+	@GetMapping("/average-ratings")
+	double getAverageRating() {
+		List<Review> rl = reviews.findAll();
+		if (rl.size() == 0) {
+			return -1;
+		}
+
+		double total = 0;
+		for (Review r : rl) {
+			total += r.getScore();
+		}
+		double average = total / reviews.count();
+		return average;
 	}
 
 	/**
@@ -98,42 +152,6 @@ public class AdministrativeController {
 	}
 
 	/**
-	 * Return the average overall 5 star rating of the system.
-	 */
-	@GetMapping("/average-ratings")
-	double getAverageRating() {
-		List<Review> rl = reviews.findAll();
-		if (rl.size() == 0) {
-			return -1;
-		}
-
-		double total = 0;
-		for (Review r : rl) {
-			total += r.getScore();
-		}
-		double average = total / reviews.count();
-		return average;
-	}
-
-	/**
-	 * Return the number of questions asked about each business defined topic.
-	 * 
-	 * @return
-	 */
-	@GetMapping("/number-questions-per-topic")
-	Map<String, Integer> getNumberQuestionsPerTopic() {
-		Map<String, Integer> map = new HashMap<>();
-		for (Question q : questions.findAll()) {
-			if (q.getIntent() == null) {
-				map.put("UnknownIntent", map.getOrDefault("UnknownIntent", 0) + 1);
-				continue;
-			}
-			map.put(q.getIntent().getIntent(), map.getOrDefault(q.getIntent().getIntent(), 0) + 1);
-		}
-		return map;
-	}
-
-	/**
 	 * Return the number of misclassifications for each business defined topic. This
 	 * is how many times the user said that their question was not answered.
 	 * 
@@ -156,15 +174,6 @@ public class AdministrativeController {
 	}
 
 	/**
-	 * Return the inappropriate queries and information about the users who asked
-	 * them (such as ip address).
-	 */
-	@GetMapping("/inappropriate-queries")
-	void getInappropriateQueries() {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
 	 * Return the total number of inappropriate queries asked to the system.
 	 */
 	@GetMapping("/number-inappropriate-queries")
@@ -173,13 +182,11 @@ public class AdministrativeController {
 	}
 
 	/**
-	 * Return all questions asked to the system and information about the users who
-	 * asked them.
+	 * Return the inappropriate queries and information about the users who asked
+	 * them (such as ip address).
 	 */
-	@GetMapping("/questions-asked")
-	void getQuestionsAsked() {
-		List<Question> q = questions.findAll();
+	@GetMapping("/inappropriate-queries")
+	void getInappropriateQueries() {
 		throw new UnsupportedOperationException();
 	}
-
 }

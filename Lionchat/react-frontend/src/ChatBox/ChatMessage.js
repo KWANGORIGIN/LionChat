@@ -21,7 +21,7 @@ const ChatMessage = ({ id, text, userSent, questionId, helpful, handleSendFeedba
         body: JSON.stringify(feedbackRequest),
       })
 
-    if (response !== undefined) {
+    if (response?.ok) {
       const message = { "key": id, "helpful": helpful }
       handleSendFeedback(message)
     }

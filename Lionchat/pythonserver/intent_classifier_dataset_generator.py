@@ -5,17 +5,21 @@ Created on Tue Mar  8 09:13:26 2022
 @author: Kevin Wang
 """
 from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 import pandas as pd
 import spacy
 from spacy.tokens import DocBin
 from tqdm.auto import tqdm
 import random
+import json
+import re
+import string
 
 class intent_classifier_dataset_generator:
     
     alpha = .80
     
-    def remove_stopwords(dataset):
+    def remove_stopwords(sentence):
         pass
     
     def synonym_replacement(sentence):
@@ -36,6 +40,29 @@ class intent_classifier_dataset_generator:
             label_list.append(label)
         return question_list, label_list
     
+    def preprocess_dataset(cls, data_list):
+        processed_dataset = []
+        
+        #Lowercase every question in dataset
+        for position in range(0, len(data_list)):
+            question = data_list[position]
+            data_list[position] = question.lower()
+        
+        #Remove punctuation
+        for position in range(0, len(data_list)):
+            question = data_list[position]
+            data_list[position] = re.sub(r'[^\w\s]', '', question)
+            
+        #Remove stop words
+        stop_words_set = set(stopwords.words('english'))
+        for question in data_list:
+            question_tokens = word_tokenize(question)
+            processed_question_list = [word for word in question_tokens if word not in stop_words_set]
+            processed_dataset.append(' '.join(processed_question_list))
+        
+        # print(processed_dataset)
+        return processed_dataset
+    
     def convert_to_docs(cls, data):
         nlp = spacy.load("en_core_web_trf")
         
@@ -44,9 +71,15 @@ class intent_classifier_dataset_generator:
             if(label=='IT_Intent'):
                 doc.cats['IT_Intent'] = 1
                 doc.cats['Event_Intent'] = 0
-            else:
+                doc.cats['Search_Intent'] = 0
+            elif(label=='Event_Intent'):
                 doc.cats['IT_Intent'] = 0
                 doc.cats['Event_Intent'] = 1
+                doc.cats['Search_Intent'] = 0
+            else:
+                doc.cats['IT_Intent'] = 0
+                doc.cats['Event_Intent'] = 0
+                doc.cats['Search_Intent'] = 1
             docs.append(doc)
         return docs
     
@@ -71,21 +104,28 @@ class intent_classifier_dataset_generator:
         erie_events_valid_df = pd.read_csv('erie_events_validation_data.csv', encoding='UTF-8')
         erie_events_df = pd.concat([erie_events_train_df, erie_events_valid_df], ignore_index=True)
         
+        search_train_df = pd.read_csv('searchQuestions_train.csv', encoding='UTF-8')
+        search_valid_df = pd.read_csv('searchQuestions_valid.csv', encoding='UTF-8')
+        search_df = pd.concat([search_train_df, search_valid_df], ignore_index=True)
+        
         it_list = it_df['Article Name'].values
         campus_events_list = campus_events_df['questions'].values
         erie_events_list = erie_events_df['questions'].values
+        search_list = search_df['question'].values
         
         it_list_len = len(it_list)
         campus_events_len = len(campus_events_list)
         erie_events_len = len(erie_events_list)
+        search_len = len(search_list)
         
-        it_list_len = 1000
-        campus_events_len = 900
+        it_list_len = 1500
+        campus_events_len = 1100
         
         print("Num of IT Questions:", len(it_list))
         print("Num of Campus Events Questions:", len(campus_events_list))
         print("Num of Erie Events Questions:", len(erie_events_list))
-        print("Total:", it_list_len + campus_events_len + erie_events_len)
+        print("Num of Search Questions:", len(search_list))
+        print("Total:", it_list_len + campus_events_len + erie_events_len + search_len)
         
         random.shuffle(it_list)
         
@@ -100,12 +140,16 @@ class intent_classifier_dataset_generator:
         erie_events_train_list = erie_events_list[:(int(newLength))]
         erie_events_valid_list = erie_events_list[(int(newLength)):]
         
+        search_train_list = search_train_df['question'].values
+        search_valid_list = search_valid_df['question'].values
+        
         train_question_list = []
         train_label_list = []
         
         train_question_list, train_label_list = cls.generate_question_and_label_list(train_question_list, train_label_list, it_train_list, 'IT_Intent')
         train_question_list, train_label_list = cls.generate_question_and_label_list(train_question_list, train_label_list, campus_events_train_list, 'Event_Intent')
         train_question_list, train_label_list = cls.generate_question_and_label_list(train_question_list, train_label_list, erie_events_train_list, 'Event_Intent')
+        train_question_list, train_label_list = cls.generate_question_and_label_list(train_question_list, train_label_list, search_train_list, 'Search_Intent')
         
         valid_question_list = []
         valid_label_list = []
@@ -113,6 +157,7 @@ class intent_classifier_dataset_generator:
         valid_question_list, valid_label_list = cls.generate_question_and_label_list(valid_question_list, valid_label_list, it_valid_list, 'IT_Intent')
         valid_question_list, valid_label_list = cls.generate_question_and_label_list(valid_question_list, valid_label_list, campus_events_valid_list, 'Event_Intent')
         valid_question_list, valid_label_list = cls.generate_question_and_label_list(valid_question_list, valid_label_list, erie_events_valid_list, 'Event_Intent')
+        valid_question_list, valid_label_list = cls.generate_question_and_label_list(valid_question_list, valid_label_list, search_valid_list, 'Search_Intent')
         
         print("Training Question list length:", len(train_question_list))
         print("Training Label list length:", len(train_label_list))
@@ -121,10 +166,12 @@ class intent_classifier_dataset_generator:
         print("Validation Label list length:", len(valid_label_list))
         
         '''
-        Lowercase whole training and validation list
+        Preprocess whole training and validation list
         '''
-        train_question_list = [question.lower() for question in train_question_list]
-        valid_question_list = [question.lower() for question in valid_question_list]
+        # train_question_list = [question.lower() for question in train_question_list]
+        # valid_question_list = [question.lower() for question in valid_question_list]
+        train_question_list = cls.preprocess_dataset(train_question_list)
+        valid_question_list = cls.preprocess_dataset(valid_question_list)
         
         print(train_question_list[0:5])
         print(valid_question_list[0:5])
@@ -203,7 +250,7 @@ class intent_classifier_dataset_generator:
         df.to_csv('erieEventsProcessed.csv', encoding='UTF-8')
     
     def test_model(cls):
-        nlp = spacy.load("./output_updated/model-best")
+        nlp = spacy.load("./output/model-best")
         inputVal = input("Enter text: ")
         while inputVal != 'exit':
             doc = nlp(inputVal)
@@ -214,6 +261,30 @@ class intent_classifier_dataset_generator:
         
         # demo = nlp("where does behrend cheerleading meet")
         # print(demo.cats)
+        
+    def load_google_questions(cls):
+        with open('./simplified-nq-train.jsonl') as questions_file:
+            questions_list = list(questions_file)
+        
+        print("Shuffling...")
+        random.shuffle(questions_list)
+        
+        print("Creating List...")
+            
+        smaller_list = questions_list[0:4000]
+        extracted_question_list = []
+        question_label_list = []
+        for question_str in smaller_list:
+            extractedQuestion = json.loads(question_str)['question_text']
+            extracted_question_list.append(extractedQuestion)
+            question_label_list.append('Search_Intent')
+        
+        print("Creating training set")
+        df = pd.DataFrame(list(zip(extracted_question_list[0:1500], question_label_list)), columns=['question', 'label'])
+        df.to_csv('searchQuestions_train.csv', encoding='UTF-8')
+        print("Creating validation set")
+        df = pd.DataFrame(list(zip(extracted_question_list[1500:], question_label_list)), columns=['question', 'label'])
+        df.to_csv('searchQuestions_valid.csv', encoding='UTF-8')
     
 if __name__ == "__main__":
     
@@ -221,3 +292,4 @@ if __name__ == "__main__":
     # dataset_generator.process_erie_events()
     # dataset_generator.generate_dataset()
     dataset_generator.test_model()
+    # dataset_generator.load_google_questions()

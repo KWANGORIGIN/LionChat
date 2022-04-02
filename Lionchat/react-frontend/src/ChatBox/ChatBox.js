@@ -58,11 +58,16 @@ const ChatBox = () => {
 				body: question,
 			})
 
-		const chatResponse = await response.json();
 
-		setMessages(previousMessages => {
-			return [...previousMessages, { key: uuidv4(), text: chatResponse.answer, userSent: false, id: chatResponse.questionId, helpful: null }]
-		})
+		// need a way to store review message + potential error message in the messages list and not include the feedback.
+		// right now boolean userSent changes how ChatMessage is displayed. A better design would have UserMessage, SystemMessage, ErrorMessage, ReviewMessage
+		if (response.ok) {
+			const chatResponse = await response.json();
+
+			setMessages(previousMessages => {
+				return [...previousMessages, { key: uuidv4(), text: chatResponse.answer, userSent: false, id: chatResponse.questionId, helpful: null }]
+			})
+		}
 	}
 
 	function handleSendFeedback(message) {
