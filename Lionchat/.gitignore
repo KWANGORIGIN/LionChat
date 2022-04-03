@@ -74,3 +74,5 @@ yarn-error.log*
 /pythonserver/__pycache__/
 
 /database
+
+/pythonserver/output

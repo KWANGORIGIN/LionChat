@@ -1,12 +1,13 @@
 div.container {
   display: flex;
   max-height: 3rem;
-  width: 100%;
 }
 
 input.messageBox {
-  font-size: 1.25em;
+  font-size: 2rem;
   flex-grow: 1;
+  width: 100%;
+  min-width: none;
 }
 
 button.send {
@@ -22,4 +23,30 @@ button.send:active {
 
 button.send:hover {
   background-color: #8888ff;
+}
+
+div.send {
+  background-image: url("Send_Button.png");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 3rem;
+  height: 3rem;
+  aspect-ratio: 1 / 1;
+  /* border: 5px solid #ffffff; */
+  box-sizing: border-box;
+  cursor: pointer;
+  filter: drop-shadow(1px 1px 1px);
+}
+
+div.send:hover {
+  filter: brightness(90%) drop-shadow(1px 1px 1px);
+}
+
+div.send:active {
+  filter: brightness(85%) drop-shadow(1px 1px 1px);
+}
+
+div.scrollbarSpacer {
+  width: 1vw;
 }
