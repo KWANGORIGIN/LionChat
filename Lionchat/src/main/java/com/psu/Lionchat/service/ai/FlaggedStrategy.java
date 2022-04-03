@@ -9,13 +9,20 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Component
 // for naughty behavior
 public class FlaggedStrategy extends IntentStrategyAbs{
     @Override
     public String doStrategy(String question) {
         //Preprocessing for keywords
-        boolean flagQuestion = false;
+        boolean flagQuestion = filterKeywords(question);
 
         //If not found flagged, then run through Python server
         if(!flagQuestion){
@@ -36,5 +43,26 @@ public class FlaggedStrategy extends IntentStrategyAbs{
         }
 
         return "Please keep your language clean and appropriate. You may rephrase your query.";
+    }
+
+    private boolean filterKeywords(String question){
+        //Read bad words from file and convert to Set
+        File file = new File("./txt-resources/bad-words.txt");
+        List<String> badWordsList = new ArrayList<>();
+        try{
+            Stream<String> lines = Files.lines(Paths.get("./txt-resources/bad-words.txt"));
+            badWordsList = lines.collect(Collectors.toList());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        Set<String> badWordsSet = new HashSet<>(badWordsList);
+
+        //Convert question to Set
+        question = question.replaceAll("\\s+", " ");//remove all extra spacing
+        Set<String> questionSet = new HashSet<>(Arrays.asList(question.split(" ")));
+
+        //Find intersection between sets
+        questionSet.retainAll(badWordsSet);
+        return questionSet.size() != 0;
     }
 }
