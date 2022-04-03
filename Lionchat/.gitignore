@@ -76,3 +76,4 @@ yarn-error.log*
 /database
 
 /pythonserver/output
+/logs
