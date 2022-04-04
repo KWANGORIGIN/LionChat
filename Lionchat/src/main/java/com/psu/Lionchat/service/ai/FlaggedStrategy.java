@@ -32,7 +32,7 @@ public class FlaggedStrategy extends IntentStrategyAbs{
             FlaggedRequest utterance = new FlaggedRequest(question);
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
-            String response = restTemplate.postForObject("http://localhost:8000/toxic_classification", entity,
+            String response = restTemplate.postForObject("http://pythonserver:8000/toxic_classification", entity,
                     String.class);
             FlaggedResponse flaggedResponse = gson.fromJson(response, FlaggedResponse.class);
 

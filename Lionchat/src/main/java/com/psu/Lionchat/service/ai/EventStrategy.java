@@ -18,7 +18,7 @@ public class EventStrategy extends IntentStrategyAbs{
         EventRequest utterance = new EventRequest(question);
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
-        String response = restTemplate.postForObject("http://localhost:8000/answer_events", entity,
+        String response = restTemplate.postForObject("http://pythonserver:8000/answer_events", entity,
                 String.class);
         EventResponse eventResponse = gson.fromJson(response, EventResponse.class);
 

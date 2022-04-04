@@ -68,7 +68,7 @@ public class ChatServiceImpl implements ChatService {
 		// TODO: make this into a bean.xml / web.xml data source if thats a
 		// thing.
 		String response = restTemplate.postForObject(
-				"http://localhost:8000/semantic-search-results", entity,
+				"http://pythonserver:8000/semantic-search-results", entity,
 				String.class);
 		SimilarityResponse articles = gson.fromJson(response,
 				SimilarityResponse.class);
@@ -95,7 +95,7 @@ public class ChatServiceImpl implements ChatService {
 		// TODO: make this into a bean.xml / web.xml data source if thats a
 		// thing.
 		String response = restTemplate.postForObject(
-				"http://localhost:8000/intent", entity, String.class);
+				"http://pythonserver:8000/intent", entity, String.class);
 		ClassifierResponse intent = gson.fromJson(response,
 				ClassifierResponse.class);
 		return intent.getIntent();
