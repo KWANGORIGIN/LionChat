@@ -1,22 +1,17 @@
-# only works on mac for some reason
-# FROM openjdk:17
+#
+# Build stage
+#
+FROM maven:3.8.4-openjdk-17-slim AS build
+COPY src /app/src
+COPY react-frontend /app/react-frontend
+COPY pom.xml /app
+RUN mvn -f /app/pom.xml clean package -DskipTests
 
-# WORKDIR /app
-
-# COPY .mvn/ .mvn
-# COPY mvnw pom.xml ./
-# RUN ./mvnw dependency:go-offline
-
-# COPY . .
-# # COPY src ./src.
-# # COPY react-frontend ./react-frontend.
-
-# CMD ["./mvnw", "spring-boot:run"]
-
-# must run "mvn clean package -DskipTests" to convert this to a jar file first
+#
+# Package stage
+#
 FROM openjdk:17
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-# ENTRYPOINT ["java","-jar","/app.jar"]
+ARG --from=build JAR_FILE=/app/target/*.jar
+COPY --from=build ${JAR_FILE} app.jar
 CMD java -jar app.jar
 EXPOSE 8080
