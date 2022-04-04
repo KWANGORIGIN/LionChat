@@ -1,8 +1,17 @@
 version: "3"
 services:
-  pythonserver:
-    build: 
+  springfrontendbackend:
+    build:
       context: .
+      dockerfile: Lionchat.Dockerfile
+    links:
+      - pythonserver
+    ports:
+      - "8080:8080"
+
+  pythonserver:
+    build:
+      context: ./pythonserver/
       dockerfile: LionchatBrain.Dockerfile
     links:
       - db
@@ -17,4 +26,4 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: ml_database
     volumes:
-      - ./db:/docker-entrypoint-initdb.d/:ro
+      - ./pythonserver/db:/docker-entrypoint-initdb.d/:ro
