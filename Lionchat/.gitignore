@@ -76,4 +76,5 @@ yarn-error.log*
 /database
 
 /pythonserver/output
+/pythonserver/intent-classifier-model
 /logs
