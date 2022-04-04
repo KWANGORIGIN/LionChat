@@ -37,6 +37,7 @@ div.send {
   box-sizing: border-box;
   cursor: pointer;
   filter: drop-shadow(1px 1px 1px);
+  margin-right: 1vw;
 }
 
 div.send:hover {
@@ -45,8 +46,4 @@ div.send:hover {
 
 div.send:active {
   filter: brightness(85%) drop-shadow(1px 1px 1px);
-}
-
-div.scrollbarSpacer {
-  width: 1vw;
 }

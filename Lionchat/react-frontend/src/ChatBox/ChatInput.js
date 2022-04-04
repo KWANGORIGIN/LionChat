@@ -18,7 +18,6 @@ const ChatInput = ({ chatInput, handleSendMessage }) => {
       {/* <button className={styles.send} onClick={handleSendMessage}>Send</button> */}
       {/* <img className={styles.send} src={Send}></img> */}
       <div className={styles.send} onClick={handleSendMessage}></div>
-      <div className={styles.scrollbarSpacer}></div>
     </div>
   );
 };
