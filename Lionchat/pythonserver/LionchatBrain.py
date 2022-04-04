@@ -195,7 +195,8 @@ def get_events():
                 evt_list[i][2] = "Event Location: " + evt_list[i][2]
                 evt_list[i][3] = "Event Date: " + str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S"))
                 evt_list[i][4] = "Event Link: " + evt_list[i][4]
-        except:
+        except Exception as e:
+            print(e)
             print("Can't access database")
             evt_list = ["Database error."]
             
@@ -237,4 +238,4 @@ if __name__ == "__main__":
     semantic_searcher.init()
     
     #Run server
-    app.run(port = 8000)
+    app.run(host='0.0.0.0', port = 8000)
