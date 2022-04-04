@@ -3,32 +3,46 @@ package com.psu.Lionchat.service.chat.responses;
 import java.util.List;
 
 public class EventResponse {
-    private final String message;
-    private final List<String> events;
+	private final List<List<String>> events;
+	private final String message;
 
-    public EventResponse(String message, List<String> events)
-    {
-        this.message = message;
-        this.events = events;
-    }
+	public EventResponse(List<List<String>> events, String message) {
+		this.events = events;
+		this.message = message;
+	}
 
-    public String getMessage()
-    {
-        return this.message;
-    }
-    public List<String> getEvents()
-    {
-        return this.events;
-    }
+	public List<List<String>> getEvents() {
+		return this.events;
+	}
 
-    public String toString()
-    {
-        String evts = message;
-        for(String e : events)
-        {
-            evts += "<br>" + e;
-        }
+	public String getMessage() {
+		return this.message;
+	}
 
-        return evts;
-    }
+	public String toString() {
+		String evts = message;
+		for (List<String> e : events) {
+			evts += "<br>" + e.toString();
+		}
+
+		return evts;
+	}
 }
+
+//class Event {
+//	private List<String> eventDetails;
+//
+//	public Event(List<String> eventDetails) {
+//		super();
+//		this.eventDetails = eventDetails;
+//	}
+//
+//	public List<String> getEventDetails() {
+//		return eventDetails;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Event [eventDetails=" + eventDetails + "]";
+//	}
+//}
