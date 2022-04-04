@@ -20,7 +20,8 @@ def init():
     try:
         nlp = spacy.load("./output/model-best-ner")
         print('NER model loaded.')
-    except:
+    except Exception as e:
+        print(e)
         print('NER model not found.')
     
     

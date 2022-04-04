@@ -1,13 +1,14 @@
 version: "3"
 services:
-  # app:
-  #   build: 
-  #     context: .
-  #     dockerfile: LionchatBrain.Dockerfile
-  #   links:
-  #     - db
-  #   ports:
-  #     - "8000:8000"
+  app:
+    build: 
+      context: .
+      dockerfile: LionchatBrain.Dockerfile
+      # dockerfile: Server.Dockerfile
+    links:
+      - db
+    ports:
+      - "8000:8000"
 
   db:
     image: mysql:8.0.28

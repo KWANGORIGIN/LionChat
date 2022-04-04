@@ -1,58 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 16 19:32:14 2022
-
-@author: Kevin Wang
-"""
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import ner
-import tox
-import intent_classifier
-import semantic_searcher
+from typing import List, Dict
+from flask import Flask
+import json
 from mysql.connector import connect
 from datetime import datetime
 from datetime import tzinfo, timedelta, datetime
 
 app = Flask(__name__)
-CORS(app)
-
-#configure database info
-
-@app.route('/semantic-search-results', methods=['POST'])
-def getSemanticSearchResults():
-    #Get POST request from client
-    receivedDict = request.get_json()
-    print("ReceivedDict: ", receivedDict)
-    
-    #Get query from received dict
-    query = receivedDict['query']
-    
-    results = semantic_searcher.search(query)
-
-    # print(results)
-    # print(jsonify(results))
-    # print(similarities)
-    
-    # print("Outgoing results: ", results)
-    #Return json list of search results
-    return jsonify(results)
-
-@app.route('/intent', methods=['POST'])
-def classifyIntent():
-    
-    #Get POST request from client
-    receivedDict = request.get_json()
-    print(receivedDict)
-    
-    #Get user utterance
-    userInput = receivedDict["utterance"]
-    
-    classifiedIntent = intent_classifier.classifyIntent(userInput)
-    print("Classified Intent: ", classifiedIntent)
-    
-    #Return intent as JSON
-    return jsonify(intent=classifiedIntent)
 
 @app.route('/answer_events', methods=["POST"])
 def get_events():
@@ -171,7 +124,7 @@ def get_events():
                 'port': '3306',
                 'database': 'ml_database'
             }
-            connection = connect(**config)
+            connection = mysql.connector.connect(**config)
             cursor = connection.cursor()
             cursor.execute(sql)
         
@@ -207,26 +160,5 @@ def get_events():
 
     return payload
 
-@app.route('/toxic_classification', methods=["POST"])
-def is_toxic():
-    
-    if isinstance(request.json, str):
-        text = jsonify(request.json)["utterance"]
-    else:
-        text = request.json["utterance"]
-
-    return jsonify(toxicity = tox.is_toxic(text))
-    
-    
-if __name__ == "__main__":
-    #Initialize similarity searcher
-    # fit_corpus_for_similarity_search()
-    
-    #load ner model
-    ner.init()
-    tox.init()
-    intent_classifier.init()
-    semantic_searcher.init()
-    
-    #Run server
-    app.run(host='0.0.0.0', port = 8000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
