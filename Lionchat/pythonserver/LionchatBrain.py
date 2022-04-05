@@ -6,6 +6,9 @@ Created on Wed Feb 16 19:32:14 2022
 """
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 import ner
 import tox
 import intent_classifier
@@ -48,7 +51,7 @@ def classifyIntent():
     print(receivedDict)
 
     # Get user utterance
-    userInput = receivedDict["utterance"]
+    userInput = preprocess_question(receivedDict["utterance"])
 
     classifiedIntent = intent_classifier.classifyIntent(userInput)
     print("Classified Intent: ", classifiedIntent)
