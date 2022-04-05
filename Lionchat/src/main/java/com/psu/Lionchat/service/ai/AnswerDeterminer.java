@@ -18,16 +18,16 @@ import java.util.Objects;
 
 @Service
 public class AnswerDeterminer implements AnswerDeterminerIF{
-    private IntentStrategyIF intentClassifier;
+//    private IntentStrategyIF intentClassifier;
     private IntentStrategyIF issueClassifier;
 
     @Autowired
     /*
     Consider getting rid of this being passed in and create a factory to create IntentStrategyIF
      */
-    public AnswerDeterminer()
+    public AnswerDeterminer(FlaggedStrategy issueClassifier)
     {
-        issueClassifier = StrategyFactory.getStrategy("Flagged_Intent");
+        this.issueClassifier = issueClassifier;//Dependency injecting FlaggedStrategy object
     }
 
     @Override
