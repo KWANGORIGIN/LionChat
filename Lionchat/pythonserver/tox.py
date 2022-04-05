@@ -31,5 +31,8 @@ def is_toxic(text):
         doc = nlp(text)
         return max(doc.cats, key= doc.cats.get)
     else:
-        return "ERROR"
+        print("TOXIC MODEL MISSING")
+        return "nontoxic"
     
+# toxic
+# nontoxic
