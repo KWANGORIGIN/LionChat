@@ -12,7 +12,7 @@ def init():
     global nlp
     
     try:
-        nlp = spacy.load("./intent-classifier-model/model-best")
+        nlp = spacy.load("./output/model-best-intent-classifier")
     except:
         print("Unable to load intent classifier model")
 
