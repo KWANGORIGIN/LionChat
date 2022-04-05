@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Feb 16 19:32:14 2022
-
 @author: Kevin Wang
 """
 from flask import Flask, request, jsonify
@@ -16,8 +15,7 @@ import semantic_searcher
 from mysql.connector import connect
 from datetime import datetime
 from datetime import timedelta
-import re
-from nltk import stopwords, word_tokenize
+
 app = Flask(__name__)
 CORS(app)
 
