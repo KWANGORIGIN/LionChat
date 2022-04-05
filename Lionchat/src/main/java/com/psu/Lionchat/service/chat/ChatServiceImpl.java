@@ -46,7 +46,7 @@ public class ChatServiceImpl implements ChatService {
 	@Autowired
 	public ChatServiceImpl(UserRepository users, ReviewRepository reviews,
 			QuestionRepository questions, IntentRepository intents,
-			InappropriateQuestionRepository inappropriateQuestions) {
+			InappropriateQuestionRepository inappropriateQuestions, AnswerDeterminer answerDeterminer) {
 		super();
 
 		this.users = users;
@@ -54,7 +54,7 @@ public class ChatServiceImpl implements ChatService {
 		this.questions = questions;
 		this.intents = intents;
 		this.inappropriateQuestions = inappropriateQuestions;
-		answerDeterminer = new AnswerDeterminer();
+		this.answerDeterminer = answerDeterminer;
 	}
 
 	private String itSimilarity(String question) {

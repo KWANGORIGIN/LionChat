@@ -3,6 +3,7 @@ package com.psu.Lionchat.service.ai;
 import com.google.gson.Gson;
 import com.psu.Lionchat.service.chat.requests.FlaggedRequest;
 import com.psu.Lionchat.service.chat.responses.FlaggedResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,6 +20,13 @@ import java.util.stream.Stream;
 @Component
 // for naughty behavior
 public class FlaggedStrategy extends IntentStrategyAbs{
+    private Set<String> badWordsSet;
+
+    @Autowired
+    public FlaggedStrategy(){
+        this.badWordsSet = createReferenceSet();
+    }
+
     @Override
     public String doStrategy(String question) {
         //Preprocessing for keywords
@@ -45,7 +53,7 @@ public class FlaggedStrategy extends IntentStrategyAbs{
         return "Please keep your language clean and appropriate. You may rephrase your query.";
     }
 
-    private boolean filterKeywords(String question){
+    private Set<String> createReferenceSet(){
         //Read bad words from file and convert to Set
         File file = new File("./txt-resources/bad-words.txt");
         List<String> badWordsList = new ArrayList<>();
@@ -55,8 +63,10 @@ public class FlaggedStrategy extends IntentStrategyAbs{
         }catch(IOException e){
             e.printStackTrace();
         }
-        Set<String> badWordsSet = new HashSet<>(badWordsList);
+        return new HashSet<>(badWordsList);
+    }
 
+    private boolean filterKeywords(String question){
         //Convert question to Set
         question = question.replaceAll("\\s+", " ");//remove all extra spacing
         Set<String> questionSet = new HashSet<>(Arrays.asList(question.split(" ")));
