@@ -9,9 +9,9 @@ const ChatMessage = ({ id, text, userSent, questionId, helpful, handleSendFeedba
   const sendFeedback = async (helpful) => {
     const feedbackRequest = { "questionId": questionId, "helpful": helpful }
 
-    const response = await fetch(`/chat/feedback`,
+    const response = await fetch(`/chat/update-feedback`,
       {
-        method: 'POST',
+        method: 'PUT',
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',

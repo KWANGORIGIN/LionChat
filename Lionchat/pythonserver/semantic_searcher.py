@@ -11,7 +11,6 @@ Created on Sat Apr  2 17:28:07 2022
 
 @author: wanga
 """
-import spacy
 from sentence_transformers import SentenceTransformer
 from sklearn.neighbors import NearestNeighbors
 import pandas as pd

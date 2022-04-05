@@ -20,7 +20,7 @@ public class ITStrategy extends IntentStrategyAbs{
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
         // TODO: make this into a bean.xml / web.xml data source if thats a thing.
-        String response = restTemplate.postForObject("http://localhost:8000/semantic-search-results", entity,
+        String response = restTemplate.postForObject("http://pythonserver:8000/semantic-search-results", entity,
                 String.class);
         SimilarityResponse articles = gson.fromJson(response, SimilarityResponse.class);
         // ClassifierResponse intent = gson.fromJson(response,
