@@ -177,8 +177,6 @@ def get_events():
 
         # make sure program does not crash if database missing
         
-        #comment this back in
-        
         try:
             
             config = {
