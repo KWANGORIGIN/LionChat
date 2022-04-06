@@ -6,6 +6,7 @@ Created on Wed Feb 16 19:32:14 2022
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import re
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import ner
@@ -278,6 +279,10 @@ if __name__ == "__main__":
     tox.init()
     intent_classifier.init()
     semantic_searcher.init()
+
+    nltk.download('stopwords')
+
+    print("yeet yeet yeet")
     
     # Run server
-    app.run(host='0.0.0.0', port = 8000)
+    app.run(host='0.0.0.0', debug = True, port = 8000)

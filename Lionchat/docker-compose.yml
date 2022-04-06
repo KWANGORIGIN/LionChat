@@ -11,7 +11,7 @@ services:
 
   pythonserver:
     build:
-      context: ./pythonserver/
+      context: ./pythonserver
       dockerfile: LionchatBrain.Dockerfile
     links:
       - db
