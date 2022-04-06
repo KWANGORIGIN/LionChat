@@ -2,6 +2,7 @@
 """
 Created on Wed Feb 16 19:32:14 2022
 @author: Kevin Wang
+@author: William Hemminger
 """
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -18,8 +19,6 @@ from datetime import timedelta
 
 app = Flask(__name__)
 CORS(app)
-
-# configure database info
 
 
 @app.route('/semantic-search-results', methods=['POST'])
@@ -86,6 +85,7 @@ def get_events():
         set_name = False
         # begin sql query on events table
         sql = "SELECT EVTNAME, ORG, LOC, DATE, URL FROM events WHERE "
+        sql_vars = {}
 
         # find current day for use in query
         current_day = datetime.today().replace(
@@ -98,7 +98,9 @@ def get_events():
             date2 += timedelta(days=1)
         date2 += timedelta(days=1)
 
+        label_num = 0
         for ent in entities:
+            
             label = ent.label_
             # replace question mark if was accidentally returned
             text = ent.text.replace("?", "")
@@ -143,10 +145,14 @@ def get_events():
                     date2 = date1 + timedelta(days=1)
 
             else:
-
+                value = "value" + str(label_num)
                 print(text)
-                sql = sql + "LOWER({}) like '%{}%'".format(label, text)
+                sql = sql + "LOWER(" + label + ") like %(" + value + ")s"
+                sql_vars[value] = "%" + text + "%"
+                
                 more_entities = True
+            
+            label_num += 1
 
         for ent in entities:
             print(ent.label_, ent.text)
@@ -159,16 +165,22 @@ def get_events():
             message = "Here's what I found for this event:"
 
         if not set_date and set_name:  # if name entered and date not entered, query all future dates for event
-            sql += "DATE >= {}".format(int(date1.timestamp()))
+            sql += "DATE >= %(time1)s"
+            sql_vars['time1'] = int(date1.timestamp())
         else:  # otherwise query between whatever dates were set
-            sql += "DATE BETWEEN {} AND {}".format(
-                int(date1.timestamp()), int(date2.timestamp()) - 1)
+            sql += "DATE BETWEEN %(time1)s AND %(time2)s"
+            sql_vars['time1'] = int(date1.timestamp())
+            sql_vars['time2'] = int(date2.timestamp() - 1)
         # print(sql)
         # print(date1)
         # print(datetime.fromtimestamp(date2.timestamp() - 1))
 
         # make sure program does not crash if database missing
+        
+        #comment this back in
+        
         try:
+            
             config = {
                 'user': 'root',
                 'password': 'root',
@@ -176,9 +188,15 @@ def get_events():
                 'port': '3306',
                 'database': 'ml_database'
             }
+            
             connection = connect(**config)
+            
             cursor = connection.cursor()
-            cursor.execute(sql)
+            
+            print(sql)
+            print(sql_vars)
+            cursor.execute(sql, sql_vars)
+            
 
             evt_list = list(cursor)
             cursor.close()
