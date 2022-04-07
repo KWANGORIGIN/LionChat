@@ -7,10 +7,10 @@ RUN --mount=type=cache,target=/root/.cache pip install -r requirements.txt
 
 RUN python -m nltk.downloader stopwords
 
-COPY ./intent-classifier-model ./intent-classifier-model
 COPY ./output ./output
 COPY ./ner.py ./
 COPY ./tox.py ./
+COPY ./IT_Knowledge_Articles.csv ./
 COPY ./intent_classifier.py ./
 COPY ./semantic_searcher.py ./
 COPY ./LionchatBrain.py ./
