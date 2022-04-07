@@ -17,7 +17,7 @@ import pandas as pd
 import numpy as np
 
 similarity_searcher = None
-embedder = None
+embedder_model = None
 articleUrls = []
 articleTitles = []
 
@@ -30,13 +30,13 @@ def generate_corpus_embeddings():
     articleTitles = df.ArticleName.values
     articleUrls = df.ArticleLink.values
     
-    return embedder.encode(articleTitles, convert_to_numpy=True)
+    return embedder_model.encode(articleTitles, convert_to_numpy=True)
 
 def init():
     global similarity_searcher
-    global embedder
+    global embedder_model
     
-    embedder = SentenceTransformer('all-MiniLM-L6-v2')
+    embedder_model = SentenceTransformer('./output/all-MiniLM-L6-v2')
     
     corpus_embeddings = generate_corpus_embeddings()
     
@@ -46,7 +46,7 @@ def init():
 
 def search(query):
     global similarity_searcher
-    global embedder
+    global embedder_model
     global articleTitles
     global articleUrls
     
@@ -55,7 +55,7 @@ def search(query):
     results = {'titles':[], 'urls': []}
     if similarity_searcher is not None:
         #Convert query to embedding
-        query_embedding = embedder.encode(query, convert_to_numpy=True)
+        query_embedding = embedder_model.encode(query, convert_to_numpy=True)
         
         #Reshape corpus embedding for input in KNN
         query_embedding = np.reshape(query_embedding, (1, 384))

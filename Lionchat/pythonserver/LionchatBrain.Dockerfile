@@ -15,6 +15,9 @@ COPY ./intent_classifier.py ./
 COPY ./semantic_searcher.py ./
 COPY ./LionchatBrain.py ./
 
-CMD python -u LionchatBrain.py
+COPY ./Lionchat.ini ./Lionchat.ini
+ENV UWSGI_INI ./Lionchat.ini
+
+# CMD python -u LionchatBrain.py
 ENV LISTEN_PORT 8000
 EXPOSE 8000
