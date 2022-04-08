@@ -41,7 +41,7 @@ public class AnswerDeterminer implements AnswerDeterminerIF{
         if(Objects.equals(issueResponse, "Valid")){
             String intentType = classifyIntent(question);
             IntentStrategyIF strategy = StrategyFactory.getStrategy(intentType);
-            return new ChatAnswer(questionId, strategy.doStrategy(question));//Returns answer as determined by classifier
+            return new ChatAnswer(questionId, strategy.doStrategy(question), intentType);//Returns answer as determined by classifier
         }
         return new ChatAnswer(questionId, issueResponse);//Returns error message from issueClassifier
     }
