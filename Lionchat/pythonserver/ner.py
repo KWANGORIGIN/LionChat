@@ -6,6 +6,8 @@ Created on Wed Feb 16 17:56:06 2022
 """
 from timeit import default_timer as timer
 import spacy
+import os
+import threading
 
 nlp = None
 
@@ -29,6 +31,9 @@ def getEnts(text):
     global nlp
     
     if nlp is not None:
+        print("PID: ", os.getpid())
+        print("Thread: ", threading.get_ident())
+        print("Text: ", text)
         text = str.lower(text) 
         doc = nlp(text)
         return doc.ents

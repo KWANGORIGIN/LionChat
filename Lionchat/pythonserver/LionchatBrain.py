@@ -16,6 +16,7 @@ import semantic_searcher
 from mysql.connector import connect
 from datetime import datetime
 from datetime import timedelta
+import os
 
 def setup_app():
     ner.init()
@@ -23,7 +24,8 @@ def setup_app():
     intent_classifier.init()
     semantic_searcher.init()
     
-    nltk.download('stopwords')
+    # nltk.download('stopwords')
+    print("Done setting up app for: ", os.getpid())
 setup_app()
 
 app = Flask(__name__)
@@ -84,6 +86,7 @@ def get_events():
     entities = []
 
     try:
+        print("Yeet getting ner")
         entities = ner.getEnts(text)  # get entities from user query
     except e as Exception:
         print(e)

@@ -13,6 +13,7 @@ def init():
     
     try:
         nlp = spacy.load("./output/model-best-intent-classifier")
+        print("Intent classifier loaded")
     except:
         print("Unable to load intent classifier model")
 

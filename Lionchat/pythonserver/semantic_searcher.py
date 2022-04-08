@@ -44,6 +44,8 @@ def init():
     
     similarity_searcher.fit(corpus_embeddings)
 
+    print("Semantic Searcher Loaded")
+
 def search(query):
     global similarity_searcher
     global embedder_model
