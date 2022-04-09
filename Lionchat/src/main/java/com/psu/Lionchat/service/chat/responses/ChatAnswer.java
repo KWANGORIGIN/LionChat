@@ -11,6 +11,7 @@ public class ChatAnswer {
 		this.answer = answer;
 		this.intent = "null";
 	}
+
 	public ChatAnswer(long questionId, String answer, String intent) {
 		super();
 		this.questionId = questionId;
