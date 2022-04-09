@@ -5,6 +5,10 @@ public class ChatAnswer {
 	private String answer;
 	private String intent;
 
+	public ChatAnswer() {
+		super();
+	}
+
 	public ChatAnswer(long questionId, String answer) {
 		super();
 		this.questionId = questionId;
