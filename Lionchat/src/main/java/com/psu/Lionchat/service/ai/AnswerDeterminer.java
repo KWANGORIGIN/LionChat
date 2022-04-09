@@ -1,13 +1,7 @@
 package com.psu.Lionchat.service.ai;
 
-import com.google.gson.Gson;
-import com.psu.Lionchat.dao.entities.Question;
-import com.psu.Lionchat.service.PythonResolver;
-import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
-import com.psu.Lionchat.service.chat.requests.SimilarityRequest;
-import com.psu.Lionchat.service.chat.responses.ChatAnswer;
-import com.psu.Lionchat.service.chat.responses.ClassifierResponse;
-import com.psu.Lionchat.service.chat.responses.SimilarityResponse;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +9,12 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
+import com.google.gson.Gson;
+import com.psu.Lionchat.dao.entities.Question;
+import com.psu.Lionchat.service.PythonResolver;
+import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
+import com.psu.Lionchat.service.chat.responses.ChatAnswer;
+import com.psu.Lionchat.service.chat.responses.ClassifierResponse;
 
 @Service
 public class AnswerDeterminer implements AnswerDeterminerIF {
