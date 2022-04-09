@@ -9,6 +9,7 @@ from flask_cors import CORS
 import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+import nltk
 import ner
 import tox
 import intent_classifier
@@ -295,5 +296,8 @@ if __name__ == "__main__":
     intent_classifier.init()
     semantic_searcher.init()
     
+    nltk.download('stopwords')
+    nltk.download('punkt')
+
     # Run server
     app.run(host='0.0.0.0', port = 8000)
