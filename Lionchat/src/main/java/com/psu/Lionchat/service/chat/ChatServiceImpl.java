@@ -114,30 +114,22 @@ public class ChatServiceImpl implements ChatService {
 	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
 		Question q = new Question(user, null, question);
-		// Old code****
-		// Intent intent = new Intent("InformationTechnology");
-		// q.setIntent(intent);
-		// intents.save(intent);
-		// questions.save(q);
-		// ****
+		Intent intent = new Intent("null");
+		q.setIntent(intent);
+		intents.save(intent);
+		questions.save(q);
+		
 		try {
 			ChatAnswer answer = answerDeterminer.getAnswer(q);
-			// new code*****
-			Intent intent = new Intent(answer.getIntent());
-			q.setIntent(intent);
+			
+			intent.setIntent(answer.getIntent());
 			intents.save(intent);
-			questions.save(q);
-			// *****
+
 			System.out.println("Answer: " + answer.getAnswer());
 			return answer;
 		} catch (Exception e) {
-			// new code****
-			Intent intent = new Intent("null");
-			q.setIntent(intent);
-			intents.save(intent);
-			questions.save(q);
-			// ****
 			e.printStackTrace();
+
 			return new ChatAnswer(q.getId(),
 					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
 		}
