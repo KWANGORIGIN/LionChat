@@ -24,6 +24,7 @@ import com.psu.Lionchat.dao.repositories.IntentRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
+import com.psu.Lionchat.service.PythonResolver;
 import com.psu.Lionchat.service.ai.AnswerDeterminer;
 import com.psu.Lionchat.service.ai.AnswerDeterminerIF;
 import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
@@ -44,9 +45,9 @@ public class ChatServiceImpl implements ChatService {
 	private AnswerDeterminerIF answerDeterminer;
 
 	@Autowired
-	public ChatServiceImpl(UserRepository users, ReviewRepository reviews,
-			QuestionRepository questions, IntentRepository intents,
-			InappropriateQuestionRepository inappropriateQuestions, AnswerDeterminer answerDeterminer) {
+	public ChatServiceImpl(UserRepository users, ReviewRepository reviews, QuestionRepository questions,
+			IntentRepository intents, InappropriateQuestionRepository inappropriateQuestions,
+			AnswerDeterminer answerDeterminer) {
 		super();
 
 		this.users = users;
@@ -63,41 +64,35 @@ public class ChatServiceImpl implements ChatService {
 		Gson gson = new Gson();
 		SimilarityRequest utterance = new SimilarityRequest(question);
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> entity = new HttpEntity<String>(
-				gson.toJson(utterance), headers);
+		HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
 		// TODO: make this into a bean.xml / web.xml data source if thats a
 		// thing.
-		String response = restTemplate.postForObject(
-				"http://pythonserver:8000/semantic-search-results", entity,
-				String.class);
-		SimilarityResponse articles = gson.fromJson(response,
-				SimilarityResponse.class);
+		String url = String.format("http://%s:8000/semantic-search-results", PythonResolver.getHostName());
+		String response = restTemplate.postForObject(url, entity, String.class);
+		SimilarityResponse articles = gson.fromJson(response, SimilarityResponse.class);
 		// ClassifierResponse intent = gson.fromJson(response,
 		// ClassifierResponse.class);
 		if (articles.getTitles().size() == 0) {
 			return "ERROR";
 		}
 		String title = articles.getTitles().get(0);
-		String url = articles.getUrls().get(0);
+		url = articles.getUrls().get(0);
 		return String.format("<a href=%s target=\"_blank\">%s</a>", url, title);
 	}
 
-	private String classify(String question)
-			throws RestClientException, JsonSyntaxException {
+	private String classify(String question) throws RestClientException, JsonSyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		Gson gson = new Gson();
 		ClassifierRequest utterance = new ClassifierRequest(question);
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> entity = new HttpEntity<String>(
-				gson.toJson(utterance), headers);
+		HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
 
 		// TODO: make this into a bean.xml / web.xml data source if thats a
 		// thing.
-		String response = restTemplate.postForObject(
-				"http://pythonserver:8000/intent", entity, String.class);
-		ClassifierResponse intent = gson.fromJson(response,
-				ClassifierResponse.class);
+		String url = String.format("http://%s:8000/intent", PythonResolver.getHostName());
+		String response = restTemplate.postForObject(url, entity, String.class);
+		ClassifierResponse intent = gson.fromJson(response, ClassifierResponse.class);
 		return intent.getIntent();
 	}
 
@@ -119,29 +114,29 @@ public class ChatServiceImpl implements ChatService {
 	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
 		Question q = new Question(user, null, question);
-		//Old code****
-		//Intent intent = new Intent("InformationTechnology");
-		//q.setIntent(intent);
-		//intents.save(intent);
-		//questions.save(q);
-		//****
+		// Old code****
+		// Intent intent = new Intent("InformationTechnology");
+		// q.setIntent(intent);
+		// intents.save(intent);
+		// questions.save(q);
+		// ****
 		try {
 			ChatAnswer answer = answerDeterminer.getAnswer(q);
-			//new code*****
+			// new code*****
 			Intent intent = new Intent(answer.getIntent());
 			q.setIntent(intent);
 			intents.save(intent);
 			questions.save(q);
-			//*****
+			// *****
 			System.out.println("Answer: " + answer.getAnswer());
 			return answer;
 		} catch (Exception e) {
-			//new code****
+			// new code****
 			Intent intent = new Intent("null");
 			q.setIntent(intent);
 			intents.save(intent);
 			questions.save(q);
-			//****
+			// ****
 			e.printStackTrace();
 			return new ChatAnswer(q.getId(),
 					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
@@ -176,8 +171,7 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public void submitFeedback(HttpServletRequest request,
-			FeedbackRequest feedbackRequest) {
+	public void submitFeedback(HttpServletRequest request, FeedbackRequest feedbackRequest) {
 		User user = this.getUser(request);
 		Question question = questions.getById(feedbackRequest.getQuestionId());
 
@@ -193,8 +187,8 @@ public class ChatServiceImpl implements ChatService {
 	// TODO: Remove IllegalStateExceptions.
 	/**
 	 * Add a review to the database if the oldest review is either undefined or
-	 * greater than 2 weeks old. The user must have asked at least one question.
-	 * The review must be in the range [1,5].
+	 * greater than 2 weeks old. The user must have asked at least one question. The
+	 * review must be in the range [1,5].
 	 */
 	@Override
 	public long submitReview(HttpServletRequest request, int score) {
@@ -210,8 +204,7 @@ public class ChatServiceImpl implements ChatService {
 			throw new IllegalStateException();
 		}
 
-		if (user.getReviews().size() != 0 && !user.getReviews()
-				.get(user.getReviews().size() - 1).getCreationTime()
+		if (user.getReviews().size() != 0 && !user.getReviews().get(user.getReviews().size() - 1).getCreationTime()
 				.plusWeeks(2).isBefore(LocalDateTime.now())) {
 			// fail since the review is too recent.
 			throw new IllegalStateException();
@@ -225,11 +218,9 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public void updateReview(HttpServletRequest request,
-			ReviewPutRequest reviewPutRequest) {
+	public void updateReview(HttpServletRequest request, ReviewPutRequest reviewPutRequest) {
 		User user = this.getUser(request);
-		Optional<Review> reviewOptional = reviews
-				.findById(reviewPutRequest.getReviewId());
+		Optional<Review> reviewOptional = reviews.findById(reviewPutRequest.getReviewId());
 
 		int score = reviewPutRequest.getReview();
 		if (score < 1 || score > 5) {
