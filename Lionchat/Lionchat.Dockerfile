@@ -13,5 +13,9 @@ RUN --mount=type=cache,target=/root/.m2 mvn -f /app/pom.xml clean package -Dskip
 FROM openjdk:17
 ARG --from=build JAR_FILE=/app/target/*.jar
 COPY --from=build ${JAR_FILE} app.jar
+
+ENV PYTHON_SERVER_IP pythonserver
+
 CMD java -jar app.jar
+
 EXPOSE 8080

@@ -15,5 +15,4 @@ COPY ./LionchatBrain.py ./
 
 CMD python -u LionchatBrain.py
 
-ENV PYTHON_SERVER_IP pythonserver
 EXPOSE 8000
