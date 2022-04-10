@@ -1,19 +1,16 @@
 package com.psu.Lionchat;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Base64;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.psu.Lionchat.dao.repositories.QuestionRepository;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Base64;;
+import com.psu.Lionchat.dao.repositories.QuestionRepository;;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class GetAnswerEndpointTest {
