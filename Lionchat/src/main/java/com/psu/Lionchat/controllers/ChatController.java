@@ -16,7 +16,7 @@ import com.psu.Lionchat.service.chat.ChatService;
 import com.psu.Lionchat.service.chat.ChatServiceImpl;
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
 import com.psu.Lionchat.service.chat.requests.ReviewPutRequest;
-import com.psu.Lionchat.service.chat.responses.ChatAnswer;
+import com.psu.Lionchat.service.chat.responses.AskQuestionResponse;
 
 @RestController
 @RequestMapping("/chat")
@@ -32,7 +32,7 @@ public class ChatController {
 	// TODO: This should be in a service
 	private ChatService chatService;
 
-	//Logger for outputs
+	// Logger for outputs
 	Logger chatControllerLogger;
 
 	@Autowired
@@ -56,7 +56,7 @@ public class ChatController {
 	 */
 	@PostMapping("/askquestion")
 	// TODO: Proper return type.
-	ChatAnswer askQuestion(@RequestBody String question, HttpServletRequest request) {
+	AskQuestionResponse askQuestion(@RequestBody String question, HttpServletRequest request) {
 		// make sure alphanumeric!
 		// first get answer to question from python server
 		// then update the state.
@@ -81,7 +81,7 @@ public class ChatController {
 		// if no, then provide helpful tips
 		try {
 			this.chatService.submitFeedback(request, feedbackRequest);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			chatControllerLogger.error("Failed to submit feedback, illegal state");
 //			return "Failed to submit feedback, illegal state.";
 		}

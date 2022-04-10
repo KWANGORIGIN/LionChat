@@ -4,10 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
 import com.psu.Lionchat.service.chat.requests.ReviewPutRequest;
-import com.psu.Lionchat.service.chat.responses.ChatAnswer;
+import com.psu.Lionchat.service.chat.responses.AskQuestionResponse;
 
 public interface ChatService {
-	public ChatAnswer getAnswer(HttpServletRequest request, String question);
+	public AskQuestionResponse getAnswer(HttpServletRequest request, String question);
 	
 	public void submitFeedback(HttpServletRequest request, FeedbackRequest feedbackRequest);
 	

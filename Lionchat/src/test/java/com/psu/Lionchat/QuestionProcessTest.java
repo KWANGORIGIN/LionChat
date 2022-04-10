@@ -22,6 +22,7 @@ import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
+import com.psu.Lionchat.service.chat.responses.AskQuestionResponse;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -44,16 +45,14 @@ class QuestionProcessTest {
 
 	@Test
 	public void testAskQuestionUpdatesDatabase() {
-		var entity = restTemplate.postForEntity(
-				"http://localhost:" + port + "/chat/askquestion",
-				"Asking a question?", ChatAnswer.class);
+		var entity = restTemplate.postForEntity("http://localhost:" + port + "/chat/askquestion", "Asking a question?",
+				AskQuestionResponse.class);
 		String cookie = entity.getHeaders().get("Set-Cookie").get(0);
 		cookie = cookie.substring(cookie.indexOf('=') + 1, cookie.indexOf(';'));
 		String session = new String(Base64.getDecoder().decode(cookie));
 
-		ChatAnswer answer = entity.getBody();
-		Optional<Question> question = questions
-				.findById(answer.getQuestionId());
+		ChatAnswer answer = entity.getBody().getAnswer();
+		Optional<Question> question = questions.findById(answer.getQuestionId());
 		assertEquals(true, question.isPresent());
 		User user = question.get().getUser();
 		assertEquals(true, user.getSessionId().equals(session));
@@ -62,22 +61,17 @@ class QuestionProcessTest {
 		headers.add("Cookie", entity.getHeaders().get("Set-Cookie").get(0));
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
-		FeedbackRequest feedbackRequest = new FeedbackRequest(
-				answer.getQuestionId(), true);
-		HttpEntity<FeedbackRequest> feedbackRequestEntity = new HttpEntity<FeedbackRequest>(
-				feedbackRequest, headers);
-		restTemplate.put("http://localhost:" + port + "/chat/update-feedback",
-				feedbackRequestEntity, String.class);
+		FeedbackRequest feedbackRequest = new FeedbackRequest(answer.getQuestionId(), true);
+		HttpEntity<FeedbackRequest> feedbackRequestEntity = new HttpEntity<FeedbackRequest>(feedbackRequest, headers);
+		restTemplate.put("http://localhost:" + port + "/chat/update-feedback", feedbackRequestEntity, String.class);
 		// System.out.println(response);
 		question = questions.findById(answer.getQuestionId());
 		assertEquals(true, question.isPresent());
 		assertEquals(true, question.get().isAnswered());
 
 		int score = 5;
-		HttpEntity<Integer> reviewPostRequestEntity = new HttpEntity<Integer>(
-				score, headers);
-		var reviewResponseEntity = restTemplate.postForEntity(
-				"http://localhost:" + port + "/chat/review",
+		HttpEntity<Integer> reviewPostRequestEntity = new HttpEntity<Integer>(score, headers);
+		var reviewResponseEntity = restTemplate.postForEntity("http://localhost:" + port + "/chat/review",
 				reviewPostRequestEntity, Long.class);
 		long reviewResponse = reviewResponseEntity.getBody();
 		Review review = reviews.getById(reviewResponse);

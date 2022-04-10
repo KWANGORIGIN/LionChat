@@ -31,6 +31,7 @@ import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
 import com.psu.Lionchat.service.chat.requests.ReviewPutRequest;
 import com.psu.Lionchat.service.chat.requests.SimilarityRequest;
+import com.psu.Lionchat.service.chat.responses.AskQuestionResponse;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;
 import com.psu.Lionchat.service.chat.responses.ClassifierResponse;
 import com.psu.Lionchat.service.chat.responses.SimilarityResponse;
@@ -111,27 +112,28 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public ChatAnswer getAnswer(HttpServletRequest request, String question) {
+	public AskQuestionResponse getAnswer(HttpServletRequest request, String question) {
 		User user = this.getUser(request);
 		Question q = new Question(user, null, question);
 		Intent intent = new Intent("null");
 		q.setIntent(intent);
 		intents.save(intent);
 		questions.save(q);
-		
+
 		try {
 			ChatAnswer answer = answerDeterminer.getAnswer(q);
-			
+
 			intent.setIntent(answer.getIntent());
 			intents.save(intent);
 
 			System.out.println("Answer: " + answer.getAnswer());
-			return answer;
+			return new AskQuestionResponse(answer, false, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			return new ChatAnswer(q.getId(),
+			ChatAnswer answer = new ChatAnswer(q.getId(),
 					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
+			return new AskQuestionResponse(answer, false, true);
 		}
 
 		/*
