@@ -36,7 +36,8 @@ def init():
     global similarity_searcher
     global embedder_model
     
-    embedder_model = SentenceTransformer('./output/all-MiniLM-L6-v2')
+    # embedder_model = SentenceTransformer('./output/all-MiniLM-L6-v2')
+    embedder_model = SentenceTransformer('multi-qa-MiniLM-L6-dot-v1')
     
     corpus_embeddings = generate_corpus_embeddings()
     
