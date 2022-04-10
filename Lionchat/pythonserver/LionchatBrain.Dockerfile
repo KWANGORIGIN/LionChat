@@ -6,6 +6,7 @@ COPY ./requirements.txt ./
 RUN --mount=type=cache,target=/root/.cache pip install -r requirements.txt
 
 RUN python -m nltk.downloader stopwords
+RUN python -m nltk.downloader punkt
 
 COPY ./output ./output
 COPY ./ner.py ./

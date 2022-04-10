@@ -11,11 +11,11 @@ nlp = None
 
 def init():
     global nlp 
-    usingGPU = spacy.prefer_gpu()
-    if usingGPU:
-        print("Using GPU")
-    else:
-        print("Not using GPU")
+    # usingGPU = spacy.prefer_gpu()
+    # if usingGPU:
+    #     print("Using GPU")
+    # else:
+    #     print("Not using GPU")
         
     try:
         nlp = spacy.load("./output/model-best-toxic")
