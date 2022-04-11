@@ -95,7 +95,7 @@ public class AdministrativeController {
 		Map<String, Integer> map = new HashMap<>();
 		for (Question q : questions.findAll()) {
 			if (q.getIntent() == null || q.getIntent().getIntent().equals("null")) {
-				map.put("UnknownIntent", map.getOrDefault("UnknownIntent", 0) + 1);
+				map.put("Unknown_Intent", map.getOrDefault("Unknown_Intent", 0) + 1);
 				continue;
 			}
 			map.put(q.getIntent().getIntent(), map.getOrDefault(q.getIntent().getIntent(), 0) + 1);
@@ -142,7 +142,7 @@ public class AdministrativeController {
 				continue;
 			}
 			if (q.getIntent() == null || q.getIntent().getIntent().equals("null")) {
-				map.put("UnknownIntent", map.getOrDefault("UnknownIntent", 0) + 1);
+				map.put("Unknown_Intent", map.getOrDefault("Unknown_Intent", 0) + 1);
 				continue;
 			}
 			map.put(q.getIntent().getIntent(), map.getOrDefault(q.getIntent().getIntent(), 0) + 1);
