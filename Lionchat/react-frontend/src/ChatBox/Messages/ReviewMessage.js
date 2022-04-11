@@ -40,6 +40,7 @@ const ReviewMessage = ({ text, id, reviewId, score, handleSendReview }) => {
             <div className={styles.messageBubble}>
                 <div className={styles.reviewMessage}>
                     <label>{text}</label>
+                    <br />
                     <Rating
                         name="simple-controlled"
                         value={score}
