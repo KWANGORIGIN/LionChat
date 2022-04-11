@@ -129,15 +129,17 @@ public class ChatServiceImpl implements ChatService {
 			System.out.println("Answer: " + answer.getAnswer());
 
 			long reviewId = -1;
-			if (user.getQuestions().size() > 3 && user.getReviews().get(user.getReviews().size() - 1).getCreationTime()
-					.plusWeeks(2).isBefore(LocalDateTime.now())) {
-				// Randomly ask for reviews once the user asks 3 questions.
-				// 20% chance per question asked
-				if (Math.random() > .20) {
-					Review review = new Review(user, -1);
-					reviews.save(review);
+			if (user.getQuestions().size() > 3) {
+				if (user.getReviews().size() == 0 || user.getReviews().get(user.getReviews().size() - 1)
+						.getCreationTime().plusWeeks(2).isBefore(LocalDateTime.now())) {
+					// Randomly ask for reviews once the user asks 3 questions.
+					// 20% chance per question asked
+					if (Math.random() > .20) {
+						Review review = new Review(user, -1);
+						reviews.save(review);
 
-					reviewId = review.getId();
+						reviewId = review.getId();
+					}
 				}
 			}
 
