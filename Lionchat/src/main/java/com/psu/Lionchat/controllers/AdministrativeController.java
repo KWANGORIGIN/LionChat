@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
+import com.psu.Lionchat.dao.entities.User;
 import com.psu.Lionchat.dao.repositories.CrashReportRepository;
 import com.psu.Lionchat.dao.repositories.InappropriateQuestionRepository;
 import com.psu.Lionchat.dao.repositories.IntentRepository;
@@ -72,7 +73,7 @@ public class AdministrativeController {
 	 */
 	@GetMapping("/total-questions-asked")
 	long getTotalQuestionsAsked() {
-		return questions.count();
+		return this.questions.count();
 	}
 
 	/**
@@ -80,9 +81,9 @@ public class AdministrativeController {
 	 * asked them.
 	 */
 	@GetMapping("/questions-asked")
-	void getQuestionsAsked() {
-		List<Question> q = questions.findAll();
-		throw new UnsupportedOperationException();
+	List<String> getQuestionsAsked() {
+		List<String> q = this.questions.findAll().stream().map(Question::getInputString).toList();
+		return q;
 	}
 
 	/**
@@ -108,7 +109,7 @@ public class AdministrativeController {
 	 */
 	@GetMapping("/average-ratings")
 	double getAverageRating() {
-		List<Review> rl = reviews.findAll();
+		List<Review> rl = this.reviews.findAll();
 
 		double total = 0;
 		long count = 0;
@@ -137,7 +138,7 @@ public class AdministrativeController {
 	@GetMapping("/number-misclassifications-per-topic")
 	Map<String, Integer> getNumberMisclassificationsPerTopic() {
 		Map<String, Integer> map = new HashMap<>();
-		for (Question q : questions.findAll()) {
+		for (Question q : this.questions.findAll()) {
 			if (q.isAnswered() == null || q.isAnswered()) {
 				continue;
 			}
@@ -155,7 +156,7 @@ public class AdministrativeController {
 	 */
 	@GetMapping("/number-inappropriate-queries")
 	long getNumberInappropriateQueries() {
-		return inappropriateQuestions.count();
+		return this.inappropriateQuestions.count();
 	}
 
 	/**
@@ -163,7 +164,15 @@ public class AdministrativeController {
 	 * them (such as ip address).
 	 */
 	@GetMapping("/inappropriate-queries")
-	void getInappropriateQueries() {
-		throw new UnsupportedOperationException();
+	InappropriateQueriesResponse getInappropriateQueries() {
+		InappropriateQueriesResponse response = new InappropriateQueriesResponse();
+		for (var i : this.inappropriateQuestions.findAll()) {
+			String question = i.getQuestion().getInputString();
+			User user = i.getQuestion().getUser();
+			String userIp = user.getIp();
+			response.addData(userIp, question);
+		}
+		return response;
+//		throw new UnsupportedOperationException();
 	}
 }
