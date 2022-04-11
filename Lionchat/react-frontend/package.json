@@ -20,6 +20,10 @@
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
+  "author": {
+    "name": "Jacob Karabin",
+    "url": "https://github.com/jxk5861"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
