@@ -94,7 +94,7 @@ public class AdministrativeController {
 	Map<String, Integer> getNumberQuestionsPerTopic() {
 		Map<String, Integer> map = new HashMap<>();
 		for (Question q : questions.findAll()) {
-			if (q.getIntent() == null) {
+			if (q.getIntent() == null || q.getIntent().getIntent().equals("null")) {
 				map.put("UnknownIntent", map.getOrDefault("UnknownIntent", 0) + 1);
 				continue;
 			}
@@ -138,10 +138,10 @@ public class AdministrativeController {
 	Map<String, Integer> getNumberMisclassificationsPerTopic() {
 		Map<String, Integer> map = new HashMap<>();
 		for (Question q : questions.findAll()) {
-			if (q.isAnswered()) {
+			if (q.isAnswered() == null || q.isAnswered()) {
 				continue;
 			}
-			if (q.getIntent() == null) {
+			if (q.getIntent() == null || q.getIntent().getIntent().equals("null")) {
 				map.put("UnknownIntent", map.getOrDefault("UnknownIntent", 0) + 1);
 				continue;
 			}
