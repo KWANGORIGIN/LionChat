@@ -77,7 +77,7 @@ const ChatBox = () => {
 
 			if (chatResponse.reviewId !== -1) {
 				setMessages(previousMessages => {
-					return [...previousMessages, { key: uuidv4(), text: "Enjoying LionChat? Please review our system!", id: chatResponse.reviewId, score: -1, type: "review" }]
+					return [...previousMessages, { key: uuidv4(), text: "Enjoying LionChat?", id: chatResponse.reviewId, score: -1, type: "review" }]
 				})
 			}
 		} else {

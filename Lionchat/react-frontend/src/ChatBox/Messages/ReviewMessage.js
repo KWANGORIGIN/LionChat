@@ -41,17 +41,19 @@ const ReviewMessage = ({ text, id, reviewId, score, handleSendReview }) => {
                 <div className={styles.reviewMessage}>
                     <label>{text}</label>
                     <br />
-                    <Rating
-                        name="simple-controlled"
-                        value={score}
-                        onChange={(event, newScore) => {
-                            if (!newScore) {
-                                event.preventDefault();
-                            } else {
-                                sendReview(newScore);
-                            }
-                        }}
-                    />
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                        <Rating
+                            name="simple-controlled"
+                            value={score}
+                            onChange={(event, newScore) => {
+                                if (!newScore) {
+                                    event.preventDefault();
+                                } else {
+                                    sendReview(newScore);
+                                }
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </div >
