@@ -6,3 +6,19 @@ body {
 ul.analyticsList {
   list-style-type: disc;
 }
+
+button {
+  padding: 0.5em;
+  background-color: #bfd2f1;
+  border-style: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #90acdd;
+}
+
+button:active {
+  background-color: #7b9edb;
+}

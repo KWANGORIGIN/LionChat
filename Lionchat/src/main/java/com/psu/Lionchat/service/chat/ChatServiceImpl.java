@@ -42,20 +42,17 @@ public class ChatServiceImpl implements ChatService {
 	private ReviewRepository reviews;
 	private QuestionRepository questions;
 	private IntentRepository intents;
-	private InappropriateQuestionRepository inappropriateQuestions;
 	private AnswerDeterminerIF answerDeterminer;
 
 	@Autowired
 	public ChatServiceImpl(UserRepository users, ReviewRepository reviews, QuestionRepository questions,
-			IntentRepository intents, InappropriateQuestionRepository inappropriateQuestions,
-			AnswerDeterminer answerDeterminer) {
+			IntentRepository intents, AnswerDeterminer answerDeterminer) {
 		super();
 
 		this.users = users;
 		this.reviews = reviews;
 		this.questions = questions;
 		this.intents = intents;
-		this.inappropriateQuestions = inappropriateQuestions;
 		this.answerDeterminer = answerDeterminer;
 	}
 

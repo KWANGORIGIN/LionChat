@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
+import com.psu.Lionchat.dao.entities.InappropriateQuestion;
 import com.psu.Lionchat.dao.entities.Question;
+import com.psu.Lionchat.dao.repositories.InappropriateQuestionRepository;
 import com.psu.Lionchat.service.PythonResolver;
 import com.psu.Lionchat.service.chat.requests.ClassifierRequest;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;
@@ -20,14 +22,16 @@ import com.psu.Lionchat.service.chat.responses.ClassifierResponse;
 public class AnswerDeterminer implements AnswerDeterminerIF {
 //    private IntentStrategyIF intentClassifier;
 	private IntentStrategyIF issueClassifier;
+	private InappropriateQuestionRepository inappropriateQuestions;
 
 	@Autowired
 	/*
 	 * Consider getting rid of this being passed in and create a factory to create
 	 * IntentStrategyIF
 	 */
-	public AnswerDeterminer(FlaggedStrategy issueClassifier) {
+	public AnswerDeterminer(FlaggedStrategy issueClassifier, InappropriateQuestionRepository inappropriateQuestions) {
 		this.issueClassifier = issueClassifier;// Dependency injecting FlaggedStrategy object
+		this.inappropriateQuestions = inappropriateQuestions;
 	}
 
 	@Override
@@ -41,10 +45,17 @@ public class AnswerDeterminer implements AnswerDeterminerIF {
 		// this
 		if (Objects.equals(issueResponse, "Valid")) {
 			String intentType = classifyIntent(question);
+			if (intentType.equals("Flagged_Intent")) {
+				InappropriateQuestion inappropriateQuestion = new InappropriateQuestion(questionObj);
+				inappropriateQuestions.save(inappropriateQuestion);
+			}
 			IntentStrategyIF strategy = StrategyFactory.getStrategy(intentType);
 			return new ChatAnswer(questionId, strategy.doStrategy(question), intentType);// Returns answer as determined
-																							// by classifier
 		}
+
+		InappropriateQuestion inappropriateQuestion = new InappropriateQuestion(questionObj);
+		inappropriateQuestions.save(inappropriateQuestion);
+
 		return new ChatAnswer(questionId, issueResponse);// Returns error message from issueClassifier
 	}
 
@@ -58,8 +69,7 @@ public class AnswerDeterminer implements AnswerDeterminerIF {
 		HttpEntity<String> entity = new HttpEntity<String>(gson.toJson(utterance), headers);
 		// TODO: make this into a bean.xml / web.xml data source if thats a thing.
 		String url = String.format("http://%s:8000/intent", PythonResolver.getHostName());
-		String response = restTemplate.postForObject(url, entity,
-				String.class);
+		String response = restTemplate.postForObject(url, entity, String.class);
 		ClassifierResponse classifierResponse = gson.fromJson(response, ClassifierResponse.class);
 		return classifierResponse.getIntent();
 	}
