@@ -1,0 +1,11 @@
+# LionChat: A Chatbot for all things Penn State 
+## 2021-2022 Capstone Project @ Penn State Behrend
+- **William Hemminger (wzh44@psu.edu)**
+  - Software Engineering
+- **Jacob Karabin (jxk5861@psu.edu)**
+  - Software Engineering, Mathematics
+- **Kevin Wang (kvw5720@psu.edu)**
+  - Software Engineering, Mathematics
+
+LionChat is a web-based, intelligent chat-bot capable of answering users’ questions. It is the goal for LionChat to serve as an additional resource that students and other members of the Behrend community can access to address concerns that they may have regarding Penn State Behrend IT services, events happening on campus, and events occurring in the local Erie region. For example, users may inquire about how to properly connect their devices to the campus Wi-Fi network,   when their next club activity is, or where the next Erie community event is being held, such as a festival or convention. LionChat also will be able to incorporate additional topics depending on what is needed by the system administrators, enabling the system to answer a variety of different questions. Most importantly, the system will be capable of servicing many different clients simultaneously, reducing the workload on Behrend ITS help desks. However, replying to user’s questions is not LionChat’s only function.  
+While LionChat will provide valuable resources to its chat users, it is important to note that the system will be capable of supplying crucial information to its administrators as well. The LionChat system will include an analytics webpage that provides system administrators with a variety of data, including feedback from users in the form of review ratings, system crash error logs, information regarding invalid user queries, and most frequent questions. By viewing this information, the system administrators will be able to tell what areas users need the most help with and can update Behrend websites to make these resources more accessible. By implementing this system, Behrend ITS workers will be able to shift their focus from addressing more trivial issues, such as Wi-Fi connectivity problems, to giving more attention to professors who are having technology difficulties in their classrooms, providing a smoother college experience to both students and faculty.
