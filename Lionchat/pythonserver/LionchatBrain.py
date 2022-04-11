@@ -7,6 +7,7 @@ Created on Wed Feb 16 19:32:14 2022
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import re
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import nltk
@@ -17,6 +18,17 @@ import semantic_searcher
 from mysql.connector import connect
 from datetime import datetime
 from datetime import timedelta
+import os
+
+def setup_app():
+    ner.init()
+    tox.init()
+    intent_classifier.init()
+    semantic_searcher.init()
+    
+    # nltk.download('stopwords')
+    print("Done setting up app for: ", os.getpid())
+setup_app()
 
 app = Flask(__name__)
 CORS(app)
@@ -74,8 +86,10 @@ def get_events():
     entities = []
 
     try:
+        print("Yeet getting ner")
         entities = ner.getEnts(text)  # get entities from user query
-    except:
+    except e as Exception:
+        print(e)
         print("NER model not found")
 
     # if entities are present
@@ -263,41 +277,3 @@ def preprocess_question(question):
 
         print(processed_question)
         return processed_question
-
-
-if __name__ == "__main__":
-    # Initialize similarity searcher
-    # fit_corpus_for_similarity_search()
-    # try:
-    #     config = {
-    #         'user': 'root',
-    #         'password': 'root',
-    #         'host': 'db',
-    #         'port': '3306',
-    #         'database': 'ml_database'
-    #     }
-    #     connection = connect(**config)
-    #     cursor = connection.cursor()
-
-    #     for line in open("./db/ml_database.sql"):
-    #         cursor.execute(line)
-
-    #     evt_list = list(cursor)
-    #     cursor.close()
-    #     connection.close()
-    # except Exception as e:
-    #     print(e)
-    #     print("Can't access database")
-    #     evt_list = ["Database error."]
-
-    # load ner model
-    ner.init()
-    tox.init()
-    intent_classifier.init()
-    semantic_searcher.init()
-    
-    nltk.download('stopwords')
-    nltk.download('punkt')
-
-    # Run server
-    app.run(host='0.0.0.0', port = 8000)

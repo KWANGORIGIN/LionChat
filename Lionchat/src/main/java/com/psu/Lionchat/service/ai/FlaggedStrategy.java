@@ -1,7 +1,6 @@
 package com.psu.Lionchat.service.ai;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -61,14 +60,14 @@ public class FlaggedStrategy extends IntentStrategyAbs {
 
 	private Set<String> createReferenceSet() {
 		// Read bad words from file and convert to Set
-		File file = new File("./txt-resources/bad-words.txt");
 		List<String> badWordsList = new ArrayList<>();
-		try {
-			Stream<String> lines = Files.lines(Paths.get("./txt-resources/bad-words.txt"));
-			badWordsList = lines.collect(Collectors.toList());
-		} catch (IOException e) {
+		try (InputStream inputStream = getClass().getResourceAsStream("/txt-resources/bad-words.txt");
+			 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+				badWordsList = reader.lines().collect(Collectors.toList());
+		}catch(IOException e){
 			e.printStackTrace();
 		}
+
 		return new HashSet<>(badWordsList);
 	}
 

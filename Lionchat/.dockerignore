@@ -1,3 +1,15 @@
 react-frontend/node
 react-frontend/node-modules
 react-frontend/build
+pythonserver/LionchatVenv
+pythonserver/NER_TESTING
+pythonserver/output_updated
+pythonserver/requirements
+pythonserver/simplified-nq-train.jsonl
+pythonserver/v1.0-simplified_simplified-nq-train.jsonl.gz
+app/LionchatVenv
+app/NER_TESTING
+app/output_updated
+app/requirements
+app/simplified-nq-train.jsonl
+app/v1.0-simplified_simplified-nq-train.jsonl.gz
