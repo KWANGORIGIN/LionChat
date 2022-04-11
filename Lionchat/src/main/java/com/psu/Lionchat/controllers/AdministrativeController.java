@@ -53,12 +53,12 @@ public class AdministrativeController {
 	}
 
 	@GetMapping("/")
-	public ModelAndView index () {
-	    ModelAndView modelAndView = new ModelAndView();
-	    modelAndView.setViewName("index");
-	    return modelAndView;
+	public ModelAndView index() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("index");
+		return modelAndView;
 	}
-	
+
 	/**
 	 * Return the crash reports and their information.
 	 */
@@ -109,15 +109,22 @@ public class AdministrativeController {
 	@GetMapping("/average-ratings")
 	double getAverageRating() {
 		List<Review> rl = reviews.findAll();
-		if (rl.size() == 0) {
+
+		double total = 0;
+		long count = 0;
+		for (Review r : rl) {
+			if (r.getScore() == -1) {
+				continue;
+			}
+			total += r.getScore();
+			count++;
+		}
+
+		if (count == 0) {
 			return -1;
 		}
 
-		double total = 0;
-		for (Review r : rl) {
-			total += r.getScore();
-		}
-		double average = total / reviews.count();
+		double average = total / count;
 		return average;
 	}
 

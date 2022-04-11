@@ -1,5 +1,7 @@
 package com.psu.Lionchat.controllers;
 
+import java.util.Scanner;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -87,26 +89,29 @@ public class ChatController {
 		}
 	}
 
-	/**
-	 * Rate the system. The system will rate the last question the user asked on a 5
-	 * star scale. There may be concurrency issues with this endpoint, and the user
-	 * should only be able to write on review for this question. Once the rates
-	 * writes the question, move them into the idle state.
-	 */
-	@PostMapping("/review")
-	// TODO: Proper return type.
-	long review(@RequestBody int score, HttpServletRequest request) {
-		// first make sure correct state
-		// then submit review
-		// revert back to default state
-		try {
-			return this.chatService.submitReview(request, score);
-		} catch (Exception e) {
-			e.printStackTrace();
-//			chatControllerLogger.error(e.toString());
-			return -1;
-		}
-	}
+	// We don't allow the user to review the system since the system now creates the
+	// review with score -1 (pending review) and the user updates it.
+
+//	/**
+//	 * Rate the system. The system will rate the last question the user asked on a 5
+//	 * star scale. There may be concurrency issues with this endpoint, and the user
+//	 * should only be able to write on review for this question. Once the rates
+//	 * writes the question, move them into the idle state.
+//	 */
+//	@PostMapping("/review")
+//	// TODO: Proper return type.
+//	long review(@RequestBody int score, HttpServletRequest request) {
+//		// first make sure correct state
+//		// then submit review
+//		// revert back to default state
+//		try {
+//			return this.chatService.submitReview(request, score);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+////			chatControllerLogger.error(e.toString());
+//			return -1;
+//		}
+//	}
 
 	@PutMapping("/update-review")
 	void updateReview(@RequestBody ReviewPutRequest reviewPutRequest, HttpServletRequest request) {

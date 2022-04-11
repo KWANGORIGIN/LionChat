@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import ChatMessage from "./ChatMessage";
+import UserMessage from "./Messages/UserMessage";
+import SystemMessage from "./Messages/SystemMessage";
+import ErrorMessage from "./Messages/ErrorMessage";
 import styles from "./ChatMessages.module.css";
+import ReviewMessage from "./Messages/ReviewMessage";
 
-const ChatMessages = ({ messages, handleSendFeedback }) => {
+const ChatMessages = ({ messages, handleSendFeedback, handleSendReview }) => {
   const bottom = useRef();
 
   useEffect(() => {
@@ -23,17 +26,34 @@ const ChatMessages = ({ messages, handleSendFeedback }) => {
   return (
     <div className={styles.container}>
       {messages.map((m) => {
-        return (
-          <ChatMessage
-            key={m.key}
-            id={m.key}
-            text={m.text}
-            userSent={m.userSent}
-            questionId={m.id}
-            helpful={m.helpful}
-            handleSendFeedback={handleSendFeedback}
-          />
-        );
+        switch (m.type) {
+          case "user":
+            return <UserMessage key={m.key} text={m.text} />
+          case "system":
+            return (
+              <SystemMessage
+                key={m.key}
+                text={m.text}
+                id={m.key}
+                questionId={m.id}
+                helpful={m.helpful}
+                handleSendFeedback={handleSendFeedback}
+              />
+            );
+          case "error":
+            return <ErrorMessage key={m.key} text={m.text} />
+          case "review":
+            return (
+              <ReviewMessage
+                key={m.key}
+                text={m.text}
+                id={m.key}
+                reviewId={m.id}
+                score={m.score}
+                handleSendReview={handleSendReview}
+              />
+            );
+        }
       })}
       <div ref={bottom}></div>
     </div>

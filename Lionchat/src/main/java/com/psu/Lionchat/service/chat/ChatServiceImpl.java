@@ -127,13 +127,28 @@ public class ChatServiceImpl implements ChatService {
 			intents.save(intent);
 
 			System.out.println("Answer: " + answer.getAnswer());
-			return new AskQuestionResponse(answer, false, false);
+
+			long reviewId = -1;
+			if (user.getQuestions().size() > 3 && user.getReviews().get(user.getReviews().size() - 1).getCreationTime()
+					.plusWeeks(2).isBefore(LocalDateTime.now())) {
+				// Randomly ask for reviews once the user asks 3 questions.
+				// 20% chance per question asked
+				if (Math.random() > .20) {
+					Review review = new Review(user, -1);
+					reviews.save(review);
+
+					reviewId = review.getId();
+				}
+			}
+
+			// determine if user should review the system...
+			return new AskQuestionResponse(answer, reviewId, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 
 			ChatAnswer answer = new ChatAnswer(q.getId(),
 					"We cannot answer your question because our classification service is offline. We apologize for the inconvenience.");
-			return new AskQuestionResponse(answer, false, true);
+			return new AskQuestionResponse(answer, -1, true);
 		}
 
 		/*

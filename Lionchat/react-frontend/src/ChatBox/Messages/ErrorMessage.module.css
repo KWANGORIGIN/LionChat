@@ -1,0 +1,29 @@
+div.container {
+  display: flex;
+  margin: 5px;
+}
+
+img.logo {
+  height: 3rem;
+  margin-left: 5px;
+}
+
+div.messageBubble {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+div.errorMessage {
+  background-color: #ffcccc;
+  color: black;
+  border-radius: 6px;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px;
+  max-width: 55%;
+  user-select: text;
+  margin-left: 5px;
+  margin-right: auto;
+  word-wrap: break-word;
+}

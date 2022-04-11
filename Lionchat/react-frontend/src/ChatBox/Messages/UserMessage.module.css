@@ -1,0 +1,24 @@
+div.container {
+  display: flex;
+  margin: 5px;
+}
+
+div.messageBubble {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+div.userMessage {
+  background-color: #66aaff;
+  color: white;
+  border-radius: 6px;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px;
+  max-width: 55%;
+  user-select: text;
+  margin-left: auto;
+  margin-right: 5px;
+  word-wrap: break-word;
+}

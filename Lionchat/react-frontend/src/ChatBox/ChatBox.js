@@ -38,7 +38,7 @@ const ChatBox = () => {
 
 		chatInput.current.value = null
 		setMessages(previousMessages => {
-			return [...previousMessages, { key: uuidv4(), text: message, userSent: true }]
+			return [...previousMessages, { key: uuidv4(), text: message, type: "user" }]
 		})
 
 
@@ -63,14 +63,37 @@ const ChatBox = () => {
 		// right now boolean userSent changes how ChatMessage is displayed. A better design would have UserMessage, SystemMessage, ErrorMessage, ReviewMessage
 		if (response.ok) {
 			const chatResponse = await response.json();
+			const chatAnswer = chatResponse.answer;
 
+			if (chatResponse.error) {
+				setMessages(previousMessages => {
+					return [...previousMessages, { key: uuidv4(), text: chatAnswer.answer, type: "error" }]
+				})
+			} else {
+				setMessages(previousMessages => {
+					return [...previousMessages, { key: uuidv4(), text: chatAnswer.answer, id: chatAnswer.questionId, helpful: null, type: "system" }]
+				})
+			}
+
+			if (chatResponse.reviewId !== -1) {
+				setMessages(previousMessages => {
+					return [...previousMessages, { key: uuidv4(), text: "Enjoying LionChat? Please review our system!", id: chatResponse.reviewId, score: -1, type: "review" }]
+				})
+			}
+		} else {
 			setMessages(previousMessages => {
-				return [...previousMessages, { key: uuidv4(), text: chatResponse.answer, userSent: false, id: chatResponse.questionId, helpful: null }]
+				return [...previousMessages, { key: uuidv4(), text: "Failed to connect to LionChat server.", type: "error" }]
 			})
 		}
 	}
 
-	function handleSendFeedback(message) {
+	async function handleSendFeedback(message) {
+		setMessages(previousMessages => {
+			return previousMessages.map(m => m.key === message.key ? { ...m, ...message } : m)
+		})
+	}
+
+	function handleSendReview(message) {
 		setMessages(previousMessages => {
 			return previousMessages.map(m => m.key === message.key ? { ...m, ...message } : m)
 		})
@@ -85,7 +108,7 @@ const ChatBox = () => {
 	return (
 		<div className={styles.chatBox}>
 			<ChatHeader minimize={() => setMinimized(true)} />
-			<ChatMessages messages={messages} handleSendFeedback={handleSendFeedback} />
+			<ChatMessages messages={messages} handleSendFeedback={handleSendFeedback} handleSendReview={handleSendReview} />
 			<ChatInput chatInput={chatInput} handleSendMessage={handleSendMessage} />
 		</div>
 	)
