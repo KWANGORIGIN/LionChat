@@ -38,7 +38,7 @@ CORS(app)
 def getSemanticSearchResults():
     # Get POST request from client
     receivedDict = request.get_json()
-    print("ReceivedDict: ", receivedDict)
+    # print("ReceivedDict: ", receivedDict)
 
     # Get query from received dict
     query = receivedDict['query']
@@ -59,13 +59,13 @@ def classifyIntent():
 
     # Get POST request from client
     receivedDict = request.get_json()
-    print(receivedDict)
+    # print(receivedDict)
 
     # Get user utterance
     userInput = preprocess_question(receivedDict["utterance"])
 
     classifiedIntent = intent_classifier.classifyIntent(userInput)
-    print("Classified Intent: ", classifiedIntent)
+    # print("Classified Intent: ", classifiedIntent)
 
     # Return intent as JSON
     return jsonify(intent=classifiedIntent)

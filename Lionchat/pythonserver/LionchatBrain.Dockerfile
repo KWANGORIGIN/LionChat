@@ -1,5 +1,7 @@
 FROM tiangolo/uwsgi-nginx-flask:python3.8
 
+ENV NGINX_WORKER_PROCESSES auto
+
 WORKDIR /pythonserver
 
 COPY ./requirements.txt ./
