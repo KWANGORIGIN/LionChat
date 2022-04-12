@@ -37,6 +37,7 @@ def init():
     embedder_model = SentenceTransformer('./output/multi-qa-MiniLM-L6-dot-v1')
     
     corpus_embeddings = generate_corpus_embeddings()
+    print("Semantic Searcher Loaded")
     
 def search(query):
     global embedder_model
