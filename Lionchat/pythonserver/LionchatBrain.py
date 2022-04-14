@@ -88,7 +88,7 @@ def get_events():
     try:
         print("Yeet getting ner")
         entities = ner.getEnts(text)  # get entities from user query
-    except e as Exception:
+    except Exception as e:
         print(e)
         print("NER model not found")
 
