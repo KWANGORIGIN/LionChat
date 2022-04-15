@@ -218,8 +218,7 @@ def get_events():
             cursor.close()
             connection.close()
             
-            
-
+            # iterate through list of events and add to payload json list
             for i in range(len(evt_list)):
                 evt_list[i] = list(evt_list[i])
                 payload_list.append(jsonify(name=evt_list[i][0], organizer=evt_list[i][1], location=evt_list[i][2]), date=str(datetime.fromtimestamp(
