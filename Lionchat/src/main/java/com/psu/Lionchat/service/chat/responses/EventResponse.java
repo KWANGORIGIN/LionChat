@@ -1,17 +1,18 @@
 package com.psu.Lionchat.service.chat.responses;
 
+
 import java.util.List;
 
 public class EventResponse {
-	private final List<List<String>> events;
+	private final List<Event> events;
 	private final String message;
 
-	public EventResponse(List<List<String>> events, String message) {
+	public EventResponse(List<Event> events, String message) {
 		this.events = events;
 		this.message = message;
 	}
 
-	public List<List<String>> getEvents() {
+	public List<Event> getEvents() {
 		return this.events;
 	}
 
@@ -21,7 +22,7 @@ public class EventResponse {
 
 	public String toString() {
 		String evts = message;
-		for (List<String> e : events) {
+		for (Event e : events) {
 			evts += "<br>" + e.toString();
 		}
 
