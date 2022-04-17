@@ -92,15 +92,30 @@ const Analytics = () => {
           .then(body => setInappropriateQueries(body)),
       ]);
     fetchAnalytics();
+
+    // TODO: Websocket to avoid spamming database.
+    // TODO: Keys for lists to more efficiently render.
+    const interval = setInterval(() => {
+      // console.log("fetching analytics")
+      fetchAnalytics();
+    }, 1000);
+    /*
+    Take a look at the useEffect Hook. At the end of the Hook, we’re returning a new function. 
+    This is the equivalent of the componentWillUnmount lifecycle method in a class-based React component. 
+    To learn more about the differences between functional components and class-based components check out this guide
+
+    The useEffect function returns the clearInterval method with the scheduled interval passed into it. 
+    As a result, the interval is correctly cleared and no longer triggers every second 
+    after the component unmounts from the DOM. */
+    return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => { }, [numberQuestionsPerTopic]);
+  // useEffect(() => { }, [numberQuestionsPerTopic]);
 
   return (
     <>
       <AnalyticsHeader />
       <ul className={styles.analyticsList}>
-        <li>Crash Reports: Not Implemented</li>
         <li>Total Questions Asked: {totalQuestionsAsked}</li>
         <li>Questions Asked <button onClick={() => setQuestionAskedModal(true)}>View</button></li>
         <Modal
@@ -108,7 +123,8 @@ const Analytics = () => {
           onClose={() => setQuestionAskedModal(false)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-        ><Box sx={boxStyle}>
+        >
+          <Box sx={boxStyle}>
             {
               questionsAsked.map(q => <div><a>{q}</a><br /></div>)
             }
@@ -138,7 +154,7 @@ const Analytics = () => {
             />
           </div>
         )}
-        <li>Average Ratings: {averageRatings}</li>
+        <li>Average Ratings: {averageRatings}⭐</li>
         <li>
           Number Misclassifications Per Topic:{" "}
           {numberMisclassificationsPerTopic && (
@@ -171,7 +187,8 @@ const Analytics = () => {
           onClose={() => setInappropriateQuestionAskedModal(false)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-        ><Box sx={boxStyle}>
+        >
+          <Box sx={boxStyle}>
             {
               inappropriateQueries?.inappropriateData?.map(q => <div><a>{q.userIp}:</a> <a>{q.question}</a><br /></div>)
             }
