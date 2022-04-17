@@ -3,15 +3,15 @@ package com.psu.Lionchat.service.chat.responses;
 import java.util.List;
 
 public class EventResponse {
-	private final List<List<String>> events;
+	private final List<Event> events;
 	private final String message;
 
-	public EventResponse(List<List<String>> events, String message) {
+	public EventResponse(List<Event> events, String message) {
 		this.events = events;
 		this.message = message;
 	}
 
-	public List<List<String>> getEvents() {
+	public List<Event> getEvents() {
 		return this.events;
 	}
 
@@ -21,8 +21,12 @@ public class EventResponse {
 
 	public String toString() {
 		String evts = message;
-		for (List<String> e : events) {
-			evts += "<br>" + e.toString();
+		for (int i = 0; i < this.events.size(); i++) {
+			Event e = this.events.get(i);
+			evts += "<div style=\"font-size:1rem\">" + e.toString() + "</div>";
+			if (i != this.events.size() - 1) {
+				evts += "<br/>";
+			}
 		}
 
 		return evts;

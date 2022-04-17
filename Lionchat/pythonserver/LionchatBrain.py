@@ -192,6 +192,8 @@ def get_events():
 
         # make sure program does not crash if database missing
         
+        payload_list = []
+        
         try:
             
             config = {
@@ -212,27 +214,34 @@ def get_events():
             
 
             evt_list = list(cursor)
+            
             cursor.close()
             connection.close()
-
+            
+            # iterate through list of events and add to payload json list
             for i in range(len(evt_list)):
                 evt_list[i] = list(evt_list[i])
-                evt_list[i][0] = "Event Name: " + evt_list[i][0]
-                evt_list[i][1] = "Event Organizer: " + evt_list[i][1]
-                evt_list[i][2] = "Event Location: " + evt_list[i][2]
-                evt_list[i][3] = "Event Date: " + str(datetime.fromtimestamp(
-                    int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S"))
-                evt_list[i][4] = "Event Link: " + evt_list[i][4]
+                payload_list.append({
+                    "name": evt_list[i][0], 
+                    "organizer": evt_list[i][1], 
+                    "location": evt_list[i][2], 
+                    "date": str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S")), 
+                    "url": evt_list[i][4]})
         except Exception as e:
             print(e)
             print("Can't access database")
-            evt_list = ["Database error."]
-
+            payload_list.append({
+                "name": 'Database Error', 
+                "organizer": 'Database Error', 
+                "location": 'Database Error', 
+                "date": 'Database Error', 
+                "url": 'Database Error'})
+            
         if evt_list:  # if events found
-            payload = jsonify(message=message, events=evt_list)
+            payload = jsonify(message=message, events=payload_list)
         else:  # if nothing found
             payload = jsonify(
-                message="It looks like I don't have any information on that.", events=[evt_list])
+                message="It looks like I don't have any information on that.", events=[])
 
     else:  # if no entities were present
         payload = jsonify(
