@@ -1,6 +1,5 @@
 package com.psu.Lionchat.service.chat.responses;
 
-
 import java.util.List;
 
 public class EventResponse {
@@ -22,8 +21,12 @@ public class EventResponse {
 
 	public String toString() {
 		String evts = message;
-		for (Event e : events) {
-			evts += "<br>" + e.toString();
+		for (int i = 0; i < this.events.size(); i++) {
+			Event e = this.events.get(i);
+			evts += "<div style=\"font-size:1rem\">" + e.toString() + "</div>";
+			if (i != this.events.size() - 1) {
+				evts += "<br/>";
+			}
 		}
 
 		return evts;
