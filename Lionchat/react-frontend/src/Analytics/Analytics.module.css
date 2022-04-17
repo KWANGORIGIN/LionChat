@@ -4,7 +4,7 @@ body {
 }
 
 ul.analyticsList {
-  list-style-type: disc;
+  list-style-type: none;
 }
 
 button {
