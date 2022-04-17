@@ -221,13 +221,22 @@ def get_events():
             # iterate through list of events and add to payload json list
             for i in range(len(evt_list)):
                 evt_list[i] = list(evt_list[i])
-                payload_list.append(jsonify(name=evt_list[i][0], organizer=evt_list[i][1], location=evt_list[i][2]), date=str(datetime.fromtimestamp(
-                    int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S")), url=evt_list[i][4])
+                payload_list.append({
+                    "name": evt_list[i][0], 
+                    "organizer": evt_list[i][1], 
+                    "location": evt_list[i][2], 
+                    "date": str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S")), 
+                    "url": evt_list[i][4]})
         except Exception as e:
             print(e)
             print("Can't access database")
-            payload_list.append(jsonify(name='Database Error', organizer='Database Error', location='Database Error', date='Database Error', url='Database Error'))
-
+            payload_list.append({
+                "name": 'Database Error', 
+                "organizer": 'Database Error', 
+                "location": 'Database Error', 
+                "date": 'Database Error', 
+                "url": 'Database Error'})
+            
         if evt_list:  # if events found
             payload = jsonify(message=message, events=payload_list)
         else:  # if nothing found
