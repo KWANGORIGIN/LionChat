@@ -221,12 +221,17 @@ def get_events():
             # iterate through list of events and add to payload json list
             for i in range(len(evt_list)):
                 evt_list[i] = list(evt_list[i])
+<<<<<<< HEAD
                 payload_list.append({
                     "name": evt_list[i][0], 
                     "organizer": evt_list[i][1], 
                     "location": evt_list[i][2], 
                     "date": str(datetime.fromtimestamp(int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S")), 
                     "url": evt_list[i][4]})
+=======
+                payload_list.append(jsonify(name=evt_list[i][0], organizer=evt_list[i][1], location=evt_list[i][2], date=str(datetime.fromtimestamp(
+                    int(evt_list[i][3])).strftime("%m/%d/%Y, %H:%M:%S")), url=evt_list[i][4]))
+>>>>>>> branch 'eventjson' of https://github.com/KWANGORIGIN/Senior-Design-Project.git
         except Exception as e:
             print(e)
             print("Can't access database")
