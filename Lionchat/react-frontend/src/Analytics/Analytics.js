@@ -154,7 +154,10 @@ const Analytics = () => {
             />
           </div>
         )}
-        <li>Average Ratings: {averageRatings}⭐</li>
+        <li>Average Ratings: {
+          /* Don't research how to do this correctly unless you want a world of pain. */
+          Math.round((averageRatings + Number.EPSILON) * 100) / 100
+        }⭐</li>
         <li>
           Number Misclassifications Per Topic:{" "}
           {numberMisclassificationsPerTopic && (
