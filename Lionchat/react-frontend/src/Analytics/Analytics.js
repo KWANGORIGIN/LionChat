@@ -60,7 +60,6 @@ const Analytics = () => {
   const [questionAskedModal, setQuestionAskedModal] = useState(false);
   const [inappropriateQuestionAskedModal, setInappropriateQuestionAskedModal] = useState(false);
 
-
   useEffect(() => {
     const fetchAnalytics = async () =>
       Promise.all([
@@ -117,7 +116,7 @@ const Analytics = () => {
       <AnalyticsHeader />
       <ul className={styles.analyticsList}>
         <li>Total Questions Asked: {totalQuestionsAsked}</li>
-        <li>Questions Asked <button onClick={() => setQuestionAskedModal(true)}>View</button></li>
+        <li>Questions Asked: <button onClick={() => setQuestionAskedModal(true)}>View</button></li>
         <Modal
           open={questionAskedModal}
           onClose={() => setQuestionAskedModal(false)}
@@ -133,26 +132,39 @@ const Analytics = () => {
         {/* <Doughnut data={numberQuestionsPerTopic} /> */}
         <li>Number Questions Per Topic:</li>
         {numberQuestionsPerTopic && (
-          <div
-            style={{
-              position: "relative",
-              height: "20rem",
-              width: "20rem",
-            }}
-          >
-            <Doughnut
-              data={{
-                labels: Object.keys(numberQuestionsPerTopic),
-                datasets: [
-                  {
-                    label: "# Questions Asked",
-                    data: Object.values(numberQuestionsPerTopic),
-                    ...chartOptions,
-                  },
-                ],
-              }}
-            />
+          <div className={styles.chartContainer}>
+            <div className={styles.doughnut}>
+              <Doughnut
+                data={{
+                  labels: Object.keys(numberQuestionsPerTopic),
+                  datasets: [
+                    {
+                      label: "# Questions Asked",
+                      data: Object.values(numberQuestionsPerTopic),
+                      ...chartOptions,
+                    },
+                  ],
+                }}
+                options={{ maintainAspectRatio: false }}
+              />
+            </div>
+            <div className={styles.bar}>
+              <Bar
+                data={{
+                  labels: Object.keys(numberQuestionsPerTopic),
+                  datasets: [
+                    {
+                      label: "# Questions Asked",
+                      data: Object.values(numberQuestionsPerTopic),
+                      backgroundColor: "#0e0e5d"
+                    },
+                  ],
+                }}
+                options={{ maintainAspectRatio: false }}
+              />
+            </div>
           </div>
+
         )}
         <li>Average Ratings: {
           /* Don't research how to do this correctly unless you want a world of pain. */
@@ -160,31 +172,49 @@ const Analytics = () => {
         }⭐</li>
         <li>
           Number Misclassifications Per Topic:{" "}
-          {numberMisclassificationsPerTopic && (
-            <div
-              style={{
-                position: "relative",
-                height: "20rem",
-                width: "20rem",
-              }}
-            >
-              <Doughnut
-                data={{
-                  labels: Object.keys(numberMisclassificationsPerTopic),
-                  datasets: [
-                    {
-                      label: "# Questions Asked",
-                      data: Object.values(numberMisclassificationsPerTopic),
-                      ...chartOptions,
-                    },
-                  ],
-                }}
-              />
+          {numberMisclassificationsPerTopic && numberQuestionsPerTopic && (
+            <div className={styles.chartContainer}>
+              <div className={styles.doughnut}
+              >
+                <Doughnut
+                  data={{
+                    labels: Object.keys(numberMisclassificationsPerTopic),
+                    datasets: [
+                      {
+                        label: "# Questions Asked",
+                        data: Object.values(numberMisclassificationsPerTopic),
+                        ...chartOptions,
+                      },
+                    ],
+                  }}
+                  options={{ maintainAspectRatio: false }}
+                />
+              </div>
+              <div className={styles.bar}>
+                <Bar
+                  data={{
+                    labels: Object.keys(numberQuestionsPerTopic),
+                    datasets: [
+                      {
+                        label: "# Unhelpful Answers",
+                        data: Object.values(numberMisclassificationsPerTopic),
+                        backgroundColor: "#ff7777"
+                      },
+                      {
+                        label: "# Helpful Answers",
+                        data: Object.values(numberQuestionsPerTopic).map((v, i) => v - Object.values(numberMisclassificationsPerTopic)[i]),
+                        backgroundColor: "#77ff77"
+                      },
+                    ],
+                  }}
+                  options={{ maintainAspectRatio: false }}
+                />
+              </div>
             </div>
           )}
         </li>
         <li>Number Inappropriate Queries: {numberInappropriateQueries}</li>
-        <li>Inappropriate Queries <button onClick={() => setInappropriateQuestionAskedModal(true)}>View</button></li>
+        <li>Inappropriate Queries: <button onClick={() => setInappropriateQuestionAskedModal(true)}>View</button></li>
         <Modal
           open={inappropriateQuestionAskedModal}
           onClose={() => setInappropriateQuestionAskedModal(false)}
