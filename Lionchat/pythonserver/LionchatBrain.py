@@ -268,7 +268,7 @@ def is_toxic():
 def preprocess_question(question):
 
         #Lowercase the question
-        question.lower()
+        question = question.lower()
         
         #Remove punctuation
         question = re.sub(r'[^\w\s]', '', question)

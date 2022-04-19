@@ -248,11 +248,35 @@ class intent_classifier_dataset_generator:
         df['organization'] = organizationList
                 
         df.to_csv('erieEventsProcessed.csv', encoding='UTF-8')
+        
+    def preprocess_question(cls, question):
+
+            #Lowercase the question
+            question = question.lower()
+            
+            #Remove punctuation
+            question = re.sub(r'[^\w\s]', '', question)
+                
+            #Remove stop words
+            stop_words_set = set(stopwords.words('english'))
+            question_tokens = word_tokenize(question)
+            print(question_tokens)
+            processed_question_list = [word for word in question_tokens if word not in stop_words_set]
+            #print(stop_words_set)
+            
+            processed_question = ''
+            for w in processed_question_list:
+                processed_question += w + ' '
+
+            print(processed_question)
+            return processed_question
     
     def test_model(cls):
-        nlp = spacy.load("./output/model-best")
+        nlp = spacy.load("./output/model-best-intent-classifier")
         inputVal = input("Enter text: ")
+        
         while inputVal != 'exit':
+            inputVal = cls.preprocess_question(inputVal)
             doc = nlp(inputVal)
             classifiedIntent = max(doc.cats, key = doc.cats.get)
             print(doc.cats)
