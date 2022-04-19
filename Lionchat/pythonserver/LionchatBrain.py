@@ -10,7 +10,6 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-import nltk
 import ner
 import tox
 import intent_classifier
@@ -81,12 +80,11 @@ def get_events():
         text = jsonify(request.json)["utterance"]
     else:
         text = request.json["utterance"]
-        text = str.replace(text, "\'", "\\'")
+        text = str.replace(text, "\'", "\\'").replace("campus", "behrend")
 
     entities = []
 
     try:
-        print("Yeet getting ner")
         entities = ner.getEnts(text)  # get entities from user query
     except Exception as e:
         print(e)
