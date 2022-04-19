@@ -76,14 +76,47 @@ public class AdministrativeController {
 		return this.questions.count();
 	}
 
+	static class IntentQuestionPair {
+		private Long key;
+		private String intent;
+		private String question;
+
+		public IntentQuestionPair(Long key, String intent, String question) {
+			super();
+			this.key = key;
+
+			if (!intent.equals("null")) {
+				this.intent = intent;
+			} else {
+				this.intent = "Unknown_Intent";
+			}
+
+			this.question = question;
+		}
+
+		public Long getKey() {
+			return key;
+		}
+
+		public String getIntent() {
+			return intent;
+		}
+
+		public String getQuestion() {
+			return question;
+		}
+	}
+
 	/**
 	 * Return all questions asked to the system and information about the users who
 	 * asked them.
 	 */
 	@GetMapping("/questions-asked")
-	List<String> getQuestionsAsked() {
-		List<String> q = this.questions.findAll().stream().map(Question::getInputString).toList();
-		return q;
+	List<IntentQuestionPair> getQuestionsAsked() {
+		List<IntentQuestionPair> questions = this.questions.findAll().stream()
+				.map(q -> new IntentQuestionPair(q.getId(), q.getIntent().getIntent(), q.getInputString())).toList();
+
+		return questions;
 	}
 
 	/**
@@ -170,7 +203,7 @@ public class AdministrativeController {
 			String question = i.getQuestion().getInputString();
 			User user = i.getQuestion().getUser();
 			String userIp = user.getIp();
-			response.addData(userIp, question);
+			response.addData(i.getId(), userIp, question);
 		}
 		return response;
 //		throw new UnsupportedOperationException();
