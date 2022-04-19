@@ -80,7 +80,8 @@ def get_events():
         text = jsonify(request.json)["utterance"]
     else:
         text = request.json["utterance"]
-        text = str.replace(text, "\'", "\\'").replace("campus", "behrend")
+        text = str.replace(text, "\'", "\\'")
+        text = str.replace(text, "campus", "behrend")
 
     entities = []
 
