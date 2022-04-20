@@ -53,12 +53,14 @@ class intent_classifier_dataset_generator:
             question = data_list[position]
             data_list[position] = re.sub(r'[^\w\s]', '', question)
             
-        #Remove stop words
-        stop_words_set = set(stopwords.words('english'))
+        # Remove stop words
+        # stop_words_set = set(stopwords.words('english'))
+        # for question in data_list:
+        #     question_tokens = word_tokenize(question)
+        #     processed_question_list = [word for word in question_tokens if word not in stop_words_set]
+        #     processed_dataset.append(' '.join(processed_question_list))
         for question in data_list:
-            question_tokens = word_tokenize(question)
-            processed_question_list = [word for word in question_tokens if word not in stop_words_set]
-            processed_dataset.append(' '.join(processed_question_list))
+            processed_dataset.append(question)
         
         # print(processed_dataset)
         return processed_dataset
@@ -124,6 +126,7 @@ class intent_classifier_dataset_generator:
         print("Num of IT Questions:", len(it_list))
         print("Num of Campus Events Questions:", len(campus_events_list))
         print("Num of Erie Events Questions:", len(erie_events_list))
+        # print("Total:", it_list_len + campus_events_len + erie_events_len)
         print("Num of Search Questions:", len(search_list))
         print("Total:", it_list_len + campus_events_len + erie_events_len + search_len)
         
@@ -140,8 +143,8 @@ class intent_classifier_dataset_generator:
         erie_events_train_list = erie_events_list[:(int(newLength))]
         erie_events_valid_list = erie_events_list[(int(newLength)):]
         
-        search_train_list = search_train_df['question'].values
-        search_valid_list = search_valid_df['question'].values
+        search_train_list = search_list[:2000]
+        search_valid_list = search_list[2000:]
         
         train_question_list = []
         train_label_list = []
@@ -272,11 +275,13 @@ class intent_classifier_dataset_generator:
             return processed_question
     
     def test_model(cls):
-        nlp = spacy.load("./output/model-best-intent-classifier")
+        # nlp = spacy.load("./output/model-best-intent-classifier")
+        nlp = spacy.load("./oversampled-search/model-last")
+        # nlp = spacy.load("./two-class-model/model-last")
         inputVal = input("Enter text: ")
         
         while inputVal != 'exit':
-            inputVal = cls.preprocess_question(inputVal)
+            # inputVal = cls.preprocess_question(inputVal)
             doc = nlp(inputVal)
             classifiedIntent = max(doc.cats, key = doc.cats.get)
             print(doc.cats)
