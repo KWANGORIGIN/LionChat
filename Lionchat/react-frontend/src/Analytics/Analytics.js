@@ -17,20 +17,6 @@ import { Modal, Box } from "@mui/material";
 ChartJS.register(ArcElement, Tooltip, Legend);
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title);
 
-const boxStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "60ch",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  padding: 2,
-  height: "50%",
-  overflowY: "scroll",
-};
-
 const chartOptions = {
   backgroundColor: [
     "#0e0e5d",
@@ -135,7 +121,7 @@ const Analytics = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={boxStyle}>
+          <Box className={styles.boxStyle}>
             <table>
               <thead>
                 <tr>
@@ -256,7 +242,7 @@ const Analytics = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={boxStyle}>
+          <Box className={styles.boxStyle}>
             <table>
               <thead>
                 <tr>

@@ -25,6 +25,20 @@ button:active {
   background-color: #7b9edb;
 }
 
+.boxStyle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(60ch, 97%);
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 2;
+  height: 50%;
+  overflow-y: scroll;
+  background-color: white;
+}
+
 @media (min-width: 55rem) {
   div.chartContainer {
     display: flex;
@@ -39,7 +53,7 @@ button:active {
     height: 20rem;
     margin: 1rem;
   }
-  
+
   div.bar {
     position: relative;
     width: 40%;
@@ -47,8 +61,6 @@ button:active {
     margin: 1rem;
   }
 }
-
-
 
 table {
   border-collapse: collapse;
