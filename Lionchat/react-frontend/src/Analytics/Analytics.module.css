@@ -25,26 +25,30 @@ button:active {
   background-color: #7b9edb;
 }
 
-div.chartContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+@media (min-width: 55rem) {
+  div.chartContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  div.doughnut {
+    position: relative;
+    width: 40%;
+    height: 20rem;
+    margin: 1rem;
+  }
+  
+  div.bar {
+    position: relative;
+    width: 40%;
+    height: 20rem;
+    margin: 1rem;
+  }
 }
 
-div.doughnut {
-  position: relative;
-  width: 40%;
-  height: 20rem;
-  margin: 1rem;
-}
 
-div.bar {
-  position: relative;
-  width: 40%;
-  height: 20rem;
-  margin: 1rem;
-}
 
 table {
   border-collapse: collapse;
