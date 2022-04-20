@@ -213,12 +213,30 @@ const Analytics = () => {
                       datasets: [
                         {
                           label: "# Unhelpful Answers",
-                          data: Object.values(numberMisclassificationsPerTopic),
+                          data: Object.keys(numberQuestionsPerTopic).map((k) =>
+                            Object.keys(
+                              numberMisclassificationsPerTopic
+                            ).includes(k)
+                              ? new Map(
+                                  Object.entries(
+                                    numberMisclassificationsPerTopic
+                                  )
+                                ).get(k)
+                              : 0
+                          ),
                           backgroundColor: "#ff7777",
                         },
                         {
                           label: "# Helpful Answers",
-                          data: Object.values(numberClassificationsPerTopic),
+                          data: Object.keys(numberQuestionsPerTopic).map((k) =>
+                            Object.keys(numberClassificationsPerTopic).includes(
+                              k
+                            )
+                              ? new Map(
+                                  Object.entries(numberClassificationsPerTopic)
+                                ).get(k)
+                              : 0
+                          ),
                           backgroundColor: "#77ff77",
                         },
                       ],
