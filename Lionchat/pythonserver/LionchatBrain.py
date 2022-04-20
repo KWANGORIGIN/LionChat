@@ -273,15 +273,15 @@ def preprocess_question(question):
         question = re.sub(r'[^\w\s]', '', question)
             
         #Remove stop words
-        stop_words_set = set(stopwords.words('english'))
-        question_tokens = word_tokenize(question)
-        print(question_tokens)
-        processed_question_list = [word for word in question_tokens if word not in stop_words_set]
+        # stop_words_set = set(stopwords.words('english'))
+        # question_tokens = word_tokenize(question)
+        # print(question_tokens)
+        # processed_question_list = [word for word in question_tokens if word not in stop_words_set]
         #print(stop_words_set)
         
-        processed_question = ''
-        for w in processed_question_list:
-            processed_question += w + ' '
+        # processed_question = ''
+        # for w in processed_question_list:
+        #     processed_question += w + ' '
 
-        print(processed_question)
-        return processed_question
+        print(question)
+        return question
