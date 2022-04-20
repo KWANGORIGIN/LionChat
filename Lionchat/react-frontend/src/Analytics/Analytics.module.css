@@ -50,16 +50,24 @@ button:active {
   div.doughnut {
     position: relative;
     width: 40%;
-    height: 20rem;
     margin: 1rem;
   }
 
   div.bar {
     position: relative;
     width: 40%;
-    height: 20rem;
     margin: 1rem;
   }
+}
+
+div.doughnut {
+  position: relative;
+  height: 20rem;
+}
+
+div.bar {
+  position: relative;
+  height: 20rem;
 }
 
 table {
