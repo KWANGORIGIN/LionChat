@@ -10,7 +10,6 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-import nltk
 import ner
 import tox
 import intent_classifier
@@ -82,11 +81,11 @@ def get_events():
     else:
         text = request.json["utterance"]
         text = str.replace(text, "\'", "\\'")
+        text = str.replace(text, "campus", "behrend")
 
     entities = []
 
     try:
-        print("Yeet getting ner")
         entities = ner.getEnts(text)  # get entities from user query
     except Exception as e:
         print(e)
@@ -268,7 +267,7 @@ def is_toxic():
 def preprocess_question(question):
 
         #Lowercase the question
-        question.lower()
+        question = question.lower()
         
         #Remove punctuation
         question = re.sub(r'[^\w\s]', '', question)

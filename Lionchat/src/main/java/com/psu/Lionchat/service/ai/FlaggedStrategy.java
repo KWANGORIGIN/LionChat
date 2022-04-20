@@ -3,11 +3,7 @@ package com.psu.Lionchat.service.ai;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -72,6 +68,12 @@ public class FlaggedStrategy extends IntentStrategyAbs {
 	}
 
 	private boolean filterKeywords(String question) {
+		//Lowercase string
+		question = question.toLowerCase();
+
+		//Strip all punctuation characters
+		question = question.replaceAll("\\p{Punct}", "");
+
 		// Convert question to Set
 		question = question.replaceAll("\\s+", " ");// remove all extra spacing
 		Set<String> questionSet = new HashSet<>(Arrays.asList(question.split(" ")));
