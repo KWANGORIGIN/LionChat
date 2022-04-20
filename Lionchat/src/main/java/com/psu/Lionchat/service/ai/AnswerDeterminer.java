@@ -45,10 +45,6 @@ public class AnswerDeterminer implements AnswerDeterminerIF {
 		// this
 		if (Objects.equals(issueResponse, "Valid")) {
 			String intentType = classifyIntent(question);
-			if (intentType.equals("Flagged_Intent")) {
-				InappropriateQuestion inappropriateQuestion = new InappropriateQuestion(questionObj);
-				inappropriateQuestions.save(inappropriateQuestion);
-			}
 			IntentStrategyIF strategy = StrategyFactory.getStrategy(intentType);
 			return new ChatAnswer(questionId, strategy.doStrategy(question), intentType);// Returns answer as determined
 		}
@@ -56,7 +52,7 @@ public class AnswerDeterminer implements AnswerDeterminerIF {
 		InappropriateQuestion inappropriateQuestion = new InappropriateQuestion(questionObj);
 		inappropriateQuestions.save(inappropriateQuestion);
 
-		return new ChatAnswer(questionId, issueResponse);// Returns error message from issueClassifier
+		return new ChatAnswer(questionId, issueResponse, "Toxic_Intent");// Returns error message from issueClassifier
 	}
 
 	// Todo: Considering loading in Python server ip from config file
