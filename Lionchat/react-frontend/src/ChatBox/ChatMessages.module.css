@@ -1,4 +1,5 @@
 div.container {
+  overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
