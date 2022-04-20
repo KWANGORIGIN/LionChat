@@ -1,8 +1,10 @@
 package com.psu.Lionchat.controllers;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.psu.Lionchat.dao.entities.InappropriateQuestion;
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
 import com.psu.Lionchat.dao.entities.User;
@@ -113,8 +116,16 @@ public class AdministrativeController {
 	 */
 	@GetMapping("/questions-asked")
 	List<IntentQuestionPair> getQuestionsAsked() {
+		// O(inappropriateSize)
+		var iids = this.inappropriateQuestions.findAll().parallelStream()
+				.map(InappropriateQuestion::getQuestion)
+				.map(Question::getId).collect(Collectors.toCollection(HashSet::new));
+
+		// O(2*questionsSize)
 		List<IntentQuestionPair> questions = this.questions.findAll().stream()
-				.map(q -> new IntentQuestionPair(q.getId(), q.getIntent().getIntent(), q.getInputString())).toList();
+				.filter(q -> !iids.contains(q.getId()))
+				.map(q -> new IntentQuestionPair(q.getId(), q.getIntent().getIntent(), q.getInputString()))
+				.toList();
 
 		return questions;
 	}
@@ -160,6 +171,28 @@ public class AdministrativeController {
 
 		double average = total / count;
 		return average;
+	}
+
+	/**
+	 * Return the number of classifications for each business defined topic. This is
+	 * how many times the user said that their question was answered.
+	 * 
+	 * @return
+	 */
+	@GetMapping("/number-classifications-per-topic")
+	Map<String, Integer> getNumberClassificationsPerTopic() {
+		Map<String, Integer> map = new HashMap<>();
+		for (Question q : this.questions.findAll()) {
+			if (q.isAnswered() == null || !q.isAnswered()) {
+				continue;
+			}
+			if (q.getIntent() == null || q.getIntent().getIntent().equals("null")) {
+				map.put("Unknown_Intent", map.getOrDefault("Unknown_Intent", 0) + 1);
+				continue;
+			}
+			map.put(q.getIntent().getIntent(), map.getOrDefault(q.getIntent().getIntent(), 0) + 1);
+		}
+		return map;
 	}
 
 	/**
