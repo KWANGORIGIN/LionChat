@@ -1,6 +1,7 @@
 package com.psu.Lionchat.service.chat;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,6 @@ import com.psu.Lionchat.dao.entities.Intent;
 import com.psu.Lionchat.dao.entities.Question;
 import com.psu.Lionchat.dao.entities.Review;
 import com.psu.Lionchat.dao.entities.User;
-import com.psu.Lionchat.dao.repositories.InappropriateQuestionRepository;
 import com.psu.Lionchat.dao.repositories.IntentRepository;
 import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
@@ -96,15 +96,16 @@ public class ChatServiceImpl implements ChatService {
 
 	private User getUser(HttpServletRequest request) {
 		String sessionId = request.getSession().getId();
-		Optional<User> userOptional = users.findBySessionId(sessionId);
+		// TODO: Concurrency issue.
+		List<User> usersList = users.findAllBySessionId(sessionId);
 
-		if (userOptional.isPresent()) {
-			return userOptional.get();
+		if (usersList.size() > 0) {
+			return usersList.get(0);
 		}
 
 		User user = new User(sessionId, request.getRemoteAddr());
 		users.save(user);
-
+		
 		return user;
 	}
 

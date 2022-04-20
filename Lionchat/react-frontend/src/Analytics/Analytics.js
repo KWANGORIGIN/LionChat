@@ -58,6 +58,8 @@ const Analytics = () => {
     numberMisclassificationsPerTopic,
     setNumberMisclassificationsPerTopic,
   ] = useState();
+  const [numberClassificationsPerTopic, setNumberClassificationsPerTopic] =
+    useState();
   const [numberInappropriateQueries, setNumberInappropriateQueries] =
     useState();
   const [inappropriateQueries, setInappropriateQueries] = useState([]);
@@ -88,6 +90,9 @@ const Analytics = () => {
         fetch("/administrative/number-misclassifications-per-topic")
           .then((response) => response.json())
           .then((body) => setNumberMisclassificationsPerTopic(body)),
+        fetch("/administrative/number-classifications-per-topic")
+          .then((response) => response.json())
+          .then((body) => setNumberClassificationsPerTopic(body)),
         fetch("/administrative/number-inappropriate-queries")
           .then((response) => response.json())
           .then((body) => setNumberInappropriateQueries(body)),
@@ -196,49 +201,47 @@ const Analytics = () => {
         </li>
         <li>
           Number Misclassifications Per Topic:{" "}
-          {numberMisclassificationsPerTopic && numberQuestionsPerTopic && (
-            <div className={styles.chartContainer}>
-              <div className={styles.doughnut}>
-                <Doughnut
-                  data={{
-                    labels: Object.keys(numberMisclassificationsPerTopic),
-                    datasets: [
-                      {
-                        label: "# Questions Asked",
-                        data: Object.values(numberMisclassificationsPerTopic),
-                        ...chartOptions,
-                      },
-                    ],
-                  }}
-                  options={{ maintainAspectRatio: false }}
-                />
+          {numberQuestionsPerTopic &&
+            numberMisclassificationsPerTopic &&
+            numberClassificationsPerTopic && (
+              <div className={styles.chartContainer}>
+                <div className={styles.doughnut}>
+                  <Doughnut
+                    data={{
+                      labels: Object.keys(numberMisclassificationsPerTopic),
+                      datasets: [
+                        {
+                          label: "# Questions Asked",
+                          data: Object.values(numberMisclassificationsPerTopic),
+                          ...chartOptions,
+                        },
+                      ],
+                    }}
+                    options={{ maintainAspectRatio: false }}
+                  />
+                </div>
+                <div className={styles.bar}>
+                  <Bar
+                    data={{
+                      labels: Object.keys(numberQuestionsPerTopic),
+                      datasets: [
+                        {
+                          label: "# Unhelpful Answers",
+                          data: Object.values(numberMisclassificationsPerTopic),
+                          backgroundColor: "#ff7777",
+                        },
+                        {
+                          label: "# Helpful Answers",
+                          data: Object.values(numberClassificationsPerTopic),
+                          backgroundColor: "#77ff77",
+                        },
+                      ],
+                    }}
+                    options={{ maintainAspectRatio: false }}
+                  />
+                </div>
               </div>
-              <div className={styles.bar}>
-                <Bar
-                  data={{
-                    labels: Object.keys(numberQuestionsPerTopic),
-                    datasets: [
-                      {
-                        label: "# Unhelpful Answers",
-                        data: Object.values(numberMisclassificationsPerTopic),
-                        backgroundColor: "#ff7777",
-                      },
-                      {
-                        label: "# Helpful Answers",
-                        data: Object.values(numberQuestionsPerTopic).map(
-                          (v, i) =>
-                            v -
-                            Object.values(numberMisclassificationsPerTopic)[i]
-                        ),
-                        backgroundColor: "#77ff77",
-                      },
-                    ],
-                  }}
-                  options={{ maintainAspectRatio: false }}
-                />
-              </div>
-            </div>
-          )}
+            )}
         </li>
         <li>Number Inappropriate Queries: {numberInappropriateQueries}</li>
         <li>
