@@ -272,12 +272,9 @@ def preprocess_question(question):
         #Remove punctuation
         question = re.sub(r'[^\w\s]', '', question)
             
-        #Remove stop words
-        # stop_words_set = set(stopwords.words('english'))
-        # question_tokens = word_tokenize(question)
-        # print(question_tokens)
-        # processed_question_list = [word for word in question_tokens if word not in stop_words_set]
-        #print(stop_words_set)
+        #Tokenize into words and recombine without extra random spaces
+        question_tokens = word_tokenize(question)
+        question = ' '.join(question_tokens)
         
         # processed_question = ''
         # for w in processed_question_list:

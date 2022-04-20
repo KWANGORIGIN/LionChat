@@ -60,7 +60,9 @@ class intent_classifier_dataset_generator:
         #     processed_question_list = [word for word in question_tokens if word not in stop_words_set]
         #     processed_dataset.append(' '.join(processed_question_list))
         for question in data_list:
-            processed_dataset.append(question)
+            question_tokens = word_tokenize(question)
+            # print(question_tokens)
+            processed_dataset.append(' '.join(question_tokens))
         
         # print(processed_dataset)
         return processed_dataset
@@ -143,8 +145,8 @@ class intent_classifier_dataset_generator:
         erie_events_train_list = erie_events_list[:(int(newLength))]
         erie_events_valid_list = erie_events_list[(int(newLength)):]
         
-        search_train_list = search_list[:2000]
-        search_valid_list = search_list[2000:]
+        search_train_list = search_list[:it_list_len]
+        search_valid_list = search_list[it_list_len:]
         
         train_question_list = []
         train_label_list = []
@@ -319,6 +321,6 @@ if __name__ == "__main__":
     
     dataset_generator = intent_classifier_dataset_generator()
     # dataset_generator.process_erie_events()
-    # dataset_generator.generate_dataset()
-    dataset_generator.test_model()
+    dataset_generator.generate_dataset()
+    # dataset_generator.test_model()
     # dataset_generator.load_google_questions()
