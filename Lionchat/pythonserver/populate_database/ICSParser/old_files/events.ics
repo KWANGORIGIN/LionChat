@@ -1,0 +1,163 @@
+BEGIN:VCALENDAR
+PRODID:-//github.com/rianjs/ical.net//NONSGML ical.net 4.0//EN
+VERSION:2.0
+BEGIN:VEVENT
+CATEGORIES:CommunityService
+DESCRIPTION:The SGA will be hosting the weekly Senate meeting in order to 
+ fulfill its obligation to the students and the community. This event is o
+ pened and encouraged for all students to attend. \n\nHosted by: Student G
+ overnment Association\n\nOnline Location: https://psu.zoom.us/j/426474313
+ 1 \n\nAdditional Information can be found at: https://behrend.campuslabs.
+ com/engage/event/6493521
+DTEND:20201211T000000Z
+DTSTAMP:20201210T031602Z
+DTSTART:20201210T230000Z
+LOCATION:Online
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SGA General Meeting
+UID:https://behrend.campuslabs.com/engage/event/6493521
+URL:https://behrend.campuslabs.com/engage/event/6493521
+X-HOSTS:Student Government Association
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:CommunityService
+CATEGORIES:Off-Campus
+DESCRIPTION:The United Way\, ServErie\, and county officials have partnere
+ d together to host a site for volunteer opportunities. \nSERVING PA: CLAR
+ ION\, CLEARFIELD\, CRAWFORD\, ELK\, ERIE\, FOREST\, JEFFERSON\, MCKEAN\, 
+ POTTER\, VENANGO AND WARREN COUNTIES.\nVisit pa211nw.org to fill out the 
+ volunteer form. They will ask about your health and what type of assistan
+ ce you are able to offer. Some examples are: \n\nwherever most needed\ndr
+ iving \nshopping\ndelivering groceries\ndata entry\npreparing or serving 
+ food\ncleaning\n\n\nHosted by: Civic and Community Engagement\n\nAddition
+ al Information can be found at: https://behrend.campuslabs.com/engage/eve
+ nt/5710999
+DTEND:20210101T180000Z
+DTSTAMP:20201210T031602Z
+DTSTART:20200506T160000Z
+GEO:42.042440;-79.852080
+LOCATION:Pennsylvania
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Volunteers needed!
+UID:https://behrend.campuslabs.com/engage/event/5710999
+URL:https://behrend.campuslabs.com/engage/event/5710999
+X-HOSTS:Civic and Community Engagement
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:CommunityService
+CATEGORIES:Community Service / Philanthropy
+DESCRIPTION:Below you'll find lots of ways to volunteer virtually - from a
+ nywhere in the world! \n \n \nFree Rice \n\nThis fun online game (or free
+  app!) allows you to answer questions under categories like Flags of the 
+ World\, Human Anatomy\, Famous Paintings\, Language Learning\, Math\, and
+  many more! For each correct answer\, 10 grains or rice are donated throu
+ gh the United Nations World Food Programme to combat food insecurity acro
+ ss the globe. \n\nCrisis Text Line:  \n\n Become a volunteer to help the 
+ Crisis Text Line offer free\, 24/7 support for those in crisis. If you ca
+ n commit to volunteering four hours each week\, you can apply to be train
+ ed for free.  \n\nSmithsonian Digital Volunteer:  \n\nThe Smithsonian Ins
+ titution is the world’s largest museum\, education\, and research complex
+ . Help make their collections more accessible by volunteering online to t
+ ranscribe historical documents or edit Wikipedia articles related to thei
+ r artifacts and research. \n\n 7 Cups: \n\n7 Cups provides free\, 24/7 em
+ otional support to millions via online chat. All you need is an internet 
+ connection and you can sign up for their trainings\, then you can help pr
+ ovide emotional support to people!  \n\nBe My Eyes: \n\nBe My Eyes is a f
+ ree mobile app designed to make the world more accessible for blind and l
+ ow-vision people by connecting them with sighted volunteers from all over
+  the world through a live video call. Read a card\, check an expiration d
+ ate\, or describe items on a shelf! \n\nProject Gutenburg:  \n\nFounded i
+ n 1971\, the goal of Project Gutenburg is to create the largest digital l
+ ibrary. So far they’ve amassed 59\,000 free eBooks. You can volunteer by 
+ donating eligible materials\, transcribing books into a digital form\, or
+  proofreading others’ work.  \n\nCharity Miles \n\nThis free app is great
+  to use for all your indoor or outdoor walks and runs! With a variety of 
+ charities to choose from (Autism Speaks\, Feeding America\, Habitat for H
+ umanity\, Wounded Warrior Project\, and lots more) you’re sure to get inv
+ ested. For every mile you move\, you help earn money for your charity fro
+ m the corporate sponsorship pool. You can also get sponsored by your frie
+ nds! \n\nResQwalk \n\nThis free mobile app lets you raise money and resou
+ rces for your favorite animal welfare organization\, and all you have to 
+ do is walk! You might find you can support your local animal rescue\, or 
+ you can support a national center! Take your dog for a walk\, or just hea
+ d out into the fresh air for yourself – but activate the app to raise mon
+ ey while you’re at it!  \n\nTranslators Without Borders \n\nThis non-prof
+ it working towards a world where knowledge knows no language barriers. If
+  you speak more than one language\, your knowledge is extremely valued! A
+  sign that reads “Wash Your Hands for at Least 20 Seconds” means nothing 
+ if it isn’t in your language. Help medical workers by translating materia
+ ls online.  \n\nBox Tops for Education \n\nDownload the free Box Tops app
+  to scan grocery receipts and earn money for the school of your choice! T
+ he app keeps track of your totals\, the school’s yearly goal\, and makes 
+ sure the funding gets directly to the school administrators.  \n\n2020 Ce
+ nsus \n\nThe 2020 Census counts every person living in the United States 
+ and five U.S. territories. Encourage your networks to complete their cens
+ us information! The website has great social media posts already written\
+ , and lots of graphics to share.   \n\nVoter Registration \n\nFirst\, che
+ ck to see the deadlines around voter registration for your state\, then s
+ tart your campaign! Let your network know when and how they can register 
+ to vote!  \n\nEducate Yourself on the United Nations Global Sustainable D
+ evelopment Goals!  \n\nGo to the U.N. website linked above\, or check out
+  this pdf guide to the Sustainable Development Goals.  \n\n \nPlatforms t
+ o Find Volunteer Projects:  \n \nErie Volunteers Needed NOW \n\nIf you wa
+ nt to volunteer locally now during the outbreak – the best place to be co
+ nnected to an opportunity is The United Way of Erie County’s 211 site. Fi
+ ll out a volunteer form to make sure you pass the health requirements\, t
+ hen they’ll match you with an organization that has requested immediate a
+ ssistance.  \n\n \nUnited Nations Volunteering:  \n\nThis incredible site
+  connects you with organizations working for peace and development in nee
+ d of skills like research\, writing\, art\, and design. Lend your talents
+  to nonprofits and organizations all over the world looking for your skil
+ lset! \n\nZooniverse:  \n\nYou got skills? Zooniverse is a platform for p
+ eople-powered research! Spend as much or as little time as you’d like ide
+ ntifying endangered animals\, classifying galaxy systems\, or transcribin
+ g Shakespearean manuscripts. \n\nCatchafire:  \n\nYour virtual volunteeri
+ ng headquarters! Each project listed has a timeline that can range anywhe
+ re from an hour to a few weeks. So whether you have an afternoon or sever
+ al (all of us right about now) you can help nonprofits and organizations 
+ with tasks like writing thank you letters or editing photos.  \n\n \nPoin
+ ts of Light’s All For Good \n\nThis large database has virtual volunteeri
+ ng opportunities and suggestions from writing to first responders\, to fa
+ cilitating a presentation to kids on what happens when they dial 911! \n\
+ n \nVolunteerMatch \n\nAt Behrend\, we use this site all the time! Find o
+ pportunities in your community by filtering with your location\, or find 
+ virtual opportunities!  \n\n \nGetConnectedErie  \n\nOur absolute favorit
+ e site for getting involved locally! Run by United Way of Erie County\, l
+ ocal nonprofits and organizations post service opportunities AND donation
+ s they’re looking for. Contact them directly\, or respond to a particular
+  call for volunteers.  \n\n \n55 Environmental Service Learning Projects 
+ \n\nCheck out all the ways you can engage with making our plant and ecosy
+ stems healthier during stay-at-home orders\, or anytime! \n\n \n\nHosted 
+ by: Civic and Community Engagement\n\nAdditional Information can be found
+  at: https://behrend.campuslabs.com/engage/event/5711703
+DTEND:20210101T180000Z
+DTSTAMP:20201210T031602Z
+DTSTART:20200506T160000Z
+GEO:39.599220;-104.858860
+LOCATION:Virtual
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Volunteer Virtually!
+UID:https://behrend.campuslabs.com/engage/event/5711703
+URL:https://behrend.campuslabs.com/engage/event/5711703
+X-HOSTS:Civic and Community Engagement
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+DESCRIPTION:Don't forget to submit your SGA Proposal.  Click here for the 
+ link.\n\nHosted by: Student Government Association\n\nAdditional Informat
+ ion can be found at: https://behrend.campuslabs.com/engage/event/6165645
+DTEND:20210113T220000Z
+DTSTAMP:20201210T031602Z
+DTSTART:20201009T160000Z
+LOCATION:BehrendSync
+SEQUENCE:0
+STATUS:CANCELLED
+SUMMARY:Call for SGA Proposals
+UID:https://behrend.campuslabs.com/engage/event/6165645
+URL:https://behrend.campuslabs.com/engage/event/6165645
+X-HOSTS:Student Government Association
+END:VEVENT
+END:VCALENDAR

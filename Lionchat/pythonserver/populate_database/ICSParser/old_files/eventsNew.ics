@@ -1,0 +1,999 @@
+BEGIN:VCALENDAR
+PRODID:-//github.com/rianjs/ical.net//NONSGML ical.net 4.0//EN
+VERSION:2.0
+BEGIN:VEVENT
+CATEGORIES:Athletics
+CATEGORIES:Athletic
+DESCRIPTION:Cheerleading Practice\n\nHosted by: PSB Competitive Cheerleadi
+ ng\n\nAdditional Information can be found at: https://behrend.campuslabs.
+ com/engage/event/7316419
+DTEND:20211128T230000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211128T190000Z
+LOCATION:Fasenmyer
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Cheerleading Practice
+UID:https://behrend.campuslabs.com/engage/event/7316419
+URL:https://behrend.campuslabs.com/engage/event/7316419
+X-HOSTS:PSB Competitive Cheerleading
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+DESCRIPTION:General E Board Meeting\n\nHosted by: Alpha Sigma Alpha\n\nAdd
+ itional Information can be found at: https://behrend.campuslabs.com/engag
+ e/event/7159417
+DTEND:20211129T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211128T233000Z
+LOCATION:Penn State Behrend Burke 106
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:E Board Meeting
+UID:https://behrend.campuslabs.com/engage/event/7159417
+URL:https://behrend.campuslabs.com/engage/event/7159417
+X-HOSTS:Alpha Sigma Alpha
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+DESCRIPTION:Chapter will have weekly meeting.\n\nHosted by: Alpha Sigma Ta
+ u\n\nAdditional Information can be found at: https://behrend.campuslabs.c
+ om/engage/event/7126803
+DTEND:20211129T003000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211128T233000Z
+LOCATION:Reed 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Chapter Meeting
+UID:https://behrend.campuslabs.com/engage/event/7126803
+URL:https://behrend.campuslabs.com/engage/event/7126803
+X-HOSTS:Alpha Sigma Tau
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+DESCRIPTION:General Weekly Chapter Meeting\n\nHosted by: Alpha Sigma Alpha
+ \n\nAdditional Information can be found at: https://behrend.campuslabs.co
+ m/engage/event/7159423
+DTEND:20211129T010000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211129T000000Z
+LOCATION:Penn State Behrend Burke 106
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Chapter Meeting
+UID:https://behrend.campuslabs.com/engage/event/7159423
+URL:https://behrend.campuslabs.com/engage/event/7159423
+X-HOSTS:Alpha Sigma Alpha
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:On-Campus
+DESCRIPTION:BMG's E-board Meeting. To talk about club administrative issue
+ s and events.\n\nHosted by: Black Media Group\n\nAdditional Information c
+ an be found at: https://behrend.campuslabs.com/engage/event/7495434
+DTEND:20211129T220000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211129T210000Z
+LOCATION:Reed 150
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:BMG E-Board Meeting
+UID:https://behrend.campuslabs.com/engage/event/7495434
+URL:https://behrend.campuslabs.com/engage/event/7495434
+X-HOSTS:Black Media Group
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Cultural
+CATEGORIES:Meeting
+DESCRIPTION:Join MCC for their general meetings every Monday at 5:30pm\n\n
+ Hosted by: Multi-Cultural Council\n\nAdditional Information can be found 
+ at: https://behrend.campuslabs.com/engage/event/7154185
+DTEND:20211129T233000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211129T223000Z
+LOCATION:MCC Suite
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:MCC General Meetings
+UID:https://behrend.campuslabs.com/engage/event/7154185
+URL:https://behrend.campuslabs.com/engage/event/7154185
+X-HOSTS:Multi-Cultural Council
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+DESCRIPTION:Psych Club and Psi Chi meetings\nWe occasionally will have spe
+ akers or small events\, small events will be scheduled separately when ne
+ cessary.\n\nHosted by: Psychology Club\n\nAdditional Information can be f
+ ound at: https://behrend.campuslabs.com/engage/event/7505477
+DTEND:20211130T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211129T230000Z
+LOCATION:Turnbull 203
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Psych Coalition Meetings
+UID:https://behrend.campuslabs.com/engage/event/7505477
+URL:https://behrend.campuslabs.com/engage/event/7505477
+X-HOSTS:Psychology Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Spirituality
+CATEGORIES:Arts / Music
+CATEGORIES:Religious / Spiritual
+CATEGORIES:On-Campus
+DESCRIPTION:Join us every Monday night at 7:30pm for Chi Alpha's worship s
+ ervice! Each week we will have the opportunity to come together to worshi
+ p and hear a brief message from one of our Chi Alpha Campus Pastors. Afte
+ r service there will be time to get to meet others in Chi Alpha and find 
+ out more about what else we have going on during the week. \nAll students
+  are welcome to attend. All present will be required to adhere the Behren
+ d's COVID guidelines. For more information\, follow and message us on Ins
+ tagram or Facebook (@behrendxa).\n\nHosted by: Chi Alpha Campus Ministry 
+ \n\nAdditional Information can be found at: https://behrend.campuslabs.co
+ m/engage/event/7098486
+DTEND:20211130T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T003000Z
+LOCATION:Smith Chapel
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Chi Alpha's Monday Night Live
+UID:https://behrend.campuslabs.com/engage/event/7098486
+URL:https://behrend.campuslabs.com/engage/event/7098486
+X-HOSTS:Chi Alpha Campus Ministry
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+DESCRIPTION:Weekly Eboard meeting for Behrend Benefiting THON\n\nHosted by
+ : Behrend Benefiting THON\n\nAdditional Information can be found at: http
+ s://behrend.campuslabs.com/engage/event/7100704
+DTEND:20211130T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T003000Z
+LOCATION:Reed 150
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Benefiting THON Eboard Meeting
+UID:https://behrend.campuslabs.com/engage/event/7100704
+URL:https://behrend.campuslabs.com/engage/event/7100704
+X-HOSTS:Behrend Benefiting THON
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+CATEGORIES:Cultural
+CATEGORIES:On-Campus
+DESCRIPTION:Join Behrend's Gender and Sexuality Equality Club for their we
+ ekly general business meetings.\n\nHosted by: Gender and Sexuality Equali
+ ty Club\n\nAdditional Information can be found at: https://behrend.campus
+ labs.com/engage/event/7185504
+DTEND:20211130T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T003000Z
+LOCATION:MCC Suite
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:GASE General Meeting
+UID:https://behrend.campuslabs.com/engage/event/7185504
+URL:https://behrend.campuslabs.com/engage/event/7185504
+X-HOSTS:Gender and Sexuality Equality Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Spirituality
+CATEGORIES:Religious / Spiritual
+DESCRIPTION:Come join us as we get into the Word and get to know one anoth
+ er! This community group is specifically for seniors to help transition t
+ hem to the world after college. \n\nHosted by: Cru\n\nAdditional Informat
+ ion can be found at: https://behrend.campuslabs.com/engage/event/7333218
+DTEND:20211130T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211129T233000Z
+LOCATION:Reed 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Senior's Community Group
+UID:https://behrend.campuslabs.com/engage/event/7333218
+URL:https://behrend.campuslabs.com/engage/event/7333218
+X-HOSTS:Cru
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:Meeting
+DESCRIPTION:The purpose of these events is to get to know our members and 
+ to plan events for the upcoming semesters. \n\nHosted by: Beta Beta Beta\
+ n\nAdditional Information can be found at: https://behrend.campuslabs.com
+ /engage/event/7283114
+DTEND:20211130T020000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T000000Z
+LOCATION:Reed 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Tri- Beta Meetings
+UID:https://behrend.campuslabs.com/engage/event/7283114
+URL:https://behrend.campuslabs.com/engage/event/7283114
+X-HOSTS:Beta Beta Beta
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+DESCRIPTION:University Gates/ NOBE Recruiting Table\n\nHosted by: National
+  Organization for Business and Engineering\n\nAdditional Information can 
+ be found at: https://behrend.campuslabs.com/engage/event/7448917
+DTEND:20211130T180000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T170000Z
+GEO:42.118160;-79.982600
+LOCATION:Reed Table
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:University Gates/ NOBE Recruiting Table
+UID:https://behrend.campuslabs.com/engage/event/7448917
+URL:https://behrend.campuslabs.com/engage/event/7448917
+X-HOSTS:National Organization for Business and Engineering
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:On-Campus
+DESCRIPTION:Join Commuter Life in making mini gingerbread houses! Enjoy so
+ me Mexican Hot Cocoa while hanging out with other commuters!\n\nHosted by
+ : Commuter Life\n\nAdditional Information can be found at: https://behren
+ d.campuslabs.com/engage/event/7613820
+DTEND:20211130T190000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T160000Z
+LOCATION:Smith Chapel Living Room
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Gingerbread House Decorating!
+UID:https://behrend.campuslabs.com/engage/event/7613820
+URL:https://behrend.campuslabs.com/engage/event/7613820
+X-HOSTS:Commuter Life
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:ThoughtfulLearning
+DESCRIPTION:BMG General Meetings are a place for the club to discuss gener
+ al club operations. This includes projects\, workshops\, etc. General mee
+ tings are also where potential projects for the club can be pitched\, and
+  discussed. \n\nHosted by: Black Media Group\n\nAdditional Information ca
+ n be found at: https://behrend.campuslabs.com/engage/event/7513543
+DTEND:20211130T233000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T223000Z
+LOCATION:Kochel 041
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:BMG General Meeting
+UID:https://behrend.campuslabs.com/engage/event/7513543
+URL:https://behrend.campuslabs.com/engage/event/7513543
+X-HOSTS:Black Media Group
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Cultural
+DESCRIPTION:The organization of African and Caribbean students will be mee
+ ting every other week to discuss and plan events to enlighten and promote
+  diversity by exploring the different cultures that exist within the Afri
+ can continent and the Caribbean Islands. ALL ARE WELCOME TO JOIN!!\n\nHos
+ ted by: Organization of African and Caribbean Students\n\nAdditional Info
+ rmation can be found at: https://behrend.campuslabs.com/engage/event/7310
+ 397
+DTEND:20211201T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T230000Z
+LOCATION:MCC Suite
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:General Meeting
+UID:https://behrend.campuslabs.com/engage/event/7310397
+URL:https://behrend.campuslabs.com/engage/event/7310397
+X-HOSTS:Organization of African and Caribbean Students
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:Late Night
+CATEGORIES:SAF/SGA Funded
+CATEGORIES:On-Campus
+DESCRIPTION:Come and help plan upcoming Lion Entertainment Board events. W
+ e are always accepting new members. We spend our meetings planning out fu
+ ture events. If you want to have a voice in what's happening\, what free 
+ food there is\, what giveaways are available\, or even what movie is play
+ ing each weekend\, come and join us! \n\nHosted by: Lion Entertainment Bo
+ ard\n\nAdditional Information can be found at: https://behrend.campuslabs
+ .com/engage/event/7505560
+DTEND:20211201T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211130T230000Z
+LOCATION:Reed 150
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Lion Entertainment Board Planning Meeting
+UID:https://behrend.campuslabs.com/engage/event/7505560
+URL:https://behrend.campuslabs.com/engage/event/7505560
+X-HOSTS:Lion Entertainment Board
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+DESCRIPTION:Come join the suites RAs and play Mario Kart while enjoying fr
+ ee pizza and cupcakes!!!\n\nHosted by: the Suites\n\nAdditional Informati
+ on can be found at: https://behrend.campuslabs.com/engage/event/7228638
+DTEND:20211201T010000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T000000Z
+LOCATION:Tigress Lobby
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Mario Kart and Pizza Night
+UID:https://behrend.campuslabs.com/engage/event/7228638
+URL:https://behrend.campuslabs.com/engage/event/7228638
+X-HOSTS:the Suites
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+DESCRIPTION:The Panhellenic Council consists of the four social sororities
+  on campus\, including Alpha Sigma Alpha\, Alpha Sigma Tau\, Phi Sigma Rh
+ o and Theta Phi Alpha. General meetings for the Panhellenic Council\, inc
+ lude the Executive Board\, each chapter delegate of the four social soror
+ ities and delegates from other large organizations on campus. \n\nHosted 
+ by: Panhellenic Council\n\nAdditional Information can be found at: https:
+ //behrend.campuslabs.com/engage/event/7239340
+DTEND:20211201T010000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T000000Z
+LOCATION:Reed 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Panhellenic Council Executive Board Meeting
+UID:https://behrend.campuslabs.com/engage/event/7239340
+URL:https://behrend.campuslabs.com/engage/event/7239340
+X-HOSTS:Panhellenic Council
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Spirituality
+CATEGORIES:Religious / Spiritual
+DESCRIPTION:Starting at 7:00\, the Cru Weekly Meeting is a place where any
+ one can come and explore spiritual topics and make meaningful friendships
+ ! Everyone is welcome!\n\nHosted by: Cru\n\nAdditional Information can be
+  found at: https://behrend.campuslabs.com/engage/event/7138395
+DTEND:20211201T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T000000Z
+LOCATION:McGarvey Commons
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Cru Weekly Meeting
+UID:https://behrend.campuslabs.com/engage/event/7138395
+URL:https://behrend.campuslabs.com/engage/event/7138395
+X-HOSTS:Cru
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+DESCRIPTION:The Panhellenic Council consists of the four social sororities
+  on campus\, including Alpha Sigma Alpha\, Alpha Sigma Tau\, Phi Sigma Rh
+ o and Theta Phi Alpha. General meetings for the Panhellenic Council\, inc
+ lude the Executive Board\, each chapter delegate of the four social soror
+ ities and delegates from other large organizations on campus. \n\nHosted 
+ by: Panhellenic Council\n\nAdditional Information can be found at: https:
+ //behrend.campuslabs.com/engage/event/7246761
+DTEND:20211201T020000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T010000Z
+LOCATION:Reed 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Panhellenic General Council
+UID:https://behrend.campuslabs.com/engage/event/7246761
+URL:https://behrend.campuslabs.com/engage/event/7246761
+X-HOSTS:Panhellenic Council
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:CommunityService
+CATEGORIES:Community Service / Philanthropy
+DESCRIPTION:Create Christmas Cards to donate to Brevillier Village or Sara
+ h Reed Children's Center.\n\nHosted by: Reality Check\n\nAdditional Infor
+ mation can be found at: https://behrend.campuslabs.com/engage/event/76028
+ 68
+DTEND:20211201T180000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T160000Z
+LOCATION:Reed tables\, Burke tables
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Reality Check Christmas Card Event
+UID:https://behrend.campuslabs.com/engage/event/7602868
+URL:https://behrend.campuslabs.com/engage/event/7602868
+X-HOSTS:Reality Check
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Arts
+CATEGORIES:Arts / Music
+DESCRIPTION:Stop down in Bruno's to hear some of your favorite hits! You c
+ an vote for the genre by following us on Instagram @behrendbvzradio and r
+ equest songs by using #bvzhumpday on our Twitter @BVZradio\n\nHosted by: 
+ BVZ Radio - Behrend's Voice\n\nAdditional Information can be found at: ht
+ tps://behrend.campuslabs.com/engage/event/7606269
+DTEND:20211201T180000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T160000Z
+LOCATION:Bruno's
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:BVZ Hump Day
+UID:https://behrend.campuslabs.com/engage/event/7606269
+URL:https://behrend.campuslabs.com/engage/event/7606269
+X-HOSTS:BVZ Radio - Behrend's Voice
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+DESCRIPTION:Partnering with The Lion's Pantry to provide sustainable perio
+ d products and contraceptives. \n\nHosted by: Planned Parenthood Generati
+ on Action \n\nAdditional Information can be found at: https://behrend.cam
+ puslabs.com/engage/event/7608958
+DTEND:20211201T200000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T160000Z
+GEO:42.119120;-79.987490
+LOCATION:Reed Fundraising Tables
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Let's Talk About Sustainable Periods with Planned Parenthood Gener
+ ation Action and the Lion's Pantry
+UID:https://behrend.campuslabs.com/engage/event/7608958
+URL:https://behrend.campuslabs.com/engage/event/7608958
+X-HOSTS:Planned Parenthood Generation Action
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:ThoughtfulLearning
+CATEGORIES:School of Engineering
+DESCRIPTION:Join us on Wednesdays to learn more about next generation tech
+ nology through hands-on projects. Some topics we will cover throughout th
+ e semester include: wireless communication\, software development\, and h
+ ardware development.\n\nHosted by: Computer Engineering Club\n\nAdditiona
+ l Information can be found at: https://behrend.campuslabs.com/engage/even
+ t/7242158
+DTEND:20211202T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T230000Z
+LOCATION:Burke 153
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Exploring Next-Gen Tech with the Computer Engineering Club
+UID:https://behrend.campuslabs.com/engage/event/7242158
+URL:https://behrend.campuslabs.com/engage/event/7242158
+X-HOSTS:Computer Engineering Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Athletics
+DESCRIPTION:Cheerleading Practice\n\nHosted by: Game Day Cheerleader Squad
+ \n\nAdditional Information can be found at: https://behrend.campuslabs.co
+ m/engage/event/7316391
+DTEND:20211202T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T221500Z
+LOCATION:Fasenmyer
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Cheerleading Practice
+UID:https://behrend.campuslabs.com/engage/event/7316391
+URL:https://behrend.campuslabs.com/engage/event/7316391
+X-HOSTS:Game Day Cheerleader Squad
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Spirituality
+DESCRIPTION:Check out our instagram (@behrend_cru) or email us at PennStat
+ eBehrendCru@gmail.com for regular updates.\nThis will just be a laid back
+  meeting where we will learn more about Christianity and what that means 
+ for our lives\, personally. We will spend time getting to know each other
+ \, reading the Bible\, praying\, and much more! If this day/time doesn't 
+ work for you\, we have multiple other Community Groups that will hopefull
+ y work better with your schedule! There is no need to sign up - just show
+  up!\n\nHosted by: Cru\n\nAdditional Information can be found at: https:/
+ /behrend.campuslabs.com/engage/event/7344652
+DTEND:20211202T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211201T230000Z
+LOCATION:Kockel Room 42
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Wednesday Community Group
+UID:https://behrend.campuslabs.com/engage/event/7344652
+URL:https://behrend.campuslabs.com/engage/event/7344652
+X-HOSTS:Cru
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+DESCRIPTION:Bi-weekly virtual club meeting where we announce our weekly ch
+ allenges and discuss upcoming events!\n\nHosted by: Project Paws\n\nOnlin
+ e Location: https://psu.zoom.us/j/6401279759\n\nAdditional Information ca
+ n be found at: https://behrend.campuslabs.com/engage/event/7294206
+DTEND:20211202T003000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T000000Z
+LOCATION:Online
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Project Paw Weekly Meeting (Zoom)
+UID:https://behrend.campuslabs.com/engage/event/7294206
+URL:https://behrend.campuslabs.com/engage/event/7294206
+X-HOSTS:Project Paws
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+CATEGORIES:Community Service / Philanthropy
+DESCRIPTION:Meeting for Behrend Benefiting THON's Public Relations and Com
+ munication Committees\n\nHosted by: Behrend Benefiting THON\n\nAdditional
+  Information can be found at: https://behrend.campuslabs.com/engage/event
+ /7098806
+DTEND:20211202T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T003000Z
+LOCATION:Reed 150
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Benefiting THON Public Relations/Communications Meeting
+UID:https://behrend.campuslabs.com/engage/event/7098806
+URL:https://behrend.campuslabs.com/engage/event/7098806
+X-HOSTS:Behrend Benefiting THON
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+CATEGORIES:Community Service / Philanthropy
+DESCRIPTION:Meeting for Behrend Benefiting THON's Special Events committee
+ \n\nHosted by: Behrend Benefiting THON\n\nAdditional Information can be f
+ ound at: https://behrend.campuslabs.com/engage/event/7098828
+DTEND:20211202T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T003000Z
+LOCATION:Reed 113
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Benefiting THON Special Events Meeting
+UID:https://behrend.campuslabs.com/engage/event/7098828
+URL:https://behrend.campuslabs.com/engage/event/7098828
+X-HOSTS:Behrend Benefiting THON
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+CATEGORIES:Community Service / Philanthropy
+DESCRIPTION:Meeting for Behrend Benefiting THON's Fundraising committee\n\
+ nHosted by: Behrend Benefiting THON\n\nAdditional Information can be foun
+ d at: https://behrend.campuslabs.com/engage/event/7098844
+DTEND:20211202T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T003000Z
+LOCATION:Reed 112
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Benefiting THON Fundraising Meeting
+UID:https://behrend.campuslabs.com/engage/event/7098844
+URL:https://behrend.campuslabs.com/engage/event/7098844
+X-HOSTS:Behrend Benefiting THON
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+CATEGORIES:Community Service / Philanthropy
+DESCRIPTION:Meeting for Behrend Benefiting THON's Morale committee\n\nHost
+ ed by: Behrend Benefiting THON\n\nAdditional Information can be found at:
+  https://behrend.campuslabs.com/engage/event/7100720
+DTEND:20211202T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T003000Z
+LOCATION:Reed 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Benefiting THON Morale Meeting
+UID:https://behrend.campuslabs.com/engage/event/7100720
+URL:https://behrend.campuslabs.com/engage/event/7100720
+X-HOSTS:Behrend Benefiting THON
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+CATEGORIES:Meeting
+CATEGORIES:Community Service / Philanthropy
+CATEGORIES:On-Campus
+DESCRIPTION:Join us every Wednesday at 7:30 for Behrend Benefiting THON's 
+ general meetings! These meetings are open to all students and a great way
+  to meet friends and foster new relationships. Our main goal is to raise 
+ money to end pediatric cancer but we also try to have some fun while doin
+ g it! We have a wide variety of committees for you to join and we can't w
+ ait to see you there!\n\nHosted by: Behrend Benefiting THON\n\nAdditional
+  Information can be found at: https://behrend.campuslabs.com/engage/event
+ /7100736
+DTEND:20211202T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T003000Z
+LOCATION:Reed 117
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Benefiting THON General Meeting
+UID:https://behrend.campuslabs.com/engage/event/7100736
+URL:https://behrend.campuslabs.com/engage/event/7100736
+X-HOSTS:Behrend Benefiting THON
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+DESCRIPTION:General Meeting\n\nHosted by: Student Nurses' Association of P
+ ennsylvania at Behrend\n\nAdditional Information can be found at: https:/
+ /behrend.campuslabs.com/engage/event/7149308
+DTEND:20211202T020000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T003000Z
+LOCATION:Hammermill 144H
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SNAP General Meeting
+UID:https://behrend.campuslabs.com/engage/event/7149308
+URL:https://behrend.campuslabs.com/engage/event/7149308
+X-HOSTS:Student Nurses' Association of Pennsylvania at Behrend
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:ThoughtfulLearning
+CATEGORIES:Academic
+CATEGORIES:Religious / Spiritual
+DESCRIPTION:We will have an open forum for math help\, for any course. Coo
+ kies and a devotional from the Bible will also be offered! This happens e
+ very week!\n\nHosted by: Cru\n\nAdditional Information can be found at: h
+ ttps://behrend.campuslabs.com/engage/event/7597137
+DTEND:20211202T020000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T010000Z
+LOCATION:OBS 101
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Math\, Cookies\, and the Bible
+UID:https://behrend.campuslabs.com/engage/event/7597137
+URL:https://behrend.campuslabs.com/engage/event/7597137
+X-HOSTS:Cru
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Athletics
+DESCRIPTION:PSB Hockey practice\n\nHosted by: Hockey Club\n\nAdditional In
+ formation can be found at: https://behrend.campuslabs.com/engage/event/74
+ 19358
+DTEND:20211202T023000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T010000Z
+LOCATION:Flo Fabrizio (JMC)
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Practice
+UID:https://behrend.campuslabs.com/engage/event/7419358
+URL:https://behrend.campuslabs.com/engage/event/7419358
+X-HOSTS:Hockey Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Cultural
+DESCRIPTION:The FAS Chat\, or ‘Faculty and Student/Staff’ Chat Series\, is
+  designed to promote a conversation between students and faculty/staff\, 
+ so that faculty and staff may learn about the many Multi-Cultural Council
+  (MCC) groups and friend organizations at Behrend from the students thems
+ elves. It is also a pun\, comically signifying that it does not take long
+  to learn about the groups. Student panelists will discuss the reasons fo
+ r their group’s formation\, the obstacles they face and challenges they h
+ ave overcome\, and will take questions from the audience.\nEach FAS Chat 
+ series highlights one or two groups per month. This month’s group is the 
+ German Club\n\nHosted by: Office of Educational Equity and Diversity Prog
+ rams\n\nAdditional Information can be found at: https://behrend.campuslab
+ s.com/engage/event/7626075
+DTEND:20211202T234500Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T223000Z
+LOCATION:McGarvey Commons - Penn State Behrend
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:FAS Chat - Featuring the German Club
+UID:https://behrend.campuslabs.com/engage/event/7626075
+URL:https://behrend.campuslabs.com/engage/event/7626075
+X-HOSTS:Office of Educational Equity and Diversity Programs
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Spirituality
+CATEGORIES:Religious / Spiritual
+DESCRIPTION:Check out our instagram (@behrend_cru) or email us at PennStat
+ eBehrendCru@gmail.com for regular updates.\nThis will just be a laid back
+  meeting where we will learn more about Christianity and what that means 
+ for our lives\, personally. We will spend time getting to know each other
+ \, reading the Bible\, praying\, and much more! If this day/time doesn't 
+ work for you\, we have other Community Groups that will hopefully work be
+ tter with your schedule! There is no need to sign up - just show up!\n\nH
+ osted by: Cru\n\nAdditional Information can be found at: https://behrend.
+ campuslabs.com/engage/event/7344621
+DTEND:20211203T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T230000Z
+LOCATION:Kochel 041
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Community Group
+UID:https://behrend.campuslabs.com/engage/event/7344621
+URL:https://behrend.campuslabs.com/engage/event/7344621
+X-HOSTS:Cru
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:ThoughtfulLearning
+CATEGORIES:Arts / Music
+CATEGORIES:Presentation / Workshop
+CATEGORIES:Meeting
+CATEGORIES:On-Campus
+CATEGORIES:School of Engineering
+DESCRIPTION:This is the weekly meeting for the Penn State Behrend Game Dev
+ eloper's Club. This week\, we will be playing games created during a "gam
+ e jam" during a prior meeting\, sign people up for Extra Life (a charity 
+ streaming event this upcoming weekend). We will also discuss rewards in v
+ ideo games\, followed by blocking out a level in Unreal Engine 4.\nThis e
+ vent is open to anyone interested in game development\, no matter the maj
+ or.\n\nHosted by: Game Developer's Club\n\nAdditional Information can be 
+ found at: https://behrend.campuslabs.com/engage/event/7585182
+DTEND:20211203T000000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T220000Z
+LOCATION:Burke 153
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Game Developer's Club Weekly Meeting
+UID:https://behrend.campuslabs.com/engage/event/7585182
+URL:https://behrend.campuslabs.com/engage/event/7585182
+X-HOSTS:Game Developer's Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:GroupBusiness
+DESCRIPTION:To fulfill the duty of the SGA of weekly meetings\, report and
+  work on projects and agendas.\n\nHosted by: Student Government Associati
+ on\n\nAdditional Information can be found at: https://behrend.campuslabs.
+ com/engage/event/7116133
+DTEND:20211203T003000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T233000Z
+LOCATION:Reed 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SGA General Meeting
+UID:https://behrend.campuslabs.com/engage/event/7116133
+URL:https://behrend.campuslabs.com/engage/event/7116133
+X-HOSTS:Student Government Association
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:Academic
+DESCRIPTION:Compete in groups with friends to build the tallest standing t
+ ower and enjoy free food and the company of others\n\nHosted by: Niagara 
+ Hall\n\nAdditional Information can be found at: https://behrend.campuslab
+ s.com/engage/event/7550875
+DTEND:20211203T003000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211202T230000Z
+GEO:42.119120;-79.987490
+LOCATION:Niagara Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Tower of Terror
+UID:https://behrend.campuslabs.com/engage/event/7550875
+URL:https://behrend.campuslabs.com/engage/event/7550875
+X-HOSTS:Niagara Hall
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:ThoughtfulLearning
+CATEGORIES:Off-Campus
+CATEGORIES:SAF/SGA Funded
+DESCRIPTION:Weekly Lessons at Brenric Stables\, Thursday at 7:00. Arrival 
+ time 6:30.  Students are required to pay $15 per lesson at the RUB Desk p
+ rior to attending.\n\nHosted by: Equestrian Club\n\nAdditional Informatio
+ n can be found at: https://behrend.campuslabs.com/engage/event/7303135
+DTEND:20211203T010000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211203T000000Z
+LOCATION:Brenric Stables
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Equestrian Lessons
+UID:https://behrend.campuslabs.com/engage/event/7303135
+URL:https://behrend.campuslabs.com/engage/event/7303135
+X-HOSTS:Equestrian Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Athletics
+DESCRIPTION:PSB Hockey Practice\n\nHosted by: Hockey Club\n\nAdditional In
+ formation can be found at: https://behrend.campuslabs.com/engage/event/74
+ 19338
+DTEND:20211203T011500Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211203T000000Z
+LOCATION:Mercyhurst Ice Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Practice
+UID:https://behrend.campuslabs.com/engage/event/7419338
+URL:https://behrend.campuslabs.com/engage/event/7419338
+X-HOSTS:Hockey Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:On-Campus
+DESCRIPTION:Come break the end of the semester stress by creating your own
+  snow globes\, and enjoying some snacks! \n\nHosted by: Commuter Life\n\n
+ Additional Information can be found at: https://behrend.campuslabs.com/en
+ gage/event/7613845
+DTEND:20211203T190000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211203T160000Z
+LOCATION:Smith Chapel Living Room
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Snow Globe and Snacks!
+UID:https://behrend.campuslabs.com/engage/event/7613845
+URL:https://behrend.campuslabs.com/engage/event/7613845
+X-HOSTS:Commuter Life
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Athletics
+DESCRIPTION:Cheerleading Practice\n\nHosted by: Game Day Cheerleader Squad
+ \n\nAdditional Information can be found at: https://behrend.campuslabs.co
+ m/engage/event/7316390
+DTEND:20211204T013000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211203T221500Z
+LOCATION:fasenmyer
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Cheerleading Practice
+UID:https://behrend.campuslabs.com/engage/event/7316390
+URL:https://behrend.campuslabs.com/engage/event/7316390
+X-HOSTS:Game Day Cheerleader Squad
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:Meeting
+DESCRIPTION:Join the Behrend Gaming Club in our weekly general meetings. W
+ e will discuss topics relating to upcoming events\, club activities\, as 
+ well as reporting on general club business. The BGC Game Night will follo
+ w immediately after.\n\nHosted by: Behrend Gaming Club\n\nAdditional Info
+ rmation can be found at: https://behrend.campuslabs.com/engage/event/7310
+ 325
+DTEND:20211204T020000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211204T010000Z
+LOCATION:Reed Union Building\, Room 114
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Gaming Club General Meeting
+UID:https://behrend.campuslabs.com/engage/event/7310325
+URL:https://behrend.campuslabs.com/engage/event/7310325
+X-HOSTS:Behrend Gaming Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:Late Night
+CATEGORIES:SAF/SGA Funded
+CATEGORIES:Fraternity and Sorority Life
+CATEGORIES:On-Campus
+DESCRIPTION:Join us at McGarvey Commons on Friday December 3rd from 7-11pm
+  for our winter formal\, A Night In Winter Wonderland!\nWe will be having
+  an open dance floor\, appetizers and desserts\, giving away prizes and c
+ ollecting Lion Pantry donations!\nCome celebrate winter and end of semest
+ er with us!\nLink to the Lion Pantry wish list: https://www.amazon.com/hz
+ /wishlist/ls/3PWIKDPWY5ZF3?ref_=wl_share\n\nHosted by: Interfraternity Co
+ uncil\, Lion Entertainment Board\, Panhellenic Council\n\nAdditional Info
+ rmation can be found at: https://behrend.campuslabs.com/engage/event/7621
+ 189
+DTEND:20211204T040000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211204T000000Z
+LOCATION:McGarvey Commons
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:LEB A Night In Winter Wonderland
+UID:https://behrend.campuslabs.com/engage/event/7621189
+URL:https://behrend.campuslabs.com/engage/event/7621189
+X-HOSTS:Panhellenic Council
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+CATEGORIES:On-Campus
+DESCRIPTION:Come join us for some karaoke and a talent show! If you don't 
+ want to do karaoke or participate in the talent show\, we will have games
+  to play. \n\nHosted by: Cru\n\nAdditional Information can be found at: h
+ ttps://behrend.campuslabs.com/engage/event/7615997
+DTEND:20211204T044500Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211204T000000Z
+LOCATION:Reed 117
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Karaoke Night + Talent Show
+UID:https://behrend.campuslabs.com/engage/event/7615997
+URL:https://behrend.campuslabs.com/engage/event/7615997
+X-HOSTS:Cru
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Social
+DESCRIPTION:Come and play your favorite video games\, board games\, tablet
+ op games\, card games\, fighting games\, MOBAs\, and more with the Behren
+ d Gaming Club! Meet other gamers\, and discuss our gaming interest. All s
+ tudents are welcome to hang out. Pizza and drinks provided.  \n\nHosted b
+ y: Behrend Gaming Club\n\nAdditional Information can be found at: https:/
+ /behrend.campuslabs.com/engage/event/7310278
+DTEND:20211204T045900Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211204T020000Z
+LOCATION:Reed Gaming Lounge
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Behrend Gaming Club Gamer's Night
+UID:https://behrend.campuslabs.com/engage/event/7310278
+URL:https://behrend.campuslabs.com/engage/event/7310278
+X-HOSTS:Behrend Gaming Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:ThoughtfulLearning
+CATEGORIES:Presentation / Workshop
+CATEGORIES:SAF/SGA Funded
+CATEGORIES:On-Campus
+DESCRIPTION:We are building a T-Shirt launching robot to bring to sporting
+  events here at Behrend!\nWe will be working on it during this workshop. 
+ All are welcome! No previous robotics experience necessary.\n\nHosted by:
+  Behrend Robotics Club\n\nAdditional Information can be found at: https:/
+ /behrend.campuslabs.com/engage/event/7593918
+DTEND:20211204T170000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211204T160000Z
+LOCATION:Burke 117
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:T-Shirt Launching Robot Open Workshop
+UID:https://behrend.campuslabs.com/engage/event/7593918
+URL:https://behrend.campuslabs.com/engage/event/7593918
+X-HOSTS:Behrend Robotics Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Athletics
+DESCRIPTION:PSB plays against Niagara CC\n\nHosted by: Hockey Club\n\nAddi
+ tional Information can be found at: https://behrend.campuslabs.com/engage
+ /event/7419254
+DTEND:20211205T030000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211205T000000Z
+LOCATION:Erie Bank Sports Park
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:PSB vs. Niagara CC
+UID:https://behrend.campuslabs.com/engage/event/7419254
+URL:https://behrend.campuslabs.com/engage/event/7419254
+X-HOSTS:Hockey Club
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Fundraising
+DESCRIPTION:This is Behrend Benefiting THON's annual 24 hour no sitting\, 
+ no sleeping dance marathon! All funds raised will go to benefit THON's so
+ le benefactor\, the Four Diamonds fund which provides emotional support a
+ nd medical treatment at Penn State Hershey Children's hospital. Students 
+ from 30+ campus clubs and organizations come together for one cause\; enh
+ ancing the lives of children and families impacted by childhood cancer. E
+ ach of the 24 hour dance is filled with fun interactive activities provid
+ ed by an on campus club or organization. These clubs provide energy and e
+ xcitement to the dancers and morales whom are committed to standing awake
+  for 20+ hours for the children who can’t. The event\, not only for the B
+ ehrend community but the families that we support. 24FAC is supported by 
+ businesses who help support the cause by donating towards the event. Help
+  us continue to grow on our mission to provide emotional and financial su
+ pport\, spread awareness\, and ensure funding for critical research ― all
+  in pursuit of a cure.\n\nHosted by: Behrend Benefiting THON\n\nAdditiona
+ l Information can be found at: https://behrend.campuslabs.com/engage/even
+ t/7618861
+DTEND:20211205T170000Z
+DTSTAMP:20211128T185406Z
+DTSTART:20211204T170000Z
+LOCATION:Fasenmyer Upper Level
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:24 FAC
+UID:https://behrend.campuslabs.com/engage/event/7618861
+URL:https://behrend.campuslabs.com/engage/event/7618861
+X-HOSTS:Behrend Benefiting THON
+END:VEVENT
+END:VCALENDAR
