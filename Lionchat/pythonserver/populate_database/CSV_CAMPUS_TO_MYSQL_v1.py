@@ -8,9 +8,7 @@ Created on Mon Jan 24 20:56:55 2022
 
 import pandas as pd
 import mysql.connector
-import yaml
 from datetime import datetime
-time_index = 0
 
 def main():
     print("Reading CSV...")
