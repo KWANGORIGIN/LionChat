@@ -123,7 +123,7 @@ class intent_classifier_dataset_generator:
         search_len = len(search_list)
         
         it_list_len = 1500
-        campus_events_len = 1100
+        campus_events_len = 750
         
         print("Num of IT Questions:", len(it_list))
         print("Num of Campus Events Questions:", len(campus_events_list))
@@ -263,27 +263,34 @@ class intent_classifier_dataset_generator:
             question = re.sub(r'[^\w\s]', '', question)
                 
             #Remove stop words
-            stop_words_set = set(stopwords.words('english'))
-            question_tokens = word_tokenize(question)
-            print(question_tokens)
-            processed_question_list = [word for word in question_tokens if word not in stop_words_set]
+            # stop_words_set = set(stopwords.words('english'))
+            # question_tokens = word_tokenize(question)
+            # print(question_tokens)
+            # processed_question_list = [word for word in question_tokens if word not in stop_words_set]
             #print(stop_words_set)
+            print(question)
             
-            processed_question = ''
-            for w in processed_question_list:
-                processed_question += w + ' '
+            question_tokens = word_tokenize(question)
+            # print(question_tokens)
+            question = ' '.join(question_tokens)
+            
+            # processed_question = ''
+            # for w in processed_question_list:
+            #     processed_question += w + ' '
 
-            print(processed_question)
-            return processed_question
+            print(question)
+            return question
     
     def test_model(cls):
         # nlp = spacy.load("./output/model-best-intent-classifier")
-        nlp = spacy.load("./oversampled-search/model-last")
+        # nlp = spacy.load("./oversampled-search/model-last")
         # nlp = spacy.load("./two-class-model/model-last")
+        nlp = spacy.load('./normal-class-amount-with-fixed-preprocessing-spacing/model-last')
+        # nlp = spacy.load("equal-parts-events/model-last")
         inputVal = input("Enter text: ")
         
         while inputVal != 'exit':
-            # inputVal = cls.preprocess_question(inputVal)
+            inputVal = cls.preprocess_question(inputVal)
             doc = nlp(inputVal)
             classifiedIntent = max(doc.cats, key = doc.cats.get)
             print(doc.cats)
@@ -321,6 +328,6 @@ if __name__ == "__main__":
     
     dataset_generator = intent_classifier_dataset_generator()
     # dataset_generator.process_erie_events()
-    dataset_generator.generate_dataset()
-    # dataset_generator.test_model()
+    # dataset_generator.generate_dataset()
+    dataset_generator.test_model()
     # dataset_generator.load_google_questions()
