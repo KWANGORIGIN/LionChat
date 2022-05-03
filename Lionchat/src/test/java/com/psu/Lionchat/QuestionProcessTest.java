@@ -22,6 +22,7 @@ import com.psu.Lionchat.dao.repositories.QuestionRepository;
 import com.psu.Lionchat.dao.repositories.ReviewRepository;
 import com.psu.Lionchat.dao.repositories.UserRepository;
 import com.psu.Lionchat.service.chat.requests.FeedbackRequest;
+import com.psu.Lionchat.service.chat.requests.ReviewPutRequest;
 import com.psu.Lionchat.service.chat.responses.AskQuestionResponse;
 import com.psu.Lionchat.service.chat.responses.ChatAnswer;;
 
@@ -52,6 +53,7 @@ class QuestionProcessTest {
 		String session = new String(Base64.getDecoder().decode(cookie));
 
 		ChatAnswer answer = entity.getBody().getAnswer();
+		long reviewId = entity.getBody().getReviewId();
 		Optional<Question> question = questions.findById(answer.getQuestionId());
 		assertEquals(true, question.isPresent());
 		User user = question.get().getUser();
@@ -69,12 +71,11 @@ class QuestionProcessTest {
 		assertEquals(true, question.isPresent());
 		assertEquals(true, question.get().isAnswered());
 
-		int score = 5;
-		HttpEntity<Integer> reviewPostRequestEntity = new HttpEntity<Integer>(score, headers);
-		var reviewResponseEntity = restTemplate.postForEntity("http://localhost:" + port + "/chat/review",
-				reviewPostRequestEntity, Long.class);
-		long reviewResponse = reviewResponseEntity.getBody();
-		Review review = reviews.getById(reviewResponse);
+		ReviewPutRequest reviewPutRequest = new ReviewPutRequest(reviewId, 5);
+		HttpEntity<ReviewPutRequest> reviewPutRequestEntity = new HttpEntity<ReviewPutRequest>(reviewPutRequest);
+		restTemplate.postForEntity("http://localhost:" + port + "/chat/update-review", reviewPutRequestEntity,
+				Void.class);
+		Review review = reviews.getById(reviewId);
 		assertEquals(true, review != null);
 	}
 
